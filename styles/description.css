@@ -1,0 +1,64 @@
+.banner {
+    position: absolute;
+    background-color: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 35%;
+}
+
+.banner > img {
+    position: absolute;
+    opacity: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.banner > div {
+    position: absolute;
+    color: white;
+    bottom: 0;
+    left: 25px;
+}
+
+.banner > div > h1 {
+    font-size: 50px;
+    margin: 0;
+}
+
+.banner > div > h2 {
+    
+}
+
+.banner > button {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    background-color: whitesmoke;
+    color: black;
+    border: black;
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.banner > button:hover {
+    background-color: black;
+    color: whitesmoke;
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    color: black;
+}
+
+.content > div {
+    background-color: whitesmoke;
+    margin: 0 auto;
+    padding: 25px 50px;
+    width: 75%;
+    font-size: large;
+}
