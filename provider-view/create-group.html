@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/layout.css">
-    <link rel="stylesheet" href="../styles/settings.css">
-    <title>Group Settings - StudyGrouper</title>
+    <link rel="stylesheet" href="../styles/create.css">
+    <title>Create Group - StudyGrouper</title>
 </head>
 <body>
     <nav>
         <div class="servers-container">
             <h2>Groups</h2>
             <ul class="servers">
-                <li class="selected"><a href="/provider-view/computer-architecture.html">Computer Architecture</a></li>
+                <li><a href="/provider-view/computer-architecture.html">Computer Architecture</a></li>
                 <li><a href="/provider-view/software-engineering.html">Software Engineering</a></li>
                 <li><a href="/provider-view/biology.html">Biology</a></li>
                 <li><a href="/provider-view/chemistry.html">Chemistry</a></li>
@@ -22,7 +22,7 @@
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="../assets/plus.png" alt="Add"> <p><a href="/provider-view/create-group.html">Create Group</a></p></li>
+                <li class="selected"><img src="../assets/plus.png" alt="Add"> <p><a href="/provider-view/create-group.html">Create Group</a></p></li>
                 <li><img src="../assets/search.png" alt="Search"> <p><a href="/provider-view/find-group.html">Find Groups</a></p></li>
                 <li><img src="../assets/person.png" alt="Account"> <p><a href="/provider-view/account.html">Account</a></p></li>
             </ul>
@@ -32,29 +32,19 @@
         </div>
     </nav>
     <main>
+        <h1>Create Study Group</h1>
         <section>
-            <h1>Group Name</h1>
-            <input type="text" value="Computer Architecture">
+            <h3>Name</h3>
+            <input type="text">
         </section>
         <section>
-            <h1>Topic</h1>
-            <input type="text" value="Computer Science">
-        </section>
-        <section>
-            <h1>Meeting Time</h1>
-            <input type="time" value="10:00"> - <input type="time" value="12:00"> <p>every</p> <select name="" id="">
-                <option value="">Monday</option>
-                <option value="">Tuesday</option>
-                <option value="">Wednesday</option>
-                <option value="">Thursday</option>
-                <option value="">Friday</option>
-                <option value="">Saturday</option>
-                <option value="">Sunday</option>
+            <h3>Topic</h3>
+            <select name="" id="">
+                <option value="">Sciences</option>
+                <option value="">Arts</option>
             </select>
         </section>
-        <section>
-            <button class="delete">Delete Group</button>
-        </section>
+        <button>Create Group</button>
     </main>
 </body>
 </html>

@@ -35,3 +35,7 @@ select {
     background-color: red;
     color: white;
 }
+
+p {
+    display: inline-block;
+}

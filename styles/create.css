@@ -1,0 +1,40 @@
+main {
+    padding: 50px 50px;
+}
+
+h3 {
+    margin: 10px 0;
+}
+
+section {
+    margin: 25px 0;
+}
+
+select {
+    background-color: white;
+    border-radius: 25px;
+    height: 30px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+input {
+    border-radius: 25px;
+    height: 25px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+button {
+    background-color: black;
+    color: whitesmoke;
+    border: solid 2px black;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
