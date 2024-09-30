@@ -8,6 +8,7 @@
 }
 
 .banner > img {
+    object-fit: cover;
     position: absolute;
     opacity: 50%;
     width: 100%;
@@ -37,6 +38,7 @@
     background-color: whitesmoke;
     color: black;
     border: black;
+    font-weight: bold;
     border-radius: 25px;
     padding: 10px 20px;
 }
@@ -60,5 +62,6 @@
     margin: 0 auto;
     padding: 25px 50px;
     width: 75%;
+    height: 75%;
     font-size: large;
 }
