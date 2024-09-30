@@ -30,3 +30,8 @@ select {
     border-radius: 25px;
     padding: 10px 20px;
 }
+
+.delete:hover {
+    background-color: red;
+    color: white;
+}
