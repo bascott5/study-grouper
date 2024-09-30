@@ -1,0 +1,32 @@
+section {
+    position: relative;
+    top: 50px;
+    bottom: 0;
+    left: 50px;
+    right: 50px;
+    margin-bottom: 50px;
+}
+
+input {
+    border-radius: 25px;
+    height: 25px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+select {
+    background-color: white;
+    border-radius: 25px;
+    height: 30px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+.delete {
+    background-color: white;
+    color: red;
+    border: solid 2px red;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 10px 20px;
+}
