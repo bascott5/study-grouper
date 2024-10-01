@@ -1,12 +1,27 @@
 main {
-    padding: 50px 50px;
-}
-
-h3 {
-    margin: 10px 0;
+    background-color: darkgray;
 }
 
 section {
+    position: absolute;
+    background-color: white;
+    border-radius: 25px;
+    padding: 50px 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    overflow-y: scroll;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h3 {
+    margin-bottom: 15px;
+}
+
+main > div {
     margin: 25px 0;
 }
 
@@ -31,6 +46,7 @@ button {
     border: solid 2px black;
     font-weight: bold;
     border-radius: 25px;
+    margin-top: 15px;
     padding: 10px 20px;
 }
 

@@ -1,10 +1,20 @@
+main {
+    background-color: darkgray;
+}
+
+main > h1 {
+    color: white;
+}
+
 section {
-    position: relative;
-    top: 50px;
-    bottom: 0;
-    left: 50px;
-    right: 50px;
-    margin-bottom: 50px;
+    position: absolute;
+    background-color: white;
+    border-radius: 25px;
+    padding: 50px 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    overflow-y: scroll;
 }
 
 input {
@@ -26,6 +36,7 @@ select {
     background-color: white;
     color: red;
     border: solid 2px red;
+    margin-top: 15px;
     font-weight: bold;
     border-radius: 25px;
     padding: 10px 20px;
