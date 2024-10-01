@@ -1,0 +1,52 @@
+main {
+    background-color: darkgray;
+}
+
+main > h1 {
+    color: white;
+}
+
+section {
+    position: absolute;
+    background-color: white;
+    border-radius: 25px;
+    padding: 50px 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    overflow-y: scroll;
+}
+
+input {
+    border-radius: 25px;
+    height: 25px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+select {
+    background-color: white;
+    border-radius: 25px;
+    height: 30px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+.delete {
+    background-color: white;
+    color: red;
+    border: solid 2px red;
+    margin-top: 15px;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.delete:hover {
+    background-color: red;
+    color: white;
+}
+
+p {
+    display: inline-block;
+}

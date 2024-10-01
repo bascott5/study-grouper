@@ -1,0 +1,56 @@
+main {
+    background-color: darkgray;
+}
+
+section {
+    position: absolute;
+    background-color: white;
+    border-radius: 25px;
+    padding: 50px 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    overflow-y: scroll;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h3 {
+    margin-bottom: 15px;
+}
+
+main > div {
+    margin: 25px 0;
+}
+
+select {
+    background-color: white;
+    border-radius: 25px;
+    height: 30px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+input {
+    border-radius: 25px;
+    height: 25px;
+    font-size: 18px;
+    padding: 0 15px;
+}
+
+button {
+    background-color: black;
+    color: whitesmoke;
+    border: solid 2px black;
+    font-weight: bold;
+    border-radius: 25px;
+    margin-top: 15px;
+    padding: 10px 20px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}

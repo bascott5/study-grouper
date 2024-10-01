@@ -46,11 +46,6 @@ nav {
     height: 70%;
 }
 
-.account-name-text{
-    font: "arial";
-    font-size: large;
-}
-
 .servers {
     overflow-y: scroll;
     height: 100%;
