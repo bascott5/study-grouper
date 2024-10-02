@@ -45,4 +45,14 @@ public class CustomerController {
     public String groupDescription(){
         return "customer-view/group-description";
     }
+
+    @GetMapping("/customer-home")
+    public String home(){
+        return "customer-view/customer-home";
+    }
+
+    @GetMapping("/write-review")
+    public String review(){
+        return "customer-view/chat-settings";
+    }
 }

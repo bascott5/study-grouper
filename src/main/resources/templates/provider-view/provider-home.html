@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/settings.css">
-    <title>Group Settings - StudyGrouper</title>
 </head>
 <body>
     <nav>
@@ -17,6 +16,10 @@
                 <li><a href="provider-biology">Biology</a></li>
                 <li><a href="provider-chemistry">Chemistry</a></li>
                 <li><a href="provider-physics">Physics</a></li>
+                <h3>Swap Account</h3>
+                <li class="selected"><a href="/customer-home">Student</a></li>
+                <li class="selected"><a href="/provider-home">Instructor / Tutor</a></li>
+                <li class="selected"><a href="/admin-home">Admin</a></li>
             </ul>
         </div>
         <div class="options">
@@ -31,33 +34,5 @@
             <h1>StudyGrouper</h1>
         </div>
     </nav>
-    <main>
-        <h1></h1>
-        <section>
-            <div>
-                <h2>Group Name</h2>
-                <input type="text" value="Computer Architecture">
-            </div>
-            <div>
-                <h2>Topic</h2>
-                <input type="text" value="Computer Science">
-            </div>
-            <div>
-                <h2>Meeting Time</h2>
-                <input type="time" value="10:00"> - <input type="time" value="12:00"> <p>every</p> <select name="" id="">
-                    <option value="">Monday</option>
-                    <option value="">Tuesday</option>
-                    <option value="">Wednesday</option>
-                    <option value="">Thursday</option>
-                    <option value="">Friday</option>
-                    <option value="">Saturday</option>
-                    <option value="">Sunday</option>
-                </select>
-            </div>
-            <div>
-                <button class="delete">Delete Group</button>
-            </div>
-        </section>
-    </main>
 </body>
 </html>

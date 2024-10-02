@@ -82,4 +82,9 @@ public class ProviderController {
     public String softEng(){
         return "provider-view/software-engineering";
     }
+
+    @GetMapping("/provider-home")
+    public String home(){
+        return "provider-view/provider-home";
+    }
 }

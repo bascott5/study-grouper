@@ -37,4 +37,18 @@ public class AdminController {
     public String stats(){
         return "admin-view/statistics";
     }
+
+    /**
+     * Displays the admin view page
+     * @return
+     */
+    @GetMapping("/admin-view")
+    public String adminView(){
+        return "admin-view/admin-view";
+    }
+
+    @GetMapping("/admin-home")
+    public String home(){
+        return "admin-view/admin-home";
+    }
 }

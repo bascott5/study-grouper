@@ -3,21 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles/layout.css">
-    <link rel="stylesheet" href="/static/styles/menu.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/menu.css">
     <title>Document</title>
 </head>
 <body>
+<nav>
+    <div class="servers-container">
+        <h2>Groups</h2>
+        <ul class="servers">
+            <li class="selected"><a href="/statistics">Statistics</a></li>
+            <li class="selected"><a href="/reviews">Reviews</a></li>
+            <li class="selected"><a href="/admin-view">Admin View</a></li>
+        </ul>
+
+    </div>
+    <div class="options">
+        <h2>Options</h2>
+        <ul>
+            <li><img src="../assets/person.png" alt="Account"> <p><a href="/account">Account</a></p></li>
+            <li><img src="../assets/home.png" alt="Home"> <p><a href="/admin-home">Home</a></p></li>
+        </ul>
+    </div>
+    <div class="logo">
+        <h1>StudyGrouper</h1>
+    </div>
+</nav>
 <main>
     <div class="logo">
         <h1>StudyGrouper</h1>
     </div>
     <section>
-        <img src="/static/assets/person.png" alt="PFP">
+        <img src="assets/person.png" alt="PFP">
         <h1>Admin</h1>
         <div>
-            <a href="reviews.html"><button>See Reviews</button></a>
-            <a href="statistics.html"><button>See Statistics</button></a>
+            <a href="reviews"><button>See Reviews</button></a>
+            <a href="statistics"><button>See Statistics</button></a>
         </div>
     </section>
 </main>

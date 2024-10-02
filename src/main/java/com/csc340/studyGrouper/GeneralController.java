@@ -16,7 +16,7 @@ public class GeneralController {
      * Mapping to the login page
      * @return login.html page
      */
-    @GetMapping("")
+    @GetMapping(value={"","/login"})
     public String loginPage(){
         return "login";
     }
@@ -26,4 +26,13 @@ public class GeneralController {
         return "create-account";
     }
 
+    @GetMapping("/home")
+    public String home(){
+        return "home";
+    }
+
+    @GetMapping("edit-account")
+    public String editAccount(){
+        return "edit-account";
+    }
 }
