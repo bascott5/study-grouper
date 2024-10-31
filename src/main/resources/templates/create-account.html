@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/settings.css">
+    <title>Group Settings - StudyGrouper</title>
+</head>
+<body>
+<nav>
+    <div class="servers-container">
+        <h2>Groups</h2>
+    </div>
+    <div class="options">
+        <h2>Options</h2>
+        <ul>
+            <li><img src="../assets/plus.png" alt="Add"> <p><a href="/login">Login</a></p></li>
+            <li><img src="../assets/person.png" alt="Account"> <p class="selected"><a href="/create-account">Create Account</a></p></li>
+            <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+        </ul>
+    </div>
+    <div class="logo">
+        <h1>StudyGrouper</h1>
+    </div>
+</nav>
+<main>
+    <h1></h1>
+    <section>
+        <form action="/create-account" method="post" modelAttribute="user">
+            <div>
+                <h2>Create Account</h2>
+                <input class="form-control" type="text" id="first_name" name="first_name" placeholder="First name">
+                <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Last name">
+                <input class="form-control" type="text" id="username" name="username" placeholder="Username">
+                <input class="form-control" type="text" id="email" name="email" placeholder="Email">
+            </div>
+            <div>
+                <h2>Password</h2>
+                <input class="form-control" type="text" id="password" name="password" placeholder="Password">
+            </div>
+            <br>
+            <div>
+                <input class="form-control" type="text" id="verify-password" name="password" placeholder="Verify Password">
+            </div>
+            <div>
+                <h2 for="account-type">Account Type</h2>
+                <select  name="accountType" id="accountType">
+                    <option value="instructor">Instructor / Tutor</option>
+                    <option value="student">Student</option>
+                </select>
+            </div>
+            <div>
+                <button class="create" type="submit" id="submit" href="/home">
+                    <a href="/home">Create</a>
+                </button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
