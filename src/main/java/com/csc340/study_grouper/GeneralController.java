@@ -33,7 +33,7 @@ public class GeneralController {
     @PostMapping("/create")
     public String createUser(@ModelAttribute("user") User user){
         userService.addUser(user);
-        return "redirect:/home";
+        return "redirect:/login";
     }
 
     @GetMapping({"/","/home", "/index"})
