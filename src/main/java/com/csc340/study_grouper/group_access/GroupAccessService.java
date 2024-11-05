@@ -14,6 +14,10 @@ public class GroupAccessService {
     @Autowired
     GroupAccessRepository repo;
 
+
+    public GroupAccess findById(int accessID){
+        return repo.findById(accessID).orElse(null);
+    }
     /**
      * Returns everything from the groupaccess table
      * @return

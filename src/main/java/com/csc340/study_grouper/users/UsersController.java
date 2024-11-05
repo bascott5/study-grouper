@@ -12,7 +12,7 @@ import java.util.List;
  * Controller to map user information from the database
  * @author Adam Cichoski
  */
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UsersController {
 
@@ -40,10 +40,22 @@ public class UsersController {
         return service.getUserByID(uID);
     }
 
+
     @PostMapping("/updateUser/{uID}")
     public User updateUser(@PathVariable int uID, @RequestBody User newUser){
         service.updateUser(uID, newUser);
         return service.getUserByID(uID);
+    }
+
+    @PutMapping("/update/{uID}")
+    public User updateUser(@RequestBody User user, @PathVariable int uID){
+        return service.updateUser(uID, user);
+    }
+
+    @DeleteMapping("/delete/{uID}")
+    public List<User> deleteUser(@PathVariable int uID){
+        service.deleteUser(uID);
+        return getAllUsers();
     }
 
 }

@@ -19,7 +19,22 @@ public class StudyGroupService {
         return repository.findAll();
     }
 
-    StudyGroup getStudyGroupByID(int groupID){
+    public StudyGroup getStudyGroupByID(int groupID){
         return repository.findById(groupID).orElse(null);
+    }
+
+    public void addStudyGroup(StudyGroup studyGroup){
+        repository.save(studyGroup);
+    }
+
+    public StudyGroup updateStudyGroup(StudyGroup updated, int gID){
+        StudyGroup current = getStudyGroupByID(gID);
+        current.setCreatorID(updated.getCreatorID());
+        current.setGroupName(updated.getGroupName());
+        return current;
+    }
+
+    public void deleteGroup(int gID){
+        repository.delete(getStudyGroupByID(gID));
     }
 }
