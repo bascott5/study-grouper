@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.csc340.study_grouper.users.AccountType;
 
 import java.sql.SQLOutput;
 
@@ -35,7 +36,11 @@ public class GeneralController {
         User test = userService.getUserByUsername(username);
         if(test != null){
             if (test.getPassword().equals(password)){
-                return "redirect:/customer/home";
+                switch(test.getAccountType()){
+                    case "student" : return "redirect:/customer/home";
+                    case "instructor" : return "redirect:/provider/home";
+                    case "admin" : return "redirect:/admin/home";
+                }
             }
         }
         return "redirect:/login";
