@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "SELECT * FROM users WHERE accountType = :accountType", nativeQuery = true)
     List<User> findByAccountType(String accountType);
+
+    @Query(value = "SELECT * FROM users WHERE username = :username", nativeQuery = true)
+    User findUserByUsername(String username);
 }

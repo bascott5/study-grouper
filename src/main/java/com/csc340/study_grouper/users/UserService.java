@@ -33,6 +33,10 @@ public class UserService {
         return getAllUsers();
     }
 
+    public User getUserByUsername(String username){
+        return repository.findUserByUsername(username);
+    }
+
     public User updateUser(int uID, User user){
         User existing = getUserByID(uID);
         existing.setEmail(user.getEmail());
