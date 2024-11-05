@@ -5,11 +5,7 @@ import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.csc340.study_grouper.users.AccountType;
-
-import java.sql.SQLOutput;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -35,11 +31,17 @@ public class GeneralController {
     public String verifyLogin(String username, String password){
         User test = userService.getUserByUsername(username);
         if(test != null){
-            if (test.getPassword().equals(password)){
-                switch(test.getAccountType()){
+            String pass = test.getPassword();
+            System.out.println(pass + "" + password);
+            System.out.println(pass.equals(password));
+            if (pass.equals(password)){
+                String accountType = test.getAccountType();
+                System.out.println(accountType);
+                switch(accountType){
                     case "student" : return "redirect:/customer/home";
                     case "instructor" : return "redirect:/provider/home";
                     case "admin" : return "redirect:/admin/home";
+                    default : return "redirect:/home";
                 }
             }
         }
@@ -66,6 +68,4 @@ public class GeneralController {
     public String editAccount(){
         return "edit-account";
     }
-
-
 }

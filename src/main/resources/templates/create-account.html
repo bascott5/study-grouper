@@ -27,7 +27,7 @@
 <main>
     <h1></h1>
     <section>
-        <form action="/create-account" method="post" modelAttribute="user">
+        <form action="/create" method="post" modelAttribute="user">
             <div>
                 <h2>Create Account</h2>
                 <input class="form-control" type="text" id="first_name" name="first_name" placeholder="First name">
@@ -41,19 +41,17 @@
             </div>
             <br>
             <div>
-                <input class="form-control" type="text" id="verify-password" name="password" placeholder="Verify Password">
+                <input class="form-control" type="text" placeholder="Verify Password">
             </div>
             <div>
                 <h2 for="account-type">Account Type</h2>
-                <select  name="accountType" id="accountType">
+                <select name="accountType">
                     <option value="instructor">Instructor / Tutor</option>
                     <option value="student">Student</option>
                 </select>
             </div>
             <div>
-                <button class="create" type="submit" id="submit" href="/home">
-                    <a href="/home">Create</a>
-                </button>
+                <button class="create" type="submit" id="submit">Create</button>
             </div>
         </form>
     </section>
