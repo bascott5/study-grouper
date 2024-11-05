@@ -31,7 +31,6 @@ public class Reports {
      */
     public Reports(int reportID, int reporterID, int senderID, int messageID, String msg_type){
         this.reporterID=reporterID;
-        this.reporterID=reporterID;
         this.senderID=senderID;
         this.messageID=messageID;
         this.msg_type=msg_type;
