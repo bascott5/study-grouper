@@ -18,7 +18,6 @@ public class MessagesController {
         return "redirect:customer-group-view";
     }
 
-
     @PostMapping("/post-message")
     public String postMessage(Message message){
         service.postMessage(message);

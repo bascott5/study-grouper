@@ -1,19 +1,32 @@
 package com.csc340.study_grouper.group_access;
 
-import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "groupaccess")
 public class GroupAccess {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int group_access_ID;
 
     @Column(nullable = false)
     private int groupID;
 
     @Column(nullable = false)
     private int userID;
+
+    /**
+     * Constructor with all values
+     * @param group_access_ID
+     * @param groupID
+     * @param userID
+     */
+    public GroupAccess(int group_access_ID, int groupID, int userID){
+        this.group_access_ID = group_access_ID;
+        this.groupID = groupID;
+        this.userID = userID;
+    }
 
     public GroupAccess(int groupID, int userID){
         this.groupID = groupID;
