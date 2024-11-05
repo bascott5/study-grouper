@@ -2,10 +2,13 @@ package com.csc340.study_grouper;
 
 import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.sql.SQLOutput;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class GeneralController {
+
+    @Autowired
     UserService userService;
     /**
      * Mapping to the login page
@@ -25,13 +30,24 @@ public class GeneralController {
         return "login";
     }
 
+    @GetMapping("/verify-user")
+    public String verifyLogin(String username, String password){
+        User test = userService.getUserByUsername(username);
+        if(test != null){
+            if (test.getPassword().equals(password)){
+                return "redirect:/customer/home";
+            }
+        }
+        return "redirect:/login";
+    }
+
     @GetMapping("/create-account")
     public String createAccount(){
         return "create-account";
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute("user") User user){
+    public String createUser(User user){
         userService.addUser(user);
         return "redirect:/login";
     }
@@ -45,4 +61,6 @@ public class GeneralController {
     public String editAccount(){
         return "edit-account";
     }
+
+
 }

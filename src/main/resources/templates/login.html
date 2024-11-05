@@ -27,18 +27,20 @@
 <main>
     <h1></h1>
     <section>
+        <form action="/verify-user" method="get">
+            <div>
+                <h2>Login</h2>
+                <input type="text" name="username" placeholder="Username">
+            </div>
+            <div>
+                <h2>Password</h2>
+                <input type="text" name="password" placeholder="Password">
+            </div>
+            <button class="create" type="submit">Login</button>
+        </form>
+
         <div>
-            <h2>Login</h2>
-            <input type="text" placeholder="Username">
-        </div>
-        <div>
-            <h2>Password</h2>
-            <input type="text" placeholder="Password">
-        </div>
-        <div>
-            <button class="create" href="/home">
-                <a href="home">Login</a>
-            </button>
+
         </div>
         <br>
         Don't have an account?
