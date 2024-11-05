@@ -1,6 +1,10 @@
 package com.csc340.study_grouper.users.admin;
 
+import com.csc340.study_grouper.reports.ReportsService;
+import com.csc340.study_grouper.study_groups.StudyGroupService;
 import com.csc340.study_grouper.users.UserService;
+import com.csc340.study_grouper.users.customer.StudentService;
+import com.csc340.study_grouper.users.provider.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +24,11 @@ public class AdminController {
 
     @Autowired
     UserService service;
+    InstructorService instructorService;
+    StudentService studentService;
+    StudyGroupService studyGroup;
+    ReportsService reportsService;
 
-//    @Autowired
-//    MessageService messageService;
 
     /**
      * The get mapping for the admin account page
@@ -39,7 +45,7 @@ public class AdminController {
      */
     @GetMapping("/reviews")
     public String reviews(Model model){
-//        model.addAttribute("reviews-list", )
+        model.addAttribute("reports-list", reportsService.findAllReports());
         return "admin-view/reviews";
     }
 
@@ -48,7 +54,13 @@ public class AdminController {
      * @return statistics html in admin-view
      */
     @GetMapping("/statistics")
-    public String stats(){
+    public String stats(Model model){
+        model.addAttribute("Students", studentService.getStudents().size());
+        model.addAttribute("Providers", instructorService.getProviders().size());
+        //Number of rooms divided by number of students.
+        int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
+
+        model.addAttribute("Avg room size", avg);
         return "admin-view/statistics";
     }
 
@@ -69,8 +81,7 @@ public class AdminController {
 
     @GetMapping("/view-users")
     public String viewUsers(Model model, @RequestParam(name = "continue",required = false) String cont) {
-        model.addAttribute("userList", service.getAllUsers());
-        model.addAttribute("title", "User List");
+        model.addAttribute("users", service.getAllUsers());
         return "admin-view/view-users";
     }
 

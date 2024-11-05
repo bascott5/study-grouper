@@ -15,7 +15,7 @@ public class StudyGroupService {
     @Autowired
     StudyGroupRepository repository;
 
-    List<StudyGroup> getAllStudyGroups(){
+    public List<StudyGroup> getAllStudyGroups(){
         return repository.findAll();
     }
 
