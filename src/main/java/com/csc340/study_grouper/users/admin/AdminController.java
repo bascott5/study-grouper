@@ -45,7 +45,7 @@ public class AdminController {
      */
     @GetMapping("/reviews")
     public String reviews(Model model){
-        model.addAttribute("reports-list", reportsService.findAllReports());
+        //model.addAttribute("reports-list", reportsService.findAllReports());
         return "admin-view/reviews";
     }
 
@@ -55,12 +55,12 @@ public class AdminController {
      */
     @GetMapping("/statistics")
     public String stats(Model model){
-        model.addAttribute("Students", studentService.getStudents().size());
+        /*model.addAttribute("Students", studentService.getStudents().size());
         model.addAttribute("Providers", instructorService.getProviders().size());
         //Number of rooms divided by number of students.
         int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
 
-        model.addAttribute("Avg room size", avg);
+        model.addAttribute("Avg room size", avg);*/
         return "admin-view/statistics";
     }
 
