@@ -8,17 +8,14 @@ import com.csc340.study_grouper.users.provider.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
  *
  * This controller is used for mapping admin account pages
  */
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -55,13 +52,18 @@ public class AdminController {
      */
     @GetMapping("/statistics")
     public String stats(Model model){
-        model.addAttribute("Students", studentService.getStudents().size());
-        model.addAttribute("Providers", instructorService.getProviders().size());
-        //Number of rooms divided by number of students.
+        int num_user = service.getAllUsers().size();
+        int num_provider = instructorService.getProviders().size();
         int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
+        return "Users: " + num_user + "\nProviders: " + num_provider + "\nAverage room size: " + avg;
 
-        model.addAttribute("Avg room size", avg);
-        return "admin-view/statistics";
+//        model.addAttribute("Students", studentService.getStudents().size());
+//        model.addAttribute("Providers", instructorService.getProviders().size());
+//        //Number of rooms divided by number of students.
+//        int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
+//
+//        model.addAttribute("Avg room size", avg);
+//        return "admin-view/statistics";
     }
 
     /**
