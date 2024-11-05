@@ -11,6 +11,10 @@ public class ReviewsService {
     @Autowired
     ReviewsRepository repo;
 
+    public List<Reviews> findAll(){
+        return repo.findAll();
+    }
+
     public List<Reviews> findByGroupID(int groupID){
         return repo.findByGroupId(groupID);
     }
@@ -27,4 +31,13 @@ public class ReviewsService {
         return repo.findByReviewTerm(reviewTerm);
     }
 
+    public List<Reviews> addReview(Reviews review){
+        repo.save(review);
+        return findAll();
+    }
+
+    public List<Reviews> deleteReview(int ID){
+        repo.delete(findByReviewId(ID));
+        return findAll();
+    }
 }
