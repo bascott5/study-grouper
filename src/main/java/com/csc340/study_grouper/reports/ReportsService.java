@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.reports;
 
+import com.csc340.study_grouper.reviews.Reviews;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,11 @@ public class ReportsService {
     public List<Reports> findByMessageType(String msg_type){
         return repo.findByMessageType(msg_type);
     }
+
+    public List<Reports> deleteReport(Reports reports){
+        repo.delete(reports);
+        return repo.findAll();
+    }
+
 
 }
