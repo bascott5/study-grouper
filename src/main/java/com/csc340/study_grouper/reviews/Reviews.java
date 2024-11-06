@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reviews")
@@ -23,9 +22,9 @@ public class Reviews {
     @Column(nullable = false)
     private int senderID;
 
-    @Column(nullable = false)
+    @Column
     @CreationTimestamp
-    private LocalDateTime time_stamp;
+    private Timestamp time_stamp;
 
     /**
      * Constructor with all values
@@ -35,7 +34,7 @@ public class Reviews {
      * @param senderID
      * @param time_stamp
      */
-    public Reviews(int reviewID, int groupID, String review, int senderID, LocalDateTime time_stamp) {
+    public Reviews(int reviewID, int groupID, String review, int senderID, Timestamp time_stamp) {
         this.reviewID = reviewID;
         this.groupID = groupID;
         this.review = review;
@@ -50,12 +49,14 @@ public class Reviews {
      * @param senderID
      * @param time_stamp
      */
-    public Reviews(int groupID, String review, int senderID, LocalDateTime time_stamp) {
+    public Reviews(int groupID, String review, int senderID, Timestamp time_stamp) {
         this.groupID = groupID;
         this.review = review;
         this.senderID = senderID;
         this.time_stamp = time_stamp;
     }
+
+    public Reviews(){}
 
     public int getReviewID() {
         return reviewID;
@@ -73,7 +74,7 @@ public class Reviews {
         return senderID;
     }
 
-    public LocalDateTime getTime_stamp() {
+    public Timestamp getTime_stamp() {
         return time_stamp;
     }
 
@@ -93,7 +94,7 @@ public class Reviews {
         this.senderID = senderID;
     }
 
-    public void setTime_stamp(LocalDateTime time_stamp) {
+    public void setTime_stamp(Timestamp time_stamp) {
         this.time_stamp = time_stamp;
     }
 }

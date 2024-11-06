@@ -11,7 +11,13 @@ public class MessagesService {
     @Autowired
     MessagesRepository repo;
 
+    public List<Message> findAll(){
+        return repo.findAll();
+    }
 
+    public List<Message> findBySenderID(int uID){
+        return repo.findBySenderID(uID);
+    }
     public Message findByID(int mID){
         return repo.findById(mID).orElse(null);
     }

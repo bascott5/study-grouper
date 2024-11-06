@@ -3,6 +3,7 @@ package com.csc340.study_grouper.reviews;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,7 @@ public class ReviewsController {
 
     @PostMapping("/add-review")
     public List<Reviews> addReview(@RequestBody Reviews review){
+        review.setTime_stamp(new Timestamp(System.currentTimeMillis()));
         return service.addReview(review);
     }
 

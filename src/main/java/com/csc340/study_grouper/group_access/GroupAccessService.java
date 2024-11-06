@@ -15,6 +15,9 @@ public class GroupAccessService {
     GroupAccessRepository repo;
 
 
+    public List<GroupAccess> findAll(){
+        return repo.findAll();
+    }
     public GroupAccess findById(int accessID){
         return repo.findById(accessID).orElse(null);
     }
@@ -42,5 +45,20 @@ public class GroupAccessService {
      */
     public List<GroupAccess> findByGroupId(int groupID){
         return repo.findByGroupID(groupID);
+    }
+
+    /**
+     * Saves a new group access to the database
+     * @param groupAccess
+     * @return all group accesses
+     */
+    public List<GroupAccess> addGroupAccess(GroupAccess groupAccess){
+        repo.save(groupAccess);
+        return findAll();
+    }
+
+    public List<GroupAccess> delete(int groupAccessID){
+        repo.delete(findById(groupAccessID));
+        return findAll();
     }
 }

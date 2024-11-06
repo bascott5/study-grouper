@@ -21,7 +21,7 @@ public class Message {
     @Column(nullable = false)
     int groupID;
 
-    @Column(nullable = false)
+    @Column
     Timestamp time_stamp;
 
     /**
