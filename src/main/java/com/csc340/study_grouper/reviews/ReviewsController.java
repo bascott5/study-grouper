@@ -30,7 +30,6 @@ public class ReviewsController {
 
     @PostMapping("/add-review")
     public List<Reviews> addReview(@RequestBody Reviews review){
-        review.setTime_stamp(new Timestamp(System.currentTimeMillis()));
         return service.addReview(review);
     }
 

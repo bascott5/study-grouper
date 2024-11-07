@@ -49,7 +49,6 @@ public class MessagesController {
      */
     @PostMapping("/post")
     public List<Message> postMessage(@RequestBody Message message){
-        message.setTime_stamp(new Timestamp(System.currentTimeMillis()));
         service.postMessage(message);
         return service.findAll();
     }

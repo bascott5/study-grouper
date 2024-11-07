@@ -1,6 +1,7 @@
 package com.csc340.study_grouper.messages;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CurrentTimestamp;
 
 import java.sql.Timestamp;
 
@@ -22,6 +23,7 @@ public class Message {
     int groupID;
 
     @Column
+    @CurrentTimestamp
     Timestamp time_stamp;
 
     /**
