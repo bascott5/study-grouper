@@ -38,9 +38,9 @@ public class GeneralController {
                 String accountType = test.getAccountType();
                 System.out.println(accountType);
                 switch(accountType){
-                    case "student" : return "redirect:/customer/home";
-                    case "instructor" : return "redirect:/provider/home";
-                    case "admin" : return "redirect:/admin/home";
+                    case "student" : return "redirect:/customer/home/"+test.getuID();
+                    case "instructor" : return "redirect:/provider/home/"+test.getuID();
+                    case "admin" : return "redirect:/admin/home/"+test.getuID();
                     default : return "redirect:/home";
                 }
             }

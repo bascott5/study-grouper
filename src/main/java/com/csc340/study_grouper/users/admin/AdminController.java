@@ -8,10 +8,7 @@ import com.csc340.study_grouper.users.provider.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -54,7 +51,7 @@ public class AdminController {
      * @return statistics html in admin-view
      */
     @GetMapping("/statistics")
-    public String stats(Model model){
+    public String stats(@ModelAttribute Model model){
         /*model.addAttribute("Students", studentService.getStudents().size());
         model.addAttribute("Providers", instructorService.getProviders().size());
         //Number of rooms divided by number of students.

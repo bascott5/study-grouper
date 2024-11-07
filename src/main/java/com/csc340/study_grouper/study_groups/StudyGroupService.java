@@ -15,11 +15,13 @@ public class StudyGroupService {
     @Autowired
     StudyGroupRepository repository;
 
-    public List<StudyGroup> getAllStudyGroups(){
+    public List<StudyGroup> findAllStudyGroups(){
         return repository.findAll();
     }
 
-    StudyGroup getStudyGroupByID(int groupID){
+    public StudyGroup findStudyGroupByID(int groupID){
         return repository.findById(groupID).orElse(null);
     }
+
+    public List<StudyGroup> findByCreatorId(int creatorID){return repository.findByCreatorID(creatorID);}
 }

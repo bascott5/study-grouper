@@ -1,7 +1,13 @@
 package com.csc340.study_grouper.users.provider;
 
+import com.csc340.study_grouper.study_groups.StudyGroupService;
+import com.csc340.study_grouper.users.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -12,6 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/provider")
 public class InstructorController {
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    StudyGroupService groupService;
 
     /**
      * Get mapping for the page where a provider can make a group
@@ -85,8 +97,10 @@ public class InstructorController {
         return "provider-view/software-engineering";
     }
 
-    @GetMapping("/home")
-    public String home(){
+    @GetMapping("/home/{pID}")
+    public String home(@ModelAttribute Model model, @PathVariable int pID){
+        model.addAttribute("instructor", userService.getUserByID(pID));
+        model.addAttribute("courses", groupService.findByCreatorId(pID));
         return "provider-view/provider-home";
     }
 

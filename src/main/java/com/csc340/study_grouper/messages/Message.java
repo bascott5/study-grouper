@@ -1,6 +1,8 @@
 package com.csc340.study_grouper.messages;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CurrentTimestamp;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.sql.Timestamp;
 
@@ -22,6 +24,7 @@ public class Message {
     int groupID;
 
     @Column(nullable = false)
+    @CurrentTimestamp
     Timestamp time_stamp;
 
     /**
