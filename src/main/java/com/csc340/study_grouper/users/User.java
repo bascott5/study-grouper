@@ -20,6 +20,7 @@ public class User {
     private int uID;
 
     @Column(nullable = false)
+
     private String email;
 
     @Column(nullable=false)

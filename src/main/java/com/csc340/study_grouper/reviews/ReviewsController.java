@@ -13,6 +13,11 @@ public class ReviewsController {
     @Autowired
     ReviewsService service;
 
+    @GetMapping("/all")
+    public List<Reviews> getAllReviews(){
+        return service.findAll();
+    }
+
     @GetMapping("/{ID}")
     public Reviews getByID(@PathVariable int ID){
         return service.findByReviewId(ID);

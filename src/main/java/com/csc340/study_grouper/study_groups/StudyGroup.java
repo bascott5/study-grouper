@@ -9,6 +9,7 @@ public class StudyGroup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int groupID;
 
+
     @Column(nullable = false)
     int creatorID;
 

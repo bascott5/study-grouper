@@ -19,6 +19,7 @@ public class Message {
     @Column(nullable = false)
     int senderID;
 
+
     @Column(nullable = false)
     int groupID;
 

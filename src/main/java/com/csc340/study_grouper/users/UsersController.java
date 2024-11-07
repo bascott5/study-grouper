@@ -41,11 +41,11 @@ public class UsersController {
     }
 
 
-    @PostMapping("/updateUser/{uID}")
-    public User updateUser(@PathVariable int uID, @RequestBody User newUser){
-        service.updateUser(uID, newUser);
-        return service.getUserByID(uID);
-    }
+//    @PostMapping("/updateUser/{uID}")
+//    public User updateUser(@PathVariable int uID, @RequestBody User newUser){
+//        service.updateUser(uID, newUser);
+//        return service.getUserByID(uID);
+//    }
 
     @PutMapping("/update/{uID}")
     public User updateUser(@RequestBody User user, @PathVariable int uID){

@@ -17,6 +17,11 @@ public class MessagesController {
     @Autowired
     MessagesService service;
 
+    @GetMapping("/all")
+    public List<Message> getAllMessages(){
+        return service.findAll();
+    }
+
     /**
      * Method to return messages of a group in order
      * localhost:8080/messages/group/{gID}
