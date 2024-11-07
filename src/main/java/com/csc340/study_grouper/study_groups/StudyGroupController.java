@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/group")
-public class StudyGroupController extends UsersController {
+public class StudyGroupController {
 
     @Autowired
     MessagesService messageService;
