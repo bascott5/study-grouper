@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/menu.css">
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+    <script src="../scripts/websockets.js" defer></script>
     <title>Computer Architecture - StudyGrouper</title>
 </head>
 <body>
@@ -13,10 +15,10 @@
             <h2>Groups</h2>
             <ul class="servers">
                 <li class="selected"><a href="/customer/computer-architecture">Computer Architecture</a></li>
-                <li><a href="/customer/software-engineering">Software Engineering</a></li>
-                <li><a href="/customer/biology">Biology</a></li>
-                <li><a href="/customer/chemistry">Chemistry</a></li>
-                <li><a href="/customer/physics">Physics</a></li>
+                <li><a hx-boost="true" href="/customer/software-engineering">Software Engineering</a></li>
+                <li><a hx-boost="true" href="/customer/biology">Biology</a></li>
+                <li><a hx-boost="true" href="/customer/chemistry">Chemistry</a></li>
+                <li><a hx-boost="true" href="/customer/physics">Physics</a></li>
             </ul>
         </div>
         <div class="options">

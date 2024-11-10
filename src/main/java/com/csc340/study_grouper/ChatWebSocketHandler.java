@@ -1,17 +1,14 @@
-// reference: https://medium.com/@ropelife/real-time-communication-with-websocket-in-spring-boot-using-webflux-5d9fbb36a0ab
 package com.csc340.study_grouper;
 
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class WebSocketHandler extends TextWebSocketHandler {
-
-    private static Set<WebSocketSession> sessions = new HashSet();
+public class ChatWebSocketHandler extends TextWebSocketHandler {
+    private final CopyOnWriteArrayList<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -21,13 +18,14 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         for (WebSocketSession webSocketSession : sessions) {
-            if (webSocketSession.isOpen()) {
-                try {
-                    webSocketSession.sendMessage(message);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            if (!webSocketSession.getId().equals(session.getId())) {
+                webSocketSession.sendMessage(message);
             }
         }
+    }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        sessions.remove(session);
     }
 }
