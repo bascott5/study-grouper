@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -24,7 +25,7 @@ public class UserService {
         return repository.findById(uID).orElse(null);
     }
 
-    public List<User> getUserByName(String name){
+    public Optional<User> getUserByName(String name){
         return repository.findUserByName(name);
     }
 
@@ -33,7 +34,7 @@ public class UserService {
         return getAllUsers();
     }
 
-    public User getUserByUsername(String username){
+    public Optional<User> getUserByUsername(String username){
         return repository.findUserByUsername(username);
     }
 

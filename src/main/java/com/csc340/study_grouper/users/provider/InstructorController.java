@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * This controller is used for mapping provider account pages
  */
 @Controller
-@RequestMapping("/provider")
+@RequestMapping("/instructor")
 public class InstructorController {
 
     @Autowired

@@ -29,7 +29,7 @@ public class GeneralController {
 
     @GetMapping("/verify-user")
     public String verifyLogin(String username, String password){
-        User test = userService.getUserByUsername(username);
+        User test = userService.getUserByUsername(username).orElse(null);
         if(test != null){
             String pass = test.getPassword();
             System.out.println(pass + "" + password);
@@ -61,6 +61,7 @@ public class GeneralController {
 
     @GetMapping({"/","/home", "/index"})
     public String home(){
+
         return "home";
     }
 

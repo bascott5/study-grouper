@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Repository for users table in the database
@@ -14,11 +15,11 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "SELECT * FROM users WHERE name LIKE %:name%", nativeQuery = true)
-    List<User> findUserByName(String name);
+    Optional<User> findUserByName(String name);
 
     @Query(value = "SELECT * FROM users WHERE accountType = :accountType", nativeQuery = true)
     List<User> findByAccountType(String accountType);
 
     @Query(value = "SELECT * FROM users WHERE username = :username", nativeQuery = true)
-    User findUserByUsername(String username);
+    Optional<User> findUserByUsername(String username);
 }

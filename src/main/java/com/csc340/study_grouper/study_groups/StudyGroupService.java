@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service to perform queries on studyGroups table in the database
@@ -19,7 +20,13 @@ public class StudyGroupService {
         return repository.findAll();
     }
 
-    StudyGroup getStudyGroupByID(int groupID){
+    public StudyGroup getStudyGroupByID(int groupID){
         return repository.findById(groupID).orElse(null);
     }
+
+    public Optional<List<StudyGroup>> findByCreatorId(int uID){
+        return repository.findByCreatorID(uID);
+    }
+
+    public List<StudyGroup> searchStudyGroups(String query) { return repository.search(query); }
 }

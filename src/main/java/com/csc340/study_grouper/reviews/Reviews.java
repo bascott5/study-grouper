@@ -1,6 +1,7 @@
 package com.csc340.study_grouper.reviews;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CurrentTimestamp;
 
 import java.sql.Timestamp;
 
@@ -22,6 +23,7 @@ public class Reviews {
     private int senderID;
 
     @Column(nullable = false)
+    @CurrentTimestamp
     private Timestamp time_stamp;
 
     /**

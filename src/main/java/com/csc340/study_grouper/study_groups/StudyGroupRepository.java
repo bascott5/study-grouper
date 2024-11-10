@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.List;
 public interface StudyGroupRepository extends JpaRepository<StudyGroup, Integer>{
 
     @Query(value = "SELECT * FROM studyGroups WHERE creatorID = creatorID", nativeQuery = true)
-    List<StudyGroup> findByCreatorID(int creatorID);
+    Optional<List<StudyGroup>> findByCreatorID(int creatorID);
 
     @Query(value = "SELECT * FROM studyGroups where group_name LIKE query", nativeQuery = true)
     List<StudyGroup> search(String query);
