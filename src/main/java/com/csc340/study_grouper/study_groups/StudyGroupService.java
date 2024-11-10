@@ -22,4 +22,6 @@ public class StudyGroupService {
     StudyGroup getStudyGroupByID(int groupID){
         return repository.findById(groupID).orElse(null);
     }
+
+    public List<StudyGroup> searchStudyGroups(String query) { return repository.search(query); }
 }
