@@ -15,15 +15,19 @@ public class StudyGroup {
     @Column(nullable=false)
     String groupName;
 
+    @Column
+    String description;
+
     /**
      * Constructor for all column values in the study groups table
      * @param groupID
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int groupID, int creatorID, String groupName){
-        this(creatorID, groupName);
+    public StudyGroup(int groupID, int creatorID, String groupName, String description){
+        this(creatorID, groupName, description);
         this.groupID = groupID;
+        this.description = description;
     }
 
     /**
@@ -31,9 +35,10 @@ public class StudyGroup {
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int creatorID, String groupName){
+    public StudyGroup(int creatorID, String groupName, String description){
         this.creatorID = creatorID;
         this.groupName = groupName;
+        this.description = description;
     }
 
     /**
