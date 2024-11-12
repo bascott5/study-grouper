@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface StudyGroupRepository extends JpaRepository<StudyGroup, Integer>{
 
-    @Query(value = "SELECT * FROM studyGroups WHERE creatorID = creatorID", nativeQuery = true)
+    @Query(value = "SELECT * FROM study_groups WHERE creatorID = :creatorID", nativeQuery = true)
     Optional<List<StudyGroup>> findByCreatorID(int creatorID);
 
-    @Query(value = "SELECT * FROM studyGroups where group_name LIKE query", nativeQuery = true)
+    @Query(value = "SELECT * FROM study_groups where group_name LIKE :query", nativeQuery = true)
     List<StudyGroup> search(String query);
 }

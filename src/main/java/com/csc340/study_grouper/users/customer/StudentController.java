@@ -38,11 +38,6 @@ public class StudentController {
         return "customer-view/software-engineering";
     }
 
-    @GetMapping("/find-group")
-    public String findGroup(){
-        return "customer-view/find-group";
-    }
-
     @GetMapping("/group-description")
     public String groupDescription(){
         return "customer-view/group-description";

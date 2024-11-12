@@ -16,4 +16,6 @@ public class InstructorService {
     public List<User> getProviders(){
         return repository.findByAccountType(User.INSTRUCTOR);
     }
+
+    public User getProviderById(int providerId) { return repository.findUserById(providerId); }
 }

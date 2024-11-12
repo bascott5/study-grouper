@@ -33,25 +33,12 @@
         </div>
     </nav>
     <main>
-        <input type="text" value="art history" placeholder="Enter group name here...">
-        <section hx-get="/group/search/biology" hx-trigger="load">
+        <input type="text" placeholder="Enter group name here...">
+        <section data-th-each="group : ${studyGroups}">
             <hr>
             <div>
-                <h2><a href="/customer/group-description">Art History - Modern Art</a></h2>
+                <h2><a th:href="@{/student/group-description}" data-th-text="${group.groupName}"></a></h2>
                 <h4>Walter White</h4>
-                <p>Learn about modern artists!</p>
-            </div>
-            <hr>
-            <div>
-                <h2><a href="/customer/group-description">Art History - Renaissance Paintings</a></h2>
-                <h4>Jessie Pinkman</h4>
-                <p>Learn about renaissance paintings!</p>
-            </div>
-            <hr>
-            <div>
-                <h2><a href="/customer/group-description">Art History - Sculptures</a></h2>
-                <h4>Gus Fring</h4>
-                <p>Learn about sculptures!</p>
             </div>
             <hr>
         </section>
