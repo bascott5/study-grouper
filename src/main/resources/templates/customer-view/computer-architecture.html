@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/menu.css">
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
-    <script src="../scripts/websockets.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <title>Computer Architecture - StudyGrouper</title>
 </head>
 <body>
@@ -24,93 +25,32 @@
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="../assets/search.png" alt="Search"> <p><a href="/customer/find-group">Find Groups</a></p></li>
-                <li><img src="../assets/person.png" alt="Account"> <p><a href="/customer/account">Account</a></p></li>
-                <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+                <li><img src="../assets/search.png" alt="Search"> <p><a hx-boost="true" href="/customer/find-group">Find Groups</a></p></li>
+                <li><img src="../assets/person.png" alt="Account"> <p><a hx-boost="true" href="/customer/account">Account</a></p></li>
+                <li><img src="../assets/home.png" alt="Home"> <p><a hx-boost="true" href="/home">Home</a></p></li>
             </ul>
         </div>
         <div class="logo">
             <h1>StudyGrouper</h1>
         </div>
     </nav>
-    <main>
+    <main id="chat-page">
         <section class="group-title">
             <h1>Computer Architecture</h1>
             <a href="/customer/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
         </section>
-        <section class="message-container">
+        <section id="messageArea" class="message-container">
             <div class="message">
                 <img src="../assets/male.png" alt="User 1">
                 <div>
                     <h3>User 1</h3>
                     <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
                 </div>
             </div>
         </section>
-        <input type="text" placeholder="Type your message here...">
+        <form id="messageForm" name="messageForm" action="">
+            <input id="message" type="text" placeholder="Type your message here...">
+        </form>
     </main>
 </body>
 </html>

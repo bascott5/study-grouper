@@ -5,6 +5,7 @@ import org.hibernate.annotations.CurrentTimestamp;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="messages")
@@ -24,8 +25,8 @@ public class Message {
     int groupID;
 
     @Column(nullable = false)
-    @CurrentTimestamp
-    Timestamp time_stamp;
+    //@CurrentTimestamp
+    LocalDateTime time_stamp;
 
     /**
      * Constructor with all column values
@@ -35,7 +36,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(int messageID, int senderID, int groupID, String message, Timestamp time_stamp) {
+    public Message(int messageID, int senderID, int groupID, String message, LocalDateTime time_stamp) {
         this.messageID = messageID;
         this.message = message;
         this.senderID = senderID;
@@ -50,7 +51,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(int senderID, int groupID, String message, Timestamp time_stamp){
+    public Message(int senderID, int groupID, String message, LocalDateTime time_stamp){
         this.message = message;
         this.senderID = senderID;
         this.groupID = groupID;
@@ -80,7 +81,7 @@ public class Message {
         return groupID;
     }
 
-    public Timestamp getTime_stamp() {
+    public LocalDateTime getTime_stamp() {
         return time_stamp;
     }
 
@@ -100,7 +101,7 @@ public class Message {
         this.groupID = groupID;
     }
 
-    public void setTime_stamp(Timestamp time_stamp) {
+    public void setTime_stamp(LocalDateTime time_stamp) {
         this.time_stamp = time_stamp;
     }
 }

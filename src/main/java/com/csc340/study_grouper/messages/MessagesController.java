@@ -1,22 +1,50 @@
 package com.csc340.study_grouper.messages;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class MessagesController {
-    @Autowired
+
+    MessagesService messageService;
+    MessagesRepository messagesRepository;
+
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public")
+    public Message sendMessage(@Payload Message chatMessage) {
+        chatMessage.setTime_stamp(LocalDateTime.now());
+        messagesRepository.save(chatMessage);
+        return chatMessage;
+    }
+
+    @MessageMapping("/chat.addUser")
+    @SendTo("/topic/public")
+    public Message addUser(@Payload Message chatMessage, SimpMessageHeaderAccessor headerAccessor
+    ) {
+        chatMessage.setTime_stamp(LocalDateTime.now());
+        messagesRepository.save(chatMessage);
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSenderID());
+        return chatMessage;
+    }
+
+    /*@Autowired
     MessagesService service;
 
-    /*@GetMapping("/{gID}")
+    @GetMapping("/{gID}")
     public String getGroupMessagesInOrder(@PathVariable int groupID, Model model){
         model.addAttribute("messages", service.getGroupMessagesInOrder(groupID));
         return "redirect:customer-group-view";
-    }*/
+    }
 
     @PostMapping("/post-message")
     public String postMessage(Message message){
@@ -24,7 +52,7 @@ public class MessagesController {
         return "redirect:customer-group-view";
     }
 
-    /*@GetMapping("/delete-message/{mID}")
+    @GetMapping("/delete-message/{mID}")
     public String deleteMessage(@PathVariable int mID){
         service.deleteMessage(service.findByID(mID));
         return "redirect:";
