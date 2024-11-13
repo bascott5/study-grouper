@@ -12,11 +12,11 @@ public class MessagesController {
     @Autowired
     MessagesService service;
 
-    @GetMapping("/{gID}")
+    /*@GetMapping("/{gID}")
     public String getGroupMessagesInOrder(@PathVariable int groupID, Model model){
         model.addAttribute("messages", service.getGroupMessagesInOrder(groupID));
         return "redirect:customer-group-view";
-    }
+    }*/
 
     @PostMapping("/post-message")
     public String postMessage(Message message){
@@ -24,9 +24,9 @@ public class MessagesController {
         return "redirect:customer-group-view";
     }
 
-    @GetMapping("/delete-message/{mID}")
+    /*@GetMapping("/delete-message/{mID}")
     public String deleteMessage(@PathVariable int mID){
         service.deleteMessage(service.findByID(mID));
         return "redirect:";
-    }
+    }*/
 }
