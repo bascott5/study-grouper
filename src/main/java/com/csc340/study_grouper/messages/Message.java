@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.messages;
 
+import com.csc340.study_grouper.users.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CurrentTimestamp;
 import org.springframework.boot.context.properties.bind.DefaultValue;
@@ -13,13 +14,15 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="messageID")
     int messageID;
 
     @Column(nullable = false)
     private String message;
 
-    @Column(nullable = false)
-    int senderID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="uID")
+    User senderID;
 
     @Column(nullable = false)
     int groupID;
@@ -36,7 +39,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(int messageID, int senderID, int groupID, String message, LocalDateTime time_stamp) {
+    public Message(int messageID, User senderID, int groupID, String message, LocalDateTime time_stamp) {
         this.messageID = messageID;
         this.message = message;
         this.senderID = senderID;
@@ -51,7 +54,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(int senderID, int groupID, String message, LocalDateTime time_stamp){
+    public Message(User senderID, int groupID, String message, LocalDateTime time_stamp){
         this.message = message;
         this.senderID = senderID;
         this.groupID = groupID;
@@ -73,7 +76,7 @@ public class Message {
         return message;
     }
 
-    public int getSenderID() {
+    public User getSenderID() {
         return senderID;
     }
 
@@ -93,7 +96,7 @@ public class Message {
         this.message = message;
     }
 
-    public void setSenderID(int senderID) {
+    public void setSenderID(User senderID) {
         this.senderID = senderID;
     }
 

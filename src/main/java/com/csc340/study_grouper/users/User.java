@@ -17,6 +17,7 @@ public class User {
     public static final String ADMIN = "admin";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="uID")
     private int uID;
 
     @Column(nullable = false)
@@ -28,10 +29,10 @@ public class User {
     @Column(nullable=false)
     private String password;
 
-    @Column(nullable=false)
+    @Column(name="first_name", nullable=false)
     private String first_name;
 
-    @Column(nullable=false)
+    @Column(name="last_name", nullable=false)
     private String last_name;
 
     @Column(nullable=false)

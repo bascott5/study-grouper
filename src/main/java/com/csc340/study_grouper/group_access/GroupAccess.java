@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.group_access;
 
+import com.csc340.study_grouper.study_groups.StudyGroup;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,8 +11,9 @@ public class GroupAccess {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int group_access_ID;
 
-    @Column(nullable = false)
-    private int groupID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="groupID")
+    private StudyGroup groupID;
 
     @Column(nullable = false)
     private int userID;
@@ -22,20 +24,20 @@ public class GroupAccess {
      * @param groupID
      * @param userID
      */
-    public GroupAccess(int group_access_ID, int groupID, int userID){
+    public GroupAccess(int group_access_ID, StudyGroup groupID, int userID){
         this.group_access_ID = group_access_ID;
         this.groupID = groupID;
         this.userID = userID;
     }
 
-    public GroupAccess(int groupID, int userID){
+    public GroupAccess(StudyGroup groupID, int userID){
         this.groupID = groupID;
         this.userID = userID;
     }
 
     public GroupAccess(){}
 
-    public int getGroupID() {
+    public StudyGroup getGroupID() {
         return groupID;
     }
 
@@ -43,7 +45,7 @@ public class GroupAccess {
         return userID;
     }
 
-    public void setGroupID(int groupID) {
+    public void setGroupID(StudyGroup groupID) {
         this.groupID = groupID;
     }
 
