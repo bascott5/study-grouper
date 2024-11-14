@@ -33,7 +33,9 @@
         </div>
     </nav>
     <main>
-        <input type="text" placeholder="Enter group name here...">
+        <form action="/group/search" method="post">
+          <input type="text" name="query" placeholder="Enter group name here...">
+        </form>
         <section data-th-each="group : ${studyGroups}">
             <hr>
             <div>

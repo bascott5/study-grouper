@@ -7,9 +7,7 @@ import com.csc340.study_grouper.users.provider.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,17 +29,24 @@ public class StudyGroupController {
         return "customer-group-view";
     }
 
-    @GetMapping("/search/{query}")
-    public String searchStudyGroups(@PathVariable String query, Model model) {
-        model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(query));
+    @GetMapping("/search")
+    public String searchPage(Model model) {
+        model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(""));
 
         return "customer-view/find-group";
     }
 
-  @GetMapping("/group-description/{groupID}")
-  public String groupDescription(@PathVariable int groupID, Model model) {
+    @PostMapping("/search")
+    public String searchStudyGroups(@RequestParam String query, Model model) {
+      model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(query));
+
+      return "customer-view/find-group";
+    }
+
+    @GetMapping("/group-description/{groupID}")
+    public String groupDescription(@PathVariable int groupID, Model model) {
       model.addAttribute("groupName", studyGroupService.getStudyGroupAndInstructorById(groupID).getGroupName());
-    model.addAttribute("description", studyGroupService.getStudyGroupAndInstructorById(groupID).getDescription());
+      model.addAttribute("description", studyGroupService.getStudyGroupAndInstructorById(groupID).getDescription());
 
       return "customer-view/group-description";
   }

@@ -1,4 +1,4 @@
-main > input {
+main > form > input {
     position: absolute;
     border-radius: 25px;
     height: 50px;
