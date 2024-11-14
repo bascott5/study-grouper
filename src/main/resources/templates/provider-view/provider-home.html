@@ -11,7 +11,7 @@
         <div model="courses" class="servers-container">
             <h2>Groups</h2>
             <ul data-th-each="course : ${courses}" class="servers">
-                <li><a data-th-text="${course.groupName}" data-th-href="@{group/{gID} (gID=${course.groupID}"></a></li>
+                <li><a data-th-text="${course.groupName}" data-th-href="@{group/{gID} (gID=${course.groupID})}"></a></li>
                 <h3>Swap Account</h3>
                 <li><a href="/customer/home">Student</a></li>
                 <li class="selected"><a href="/provider/home">Instructor / Tutor</a></li>
