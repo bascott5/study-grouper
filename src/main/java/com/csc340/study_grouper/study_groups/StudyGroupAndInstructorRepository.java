@@ -14,6 +14,6 @@ public interface StudyGroupAndInstructorRepository extends JpaRepository<StudyGr
 
   @Query(value = "SELECT sg.groupID, sg.group_name, sg.description, u.first_name, u.last_name FROM study_groups sg " +
           "INNER JOIN users u ON sg.creatorID=u.uID " +
-          "WHERE (sg.group_name LIKE :query OR sg.description LIKE :query);", nativeQuery = true)
+          "WHERE sg.group_name LIKE %:query% OR sg.description LIKE %:query%;", nativeQuery = true)
   List<StudyGroupAndInstructor> search(String query);
 }

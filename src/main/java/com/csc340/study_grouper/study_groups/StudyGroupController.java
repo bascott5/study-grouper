@@ -33,7 +33,7 @@ public class StudyGroupController {
     }
 
     @PostMapping("/search")
-    public String searchStudyGroups(@RequestParam String query, Model model) {
+    public String searchStudyGroups(String query, Model model) {
       model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(query));
 
       return "customer-view/find-group";
