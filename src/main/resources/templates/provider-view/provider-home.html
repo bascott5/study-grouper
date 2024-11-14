@@ -10,8 +10,8 @@
     <nav>
         <div model="courses" class="servers-container">
             <h2 data-th-text="${instructor.first_name}"/>
-            <ul data-th-each="course : ${courses}" class="servers">
-                <li><a data-th-text="${course.groupName}" data-th-href="@{group/{gID} (gID=${course.groupID})}"></a></li>
+            <ul class="servers">
+                <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{group/{gID} (gID=${course.groupID})}"></a></li>
             </ul>
             <ul>
                 <h3>Swap Account</h3>

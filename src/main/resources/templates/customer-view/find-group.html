@@ -34,15 +34,18 @@
     </nav>
     <main>
         <form action="/group/search" method="post">
-          <input type="text" name="query" placeholder="Enter group name here...">
+          <input type="text" name="query" id="query" placeholder="Enter group name here...">
         </form>
-        <section data-th-each="group : ${studyGroups}">
+        <section >
             <hr>
-            <div>
-                <h2><a data-th-text="${group.groupName}" data-th-href="(@{~/group/group-description/} + ${group.groupID})"></a></h2>
-                <h4 data-th-text="(${group.first_name} + ' ' + ${group.last_name})"></h4>
-                <p data-th-text="${group.description}"></p>
-            </div>
+            <a data-th-each="group : ${studyGroups}" data-th-href="(@{~/group/group-description/} + ${group.groupID})">
+                <div>
+                    <h2 data-th-text="${group.groupName}" ></h2>
+                    <h4 data-th-text="(${group.first_name} + ' ' + ${group.last_name})"></h4>
+                    <p data-th-text="${group.description}"></p>
+                </div>
+            </a>
+
             <hr>
         </section>
     </main>
