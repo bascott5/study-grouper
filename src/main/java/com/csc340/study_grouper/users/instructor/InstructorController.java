@@ -1,4 +1,4 @@
-package com.csc340.study_grouper.users.provider;
+package com.csc340.study_grouper.users.instructor;
 
 import com.csc340.study_grouper.study_groups.StudyGroupService;
 import com.csc340.study_grouper.users.UserService;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
  *
- * This controller is used for mapping provider account pages
+ * This controller is used for mapping instructor account pages
  */
 @Controller
 @RequestMapping("/instructor")
@@ -26,86 +26,86 @@ public class InstructorController {
     StudyGroupService groupService;
 
     /**
-     * Get mapping for the page where a provider can make a group
-     * @return create-group html in provider-view
+     * Get mapping for the page where a instructor can make a group
+     * @return create-group html in instructor-view
      */
     @GetMapping("/create-group")
     public String createGroup(){
-        return "provider-view/create-group";
+        return "instructor-view/create-group";
     }
 
     /**
-     * Get mapping for the group settings where a provider can view student customer statistics
-     * @return group-settings html in provider-view
+     * Get mapping for the group settings where a instructor can view student student statistics
+     * @return group-settings html in instructor-view
      */
     @GetMapping("/group-settings")
     public String groupSettings(){
-        return "provider-view/group-settings";
+        return "instructor-view/group-settings";
     }
 
     /**
-     * Get mapping for the provider specific account page
-     * @return account html in provider-view
+     * Get mapping for the instructor specific account page
+     * @return account html in instructor-view
      */
     @GetMapping("/account")
     public String account(){
-        return "provider-view/account";
+        return "instructor-view/account";
     }
 
     /**
-     * Displays the provider view of a biology chat room
-     * @return biology html in provider-view
+     * Displays the instructor view of a biology chat room
+     * @return biology html in instructor-view
      */
     @GetMapping("/biology")
     public String biology(){
-        return "provider-view/biology";
+        return "instructor-view/biology";
     }
 
     /**
-     * Displays the provider view of a chemistry chat room
-     * @return chemistry html in provider-view
+     * Displays the instructor view of a chemistry chat room
+     * @return chemistry html in instructor-view
      */
     @GetMapping("/chemistry")
     public String chem(){
-        return "provider-view/chemistry";
+        return "instructor-view/chemistry";
     }
 
     /**
-     * Displays the provider view of a computer architecture chat room
-     * @return computer architecture html in provider-view
+     * Displays the instructor view of a computer architecture chat room
+     * @return computer architecture html in instructor-view
      */
     @GetMapping("/computer-architecture")
     public String compArch(){
-        return "provider-view/computer-architecture";
+        return "instructor-view/computer-architecture";
     }
 
     /**
-     * Displays the provider view of a physics chat room
-     * @return physics html in provider-view
+     * Displays the instructor view of a physics chat room
+     * @return physics html in instructor-view
      */
     @GetMapping("/physics")
     public String physics(){
-        return "provider-view/physics";
+        return "instructor-view/physics";
     }
 
     /**
-     * Displays the provider view of a software engineering chat room
-     * @return software engineering html in provider-view
+     * Displays the instructor view of a software engineering chat room
+     * @return software engineering html in instructor-view
      */
     @GetMapping("/software-engineering")
     public String softEng(){
-        return "provider-view/software-engineering";
+        return "instructor-view/software-engineering";
     }
 
     @GetMapping("/home/{pID}")
-    public String home(@ModelAttribute Model model, @PathVariable int pID){
+    public String home(Model model, @PathVariable int pID){
         model.addAttribute("instructor", userService.getUserByID(pID));
-        model.addAttribute("courses", groupService.findByCreatorId(pID));
+        model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
         return "provider-view/provider-home";
     }
 
     @GetMapping("/statistics")
     public String providerStats() {
-        return "provider-view/statistics";
+        return "instructor-view/statistics";
     }
 }

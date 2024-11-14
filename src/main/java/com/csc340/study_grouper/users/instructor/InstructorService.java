@@ -1,4 +1,4 @@
-package com.csc340.study_grouper.users.provider;
+package com.csc340.study_grouper.users.instructor;
 
 import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserRepository;

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
@@ -22,16 +23,13 @@ public class MessagesController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public Message sendMessage(@Payload Message chatMessage) {
-        chatMessage.setTime_stamp(LocalDateTime.now());
         messagesRepository.save(chatMessage);
         return chatMessage;
     }
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
-    public Message addUser(@Payload Message chatMessage, SimpMessageHeaderAccessor headerAccessor
-    ) {
-        chatMessage.setTime_stamp(LocalDateTime.now());
+    public Message addUser(@Payload Message chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         messagesRepository.save(chatMessage);
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSenderID());
         return chatMessage;
@@ -43,13 +41,13 @@ public class MessagesController {
     @GetMapping("/{gID}")
     public String getGroupMessagesInOrder(@PathVariable int groupID, Model model){
         model.addAttribute("messages", service.getGroupMessagesInOrder(groupID));
-        return "redirect:customer-group-view";
+        return "redirect:student-group-view";
     }
 
     @PostMapping("/post-message")
     public String postMessage(Message message){
         service.postMessage(message);
-        return "redirect:customer-group-view";
+        return "redirect:student-group-view";
     }
 
     @GetMapping("/delete-message/{mID}")
