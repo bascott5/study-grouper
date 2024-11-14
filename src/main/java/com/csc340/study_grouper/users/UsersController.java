@@ -1,9 +1,6 @@
 package com.csc340.study_grouper.users;
 
-import com.csc340.study_grouper.users.customer.StudentService;
-import com.csc340.study_grouper.users.provider.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +9,7 @@ import java.util.List;
  * Controller to map user information from the database
  * @author Adam Cichoski
  */
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UsersController {
 

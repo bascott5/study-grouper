@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.study_groups;
 
+import com.csc340.study_grouper.users.User;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,12 +8,14 @@ import jakarta.persistence.*;
 public class StudyGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="groupID")
     int groupID;
 
-    @Column(nullable = false)
-    int creatorID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="uID")
+    User creatorID;
 
-    @Column(nullable=false)
+    @Column(name="groupName", nullable=false)
     String groupName;
 
     @Column
@@ -24,7 +27,7 @@ public class StudyGroup {
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int groupID, int creatorID, String groupName, String description){
+    public StudyGroup(int groupID, User creatorID, String groupName, String description){
         this(creatorID, groupName, description);
         this.groupID = groupID;
         this.description = description;
@@ -35,7 +38,7 @@ public class StudyGroup {
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int creatorID, String groupName, String description){
+    public StudyGroup(User creatorID, String groupName, String description){
         this.creatorID = creatorID;
         this.groupName = groupName;
         this.description = description;
@@ -50,7 +53,7 @@ public class StudyGroup {
         return groupID;
     }
 
-    public int getCreatorID() {
+    public User getCreatorID() {
         return creatorID;
     }
 
@@ -62,7 +65,7 @@ public class StudyGroup {
         this.groupID = groupID;
     }
 
-    public void setCreatorID(int creatorID) {
+    public void setCreatorID(User creatorID) {
         this.creatorID = creatorID;
     }
 
