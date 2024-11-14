@@ -14,19 +14,22 @@ import java.util.Optional;
 public class StudyGroupService {
 
     @Autowired
-    StudyGroupRepository repository;
+    StudyGroupRepository studyGroupRepository;
+
+    @Autowired
+    StudyGroupAndInstructorRepository studyGroupAndInstructorRepository;
 
     public List<StudyGroup> getAllStudyGroups(){
-        return repository.findAll();
+        return studyGroupRepository.findAll();
     }
 
     public StudyGroup getStudyGroupByID(int groupID){
-        return repository.findById(groupID).orElse(null);
+        return studyGroupRepository.findById(groupID).orElse(null);
     }
 
     public Optional<List<StudyGroup>> findByCreatorId(int uID){
-        return repository.findByCreatorID(uID);
+        return studyGroupRepository.findByCreatorID(uID);
     }
 
-    public List<StudyGroup> searchStudyGroups(String query) { return repository.search(query); }
+    public List<StudyGroupAndInstructor> searchStudyGroups(String query) { return studyGroupAndInstructorRepository.search(query); }
 }

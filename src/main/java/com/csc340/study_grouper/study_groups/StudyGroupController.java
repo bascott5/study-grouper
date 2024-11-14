@@ -33,14 +33,8 @@ public class StudyGroupController {
 
     @GetMapping("/search/{query}")
     public String searchStudyGroups(@PathVariable String query, Model model) {
-        List<StudyGroup> studyGroups = studyGroupService.searchStudyGroups(query);
-        User[] instructors = new User[studyGroups.size()];
+        model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(query));
 
-        for (int i = 0; i < studyGroups.size(); i++) {
-            instructors[i] = instructorService.getProviderById(studyGroups.get(i).getGroupID());
-        }
-
-        model.addAttribute("studyGroups", studyGroups);
         return "customer-view/find-group";
     }
 }
