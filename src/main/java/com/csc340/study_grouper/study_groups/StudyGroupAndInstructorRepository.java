@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface StudyGroupAndInstructorRepository extends JpaRepository<StudyGroupAndInstructor, Integer> {
 
-    @Query(value = "SELECT groupid, group_name, description, first_name, last_name from study_groups sg NATURAL JOIN users u WHERE u.uid=sg.creatorid AND sg.group_name LIKE :query;", nativeQuery = true)
+    @Query(value = "SELECT sg.groupid, sg.group_name, sg.description, u.first_name, u.last_name FROM study_groups sg LEFT JOIN users u ON u.uid=sg.creatorid AND sg.group_name LIKE :query;", nativeQuery = true)
     List<StudyGroupAndInstructor> search(String query);
 }
