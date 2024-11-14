@@ -37,4 +37,12 @@ public class StudyGroupController {
 
         return "customer-view/find-group";
     }
+
+  @GetMapping("/group-description/{groupID}")
+  public String groupDescription(@PathVariable int groupID, Model model) {
+      model.addAttribute("groupName", studyGroupService.getStudyGroupAndInstructorById(groupID).getGroupName());
+    model.addAttribute("description", studyGroupService.getStudyGroupAndInstructorById(groupID).getDescription());
+
+      return "customer-view/group-description";
+  }
 }

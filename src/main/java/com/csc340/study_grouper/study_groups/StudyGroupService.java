@@ -32,4 +32,8 @@ public class StudyGroupService {
     }
 
     public List<StudyGroupAndInstructor> searchStudyGroups(String query) { return studyGroupAndInstructorRepository.search(query); }
+
+    public StudyGroupAndInstructor getStudyGroupAndInstructorById(int groupId) {
+      return studyGroupAndInstructorRepository.getById(groupId);
+    }
 }

@@ -37,7 +37,7 @@
         <section data-th-each="group : ${studyGroups}">
             <hr>
             <div>
-                <h2><a data-th-text="${group.groupName}"></a></h2>
+                <h2><a data-th-text="${group.groupName}" data-th-href="(@{~/group/group-description/} + ${group.groupID})"></a></h2>
                 <h4 data-th-text="(${group.first_name} + ' ' + ${group.last_name})"></h4>
                 <p data-th-text="${group.description}"></p>
             </div>

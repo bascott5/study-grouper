@@ -1,12 +1,17 @@
 package com.csc340.study_grouper.users.customer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/student")
 public class StudentController {
+
+    @Autowired
 
     @GetMapping("/account")
     public String account(){
@@ -36,11 +41,6 @@ public class StudentController {
     @GetMapping("/software-engineering")
     public String seChat(){
         return "customer-view/software-engineering";
-    }
-
-    @GetMapping("/group-description")
-    public String groupDescription(){
-        return "customer-view/group-description";
     }
 
     @GetMapping("/home")
