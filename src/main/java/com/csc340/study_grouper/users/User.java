@@ -132,6 +132,8 @@ public class User {
     public String getLast_name() {
         return last_name;
     }
+    public String getFullName(){ return first_name + " " + last_name;
+    }
 
     public String getAccountType() {
         return accountType;

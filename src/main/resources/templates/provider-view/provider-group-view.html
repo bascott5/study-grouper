@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/layout.css">
-    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/menu.css">
     <title>Software Engineering - StudyGrouper</title>
 </head>
 <body>
@@ -33,82 +33,21 @@
     </nav>
     <main>
         <section class="group-title">
-            <h1>Software Engineering</h1>
+            <h1 data-th-text="${group.groupName}"/>
             <a href="/provider/group-settings"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
         </section>
         <section class="message-container">
-            <div class="message">
+            <div class="message" data-th-each="message:${messages}">
                 <img src="../assets/male.png" alt="User 1">
                 <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
-            </div>
-            <div class="message">
-                <img src="../assets/female.png" alt="User 2">
-                <div>
-                    <h3>User 2</h3>
-                    <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
+                    <h3 data-th-text="${message.getFullName()}"/>
+                    <p data-th-text="${message.message}"> </p>
                 </div>
             </div>
         </section>
-        <input type="text" placeholder="Type your message here...">
+        <div>
+            <input type="text" placeholder="Type your message here...">
+        </div>
     </main>
 </body>
 </html>

@@ -20,9 +20,12 @@ public class StudyGroupController {
     @Autowired
     InstructorService instructorService;
 
+
     @GetMapping("/{gID}")
-    public String studyGroupPage(@PathVariable int groupID){
-        return "student-group-view";
+    public String studyGroupPage(Model model, @PathVariable int gID){
+        model.addAttribute("group", studyGroupService.getStudyGroupByID(gID));
+        model.addAttribute("messages", messageService.userMessageJoin(gID));
+        return "provider-view/provider-group-view";
     }
 
     @GetMapping("/search")

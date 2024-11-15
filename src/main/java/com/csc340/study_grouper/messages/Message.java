@@ -1,8 +1,10 @@
 package com.csc340.study_grouper.messages;
 
 import com.csc340.study_grouper.users.User;
+import com.csc340.study_grouper.users.UserService;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CurrentTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.sql.Timestamp;
@@ -20,16 +22,16 @@ public class Message {
     @Column(nullable = false)
     private String message;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="uID")
-    User senderID;
+    @Column(nullable = false)
+    private int senderID;
 
     @Column(nullable = false)
-    int groupID;
+    private int groupID;
 
     @Column(nullable = false)
-    //@CurrentTimestamp
+    @CurrentTimestamp
     LocalDateTime time_stamp;
+
 
     /**
      * Constructor with all column values
@@ -39,7 +41,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(int messageID, User senderID, int groupID, String message, LocalDateTime time_stamp) {
+    public Message(int messageID, int senderID, int groupID, String message, LocalDateTime time_stamp) {
         this.messageID = messageID;
         this.message = message;
         this.senderID = senderID;
@@ -54,7 +56,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(User senderID, int groupID, String message, LocalDateTime time_stamp){
+    public Message(int senderID, int groupID, String message, LocalDateTime time_stamp){
         this.message = message;
         this.senderID = senderID;
         this.groupID = groupID;
@@ -76,7 +78,7 @@ public class Message {
         return message;
     }
 
-    public User getSenderID() {
+    public int getSenderID() {
         return senderID;
     }
 
@@ -96,7 +98,7 @@ public class Message {
         this.message = message;
     }
 
-    public void setSenderID(User senderID) {
+    public void setSenderID(int senderID) {
         this.senderID = senderID;
     }
 
@@ -107,4 +109,6 @@ public class Message {
     public void setTime_stamp(LocalDateTime time_stamp) {
         this.time_stamp = time_stamp;
     }
+
+
 }

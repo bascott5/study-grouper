@@ -17,8 +17,7 @@ public interface MessagesRepository extends JpaRepository<Message, Integer> {
     List<Message> findBySenderID(int senderID);
 
 
-    @Query(value="SELECT * FROM messages WHERE groupID =:groupID ORDER BY time_stamp DESC", nativeQuery = true)
+    @Query(value="SELECT * FROM messages WHERE groupID =:groupID ORDER BY time_stamp desc", nativeQuery = true)
     List<Message> getGroupMessagesInOrder(int groupID);
-
 
 }
