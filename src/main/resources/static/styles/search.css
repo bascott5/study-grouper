@@ -34,3 +34,7 @@ div > p {
     color: darkgrey;
     margin: 15px 0;
 }
+
+section > a {
+    cursor: pointer;
+}

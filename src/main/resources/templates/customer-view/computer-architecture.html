@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/layout.css">
-    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="/styles/layout.css">
+    <link rel="stylesheet" href="/styles/menu.css">
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
@@ -15,18 +15,18 @@
         <div class="servers-container">
             <h2>Groups</h2>
             <ul class="servers">
-                <li class="selected"><a href="/customer/computer-architecture">Computer Architecture</a></li>
-                <li><a hx-boost="true" href="/customer/software-engineering">Software Engineering</a></li>
-                <li><a hx-boost="true" href="/customer/biology">Biology</a></li>
-                <li><a hx-boost="true" href="/customer/chemistry">Chemistry</a></li>
-                <li><a hx-boost="true" href="/customer/physics">Physics</a></li>
+                <li class="selected"><a href="/student/computer-architecture">Computer Architecture</a></li>
+                <li><a hx-boost="true" href="/student/software-engineering">Software Engineering</a></li>
+                <li><a hx-boost="true" href="/student/biology">Biology</a></li>
+                <li><a hx-boost="true" href="/student/chemistry">Chemistry</a></li>
+                <li><a hx-boost="true" href="/student/physics">Physics</a></li>
             </ul>
         </div>
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="../assets/search.png" alt="Search"> <p><a hx-boost="true" href="/customer/find-group">Find Groups</a></p></li>
-                <li><img src="../assets/person.png" alt="Account"> <p><a hx-boost="true" href="/customer/account">Account</a></p></li>
+                <li><img src="../assets/search.png" alt="Search"> <p><a hx-boost="true" href="/group/search">Find Groups</a></p></li>
+                <li><img src="../assets/person.png" alt="Account"> <p><a hx-boost="true" href="/student/account">Account</a></p></li>
                 <li><img src="../assets/home.png" alt="Home"> <p><a hx-boost="true" href="/home">Home</a></p></li>
             </ul>
         </div>
@@ -37,7 +37,7 @@
     <main id="chat-page">
         <section class="group-title">
             <h1>Computer Architecture</h1>
-            <a href="/customer/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
+            <a href="/student/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
         </section>
         <section id="messageArea" class="message-container">
             <div class="message">

@@ -13,18 +13,18 @@
         <div class="servers-container">
             <h2>Groups</h2>
             <ul class="servers">
-                <li><a hx-boost="true" href="/customer/computer-architecture">Computer Architecture</a></li>
-                <li><a hx-boost="true" href="/customer/software-engineering">Software Engineering</a></li>
-                <li><a hx-boost="true" href="/customer/biology">Biology</a></li>
-                <li><a hx-boost="true" href="/customer/chemistry">Chemistry</a></li>
-                <li><a hx-boost="true" href="/customer/physics">Physics</a></li>
+                <li><a hx-boost="true" href="/student/computer-architecture">Computer Architecture</a></li>
+                <li><a hx-boost="true" href="/student/software-engineering">Software Engineering</a></li>
+                <li><a hx-boost="true" href="/student/biology">Biology</a></li>
+                <li><a hx-boost="true" href="/student/chemistry">Chemistry</a></li>
+                <li><a hx-boost="true" href="/student/physics">Physics</a></li>
             </ul>
         </div>
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="../assets/search.png" alt="Search"> <p class="selected"><a href="/customer/find-group">Find Groups</a></p></li>
-                <li><img src="../assets/person.png" alt="Account"> <p><a href="/customer/account">Account</a></p></li>
+                <li><img src="../assets/search.png" alt="Search"> <p class="selected"><a href="/group/search">Find Groups</a></p></li>
+                <li><img src="../assets/person.png" alt="Account"> <p><a href="/student/account">Account</a></p></li>
                 <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
             </ul>
         </div>
@@ -36,16 +36,15 @@
         <form action="/group/search" method="post">
           <input type="text" name="query" id="query" placeholder="Enter group name here...">
         </form>
-        <section >
+        <section data-th-each="group : ${studyGroups}">
             <hr>
-            <a data-th-each="group : ${studyGroups}" data-th-href="(@{~/group/group-description/} + ${group.groupID})">
+            <a data-th-href="(@{~/group/group-description/} + ${group.groupID})">
                 <div>
                     <h2 data-th-text="${group.groupName}" ></h2>
                     <h4 data-th-text="(${group.first_name} + ' ' + ${group.last_name})"></h4>
                     <p data-th-text="${group.description}"></p>
                 </div>
             </a>
-
             <hr>
         </section>
     </main>

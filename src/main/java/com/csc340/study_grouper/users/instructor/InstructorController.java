@@ -27,74 +27,80 @@ public class InstructorController {
 
     /**
      * Get mapping for the page where a instructor can make a group
-     * @return create-group html in instructor-view
+     * @return create-group html in provider-view
      */
-    @GetMapping("/create-group")
-    public String createGroup(){
-        return "instructor-view/create-group";
+    @GetMapping("/create-group/{pID}")
+    public String createGroup(Model model, @PathVariable int pID){
+      model.addAttribute("instructor", userService.getUserByID(pID));
+      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      return "provider-view/create-group";
     }
 
     /**
      * Get mapping for the group settings where a instructor can view student student statistics
-     * @return group-settings html in instructor-view
+     * @return group-settings html in provider-view
      */
-    @GetMapping("/group-settings")
-    public String groupSettings(){
-        return "instructor-view/group-settings";
+    @GetMapping("/group-settings/{pID}")
+    public String groupSettings(Model model, @PathVariable int pID){
+      model.addAttribute("instructor", userService.getUserByID(pID));
+      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      return "provider-view/group-settings";
     }
 
     /**
      * Get mapping for the instructor specific account page
-     * @return account html in instructor-view
+     * @return account html in provider-view
      */
-    @GetMapping("/account")
-    public String account(){
-        return "instructor-view/account";
+    @GetMapping("/account/{pID}")
+    public String account(Model model, @PathVariable int pID){
+      model.addAttribute("instructor", userService.getUserByID(pID));
+      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      return "provider-view/account";
     }
 
     /**
      * Displays the instructor view of a biology chat room
-     * @return biology html in instructor-view
+     * @return biology html in provider-view
      */
     @GetMapping("/biology")
     public String biology(){
-        return "instructor-view/biology";
+        return "provider-view/biology";
     }
 
     /**
      * Displays the instructor view of a chemistry chat room
-     * @return chemistry html in instructor-view
+     * @return chemistry html in provider-view
      */
     @GetMapping("/chemistry")
     public String chem(){
-        return "instructor-view/chemistry";
+        return "provider-view/chemistry";
     }
 
     /**
      * Displays the instructor view of a computer architecture chat room
-     * @return computer architecture html in instructor-view
+     * @return computer architecture html in provider-view
      */
     @GetMapping("/computer-architecture")
     public String compArch(){
-        return "instructor-view/computer-architecture";
+        return "provider-view/computer-architecture";
     }
 
     /**
      * Displays the instructor view of a physics chat room
-     * @return physics html in instructor-view
+     * @return physics html in provider-view
      */
     @GetMapping("/physics")
     public String physics(){
-        return "instructor-view/physics";
+        return "provider-view/physics";
     }
 
     /**
      * Displays the instructor view of a software engineering chat room
-     * @return software engineering html in instructor-view
+     * @return software engineering html in provider-view
      */
     @GetMapping("/software-engineering")
     public String softEng(){
-        return "instructor-view/software-engineering";
+        return "provider-view/software-engineering";
     }
 
     @GetMapping("/home/{pID}")
@@ -106,6 +112,6 @@ public class InstructorController {
 
     @GetMapping("/statistics")
     public String providerStats() {
-        return "instructor-view/statistics";
+        return "provider-view/statistics";
     }
 }
