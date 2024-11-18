@@ -31,7 +31,7 @@
     
 }
 
-.banner > button {
+.banner > form > button {
     position: absolute;
     bottom: 20px;
     right: 50px;
@@ -43,7 +43,7 @@
     padding: 10px 20px;
 }
 
-.banner > button:hover {
+.banner > form > button:hover {
     background-color: black;
     color: whitesmoke;
 }

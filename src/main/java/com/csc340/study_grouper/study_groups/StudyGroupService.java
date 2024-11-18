@@ -1,8 +1,11 @@
 package com.csc340.study_grouper.study_groups;
 
+import com.csc340.study_grouper.group_access.GroupAccess;
+import com.csc340.study_grouper.group_access.GroupAccessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +15,9 @@ import java.util.Optional;
  */
 @Service
 public class StudyGroupService {
+
+    @Autowired
+    GroupAccessRepository groupAccessRepository;
 
     @Autowired
     StudyGroupRepository studyGroupRepository;
@@ -35,5 +41,13 @@ public class StudyGroupService {
 
     public StudyGroupAndInstructor getStudyGroupAndInstructorById(int groupId) { return studyGroupAndInstructorRepository.getById(groupId); }
 
-    public List<StudyGroup> getStudyGroupsByUserID(int uid) { return studyGroupRepository.findByUID(uid); }
+    public List<StudyGroup> getStudyGroupByGroupAccess(int pID) {
+        List<GroupAccess> accessGroups = groupAccessRepository.findByUserID(pID);
+        List<StudyGroup> studyGroups = new ArrayList<>();
+        for (int i = 0; i < accessGroups.size(); i++) {
+          studyGroups.add(studyGroupRepository.findById(accessGroups.get(i).getGroupID().getGroupID()).orElse(null));
+        }
+
+        return studyGroups;
+    }
 }
