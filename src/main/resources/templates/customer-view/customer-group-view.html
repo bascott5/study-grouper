@@ -5,26 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/menu.css">
-    <title>Biology - StudyGrouper</title>
+    <title>Group View - StudyGrouper</title>
 </head>
 <body>
 <nav>
-    <div class="servers-container">
-        <h2>Groups</h2>
+    <div model="courses" class="servers-container">
+        <h2 data-th-text="${student.first_name}"></h2>
         <ul class="servers">
-            <li><a href="/student/computer-architecture">Computer Architecture</a></li>
-            <li><a href="/student/software-engineering">Software Engineering</a></li>
-            <li class="selected"><a href="/student/biology">Biology</a></li>
-            <li><a href="/student/chemistry">Chemistry</a></li>
-            <li><a href="/student/physics">Physics</a></li>
+            <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{/group/student/{gID} (gID=${course.groupID})}"></a></li>
         </ul>
     </div>
     <div class="options">
         <h2>Options</h2>
         <ul>
-            <li><img src="../assets/search.png" alt="Search"> <p><a href="/group/search">Find Groups</a></p></li>
-            <li><img src="../assets/person.png" alt="Account"> <p><a href="/student/account">Account</a></p></li>
-            <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+            <li><img src="/assets/search.png" alt="Search"> <p><a href="/group/search">Find Groups</a></p></li>
+            <li><img src="/assets/person.png" alt="Account"> <p><a href="/student/account/0">Account</a></p></li>
+            <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
         </ul>
     </div>
     <div class="logo">
@@ -34,81 +30,26 @@
 <main>
     <section class="group-title">
         <h1 data-th-text="${group.groupName}"></h1>
-        <a href="/student/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
+        <a href="/student/write-review/0"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
     </section>
-    <section class="message-container">
-        <div class="message">
-            <img src="../assets/male.png" alt="User 1">
-            <div>
-                <h3>User 1</h3>
-                <p>Ipsum lorum!</p>
+    <main id="chat-page">
+        <section class="group-title">
+            <h1>Computer Architecture</h1>
+            <a href="/student/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
+        </section>
+        <section id="messageArea" class="message-container">
+            <div class="message">
+                <img src="/assets/male.png" alt="User 1">
+                <div>
+                    <h3>User 1</h3>
+                    <p>Ipsum lorum!</p>
+                </div>
             </div>
-        </div>
-        <div class="message">
-            <img src="../assets/female.png" alt="User 2">
-            <div>
-                <h3>User 2</h3>
-                <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/male.png" alt="User 1">
-            <div>
-                <h3>User 1</h3>
-                <p>Ipsum lorum!</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/female.png" alt="User 2">
-            <div>
-                <h3>User 2</h3>
-                <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/male.png" alt="User 1">
-            <div>
-                <h3>User 1</h3>
-                <p>Ipsum lorum!</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/female.png" alt="User 2">
-            <div>
-                <h3>User 2</h3>
-                <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/male.png" alt="User 1">
-            <div>
-                <h3>User 1</h3>
-                <p>Ipsum lorum!</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/female.png" alt="User 2">
-            <div>
-                <h3>User 2</h3>
-                <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/male.png" alt="User 1">
-            <div>
-                <h3>User 1</h3>
-                <p>Ipsum lorum!</p>
-            </div>
-        </div>
-        <div class="message">
-            <img src="../assets/female.png" alt="User 2">
-            <div>
-                <h3>User 2</h3>
-                <p>Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed buns Hot crossed buns hot crossed bunsHot crossed buns hot crossed buns</p>
-            </div>
-        </div>
-    </section>
-    <input type="text" placeholder="Type your message here...">
+        </section>
+        <form id="messageForm" name="messageForm" action="">
+            <input id="message" type="text" placeholder="Type your message here...">
+        </form>
+    </main>
 </main>
 </body>
 </html>
