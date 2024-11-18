@@ -36,4 +36,8 @@ public class StudyGroupService {
     public StudyGroupAndInstructor getStudyGroupAndInstructorById(int groupId) { return studyGroupAndInstructorRepository.getById(groupId); }
 
     public List<StudyGroup> getStudyGroupsByUserID(int uid) { return studyGroupRepository.findByUID(uid); }
+
+    public StudyGroup joinStudyGroupByID(StudyGroup group, int uid) {
+      return studyGroupRepository.joinGroup(group, uid);
+    }
 }

@@ -34,10 +34,12 @@
                 <h1 data-th-text="${groupName}"></h1>
                 <h2 data-th-text="${description}"></h2>
             </div>
-            <button>Join Group</button>
+            <form data-th-action="(@{~/group/join/} + ${groupID})" method="post">
+                <button type="submit">Join Group</button>
+            </form>
         </section>
         <section class="content">
-            <div><p>My name is Walter Hartwell White. I've been teaching art history for years and have made this group to tutor part time.</p></div>
+            <div><p data-th-text="${description}"></p></div>
         </section>
     </main>
 </body>

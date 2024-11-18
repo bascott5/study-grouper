@@ -63,11 +63,21 @@ public class StudyGroupController {
 
     @GetMapping("/group-description/{groupID}")
     public String groupDescription(@PathVariable int groupID, Model model) {
+      StudyGroupAndInstructor group = studyGroupService.getStudyGroupAndInstructorById(groupID);
+
       model.addAttribute("student", userService.getUserByID(2));
-      model.addAttribute("courses", studyGroupService.findByCreatorId(2).orElse(null));
-      model.addAttribute("groupName", studyGroupService.getStudyGroupAndInstructorById(groupID).getGroupName());
-      model.addAttribute("description", studyGroupService.getStudyGroupAndInstructorById(groupID).getDescription());
+      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
+      model.addAttribute("groupID", groupID);
+      model.addAttribute("groupName", group.getGroupName());
+      model.addAttribute("description", group.getDescription());
 
       return "customer-view/group-description";
+  }
+
+  @PostMapping("/join/{groupID}")
+  public String joinGroup(@PathVariable int uid, @PathVariable int groupID) {
+      studyGroupService.joinStudyGroupByID(studyGroupService.getStudyGroupByID(groupID), 2);
+
+      return "customer-view/customer-group-view";
   }
 }
