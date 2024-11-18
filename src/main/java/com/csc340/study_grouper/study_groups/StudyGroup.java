@@ -9,14 +9,13 @@ public class StudyGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="groupID")
-    int groupID;
+    public int groupID;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="uID")
-    User creatorID;
+    @Column(nullable = false)
+    public int creatorID;
 
     @Column(name="groupName", nullable=false)
-    String groupName;
+    public String groupName;
 
     @Column
     String description;
@@ -27,7 +26,7 @@ public class StudyGroup {
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int groupID, User creatorID, String groupName, String description){
+    public StudyGroup(int groupID, int creatorID, String groupName, String description){
         this(creatorID, groupName, description);
         this.groupID = groupID;
         this.description = description;
@@ -38,7 +37,7 @@ public class StudyGroup {
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(User creatorID, String groupName, String description){
+    public StudyGroup(int creatorID, String groupName, String description){
         this.creatorID = creatorID;
         this.groupName = groupName;
         this.description = description;
@@ -53,7 +52,7 @@ public class StudyGroup {
         return groupID;
     }
 
-    public User getCreatorID() {
+    public int getCreatorID() {
         return creatorID;
     }
 
@@ -65,7 +64,7 @@ public class StudyGroup {
         this.groupID = groupID;
     }
 
-    public void setCreatorID(User creatorID) {
+    public void setCreatorID(int creatorID) {
         this.creatorID = creatorID;
     }
 

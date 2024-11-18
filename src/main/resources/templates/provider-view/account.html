@@ -10,17 +10,23 @@
 <body>
     <nav>
         <div model="courses" class="servers-container">
-            <h2 data-th-text="${instructor.first_name}"></h2>
+            <h2 data-th-text="${user.first_name}"/>
             <ul class="servers">
-                <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{/group/instructor/{gID} (gID=${course.groupID})}"></a></li>
+                <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{/group/{gID} (gID=${course.getGroupID()})}"></a></li>
+            </ul>
+            <ul>
+                <h3>Swap Account</h3>
+                <li><a href="/student/home">Student</a></li>
+                <li class="selected"><a href="/instructor/home/3">Instructor / Tutor</a></li>
+                <li><a href="/admin/home">Admin</a></li>
             </ul>
         </div>
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="/assets/plus.png" alt="Add"> <p><a href="/instructor/create-group/0">Create Group</a></p></li>
-                <li><img src="/assets/person.png" alt="Account"> <p class="selected"><a href="/instructor/account/0">Account</a></p></li>
-                <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+                <li><img src="../assets/plus.png" alt="Add"> <p><a href="/provider/create-group">Create Group</a></p></li>
+                <li><img src="../assets/person.png" alt="Account"> <p class="selected"><a href="/provider/account/3">Account</a></p></li>
+                <li><img src="../assets/home.png" alt="Home"> <p><a href="/instructor/home/3">Home</a></p></li>
             </ul>
         </div>
         <div class="logo">
@@ -39,3 +45,4 @@
     </main>
 </body>
 </html>
+

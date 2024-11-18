@@ -27,8 +27,9 @@ public class StudyGroupController {
 
     @GetMapping("/instructor/{gID}")
     public String instructorStudyGroupPage(Model model, @PathVariable int gID){
-        model.addAttribute("instructor", userService.getUserByID(0));;
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(0));
+        int pID = studyGroupService.getStudyGroupByID(gID).getCreatorID();
+        model.addAttribute("instructor", userService.getUserByID(pID));
+        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(pID));
         model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
         model.addAttribute("messages", messageService.userMessageJoin(gID));
         return "provider-view/provider-group-view";
