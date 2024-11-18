@@ -3,8 +3,11 @@ package com.csc340.study_grouper;
 import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -65,8 +68,9 @@ public class GeneralController {
         return "home";
     }
 
-    @GetMapping("edit-account")
-    public String editAccount(){
+    @GetMapping("/edit-account/{uID}")
+    public String editAccount(@PathVariable int uID, Model model){
+        model.addAttribute("user", userService.getUserByID(uID));
         return "edit-account";
     }
 }

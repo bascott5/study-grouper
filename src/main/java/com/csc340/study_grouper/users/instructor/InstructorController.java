@@ -50,7 +50,7 @@ public class InstructorController {
     @GetMapping("/account/{uID}")
     public String account(@PathVariable int uID, Model model){
         model.addAttribute("user", userService.getUserByID(uID));
-        model.addAttribute("courses", groupService.findByCreatorId(uID));
+        model.addAttribute("courses", groupService.findByCreatorId(uID).orElse(null));
         return "provider-view/account";
     }
 
