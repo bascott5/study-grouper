@@ -179,4 +179,6 @@ public class User {
     public void setProfile_picture(Blob profile_picture) {
         this.profile_picture = profile_picture;
     }
+
+
 }

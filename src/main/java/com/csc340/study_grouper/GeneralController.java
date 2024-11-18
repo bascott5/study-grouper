@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -27,26 +29,31 @@ public class GeneralController {
         return "login";
     }
 
-    @GetMapping("/verify-user")
-    public String verifyLogin(String username, String password){
-        User test = userService.getUserByUsername(username).orElse(null);
-        if(test != null){
-            String pass = test.getPassword();
-            System.out.println(pass + "" + password);
-            System.out.println(pass.equals(password));
-            if (pass.equals(password)){
-                String accountType = test.getAccountType();
-                System.out.println(accountType);
-                switch(accountType){
-                    case "student" : return "redirect:/customer/home/"+test.getuID();
-                    case "instructor" : return "redirect:/provider/home/"+test.getuID();
-                    case "admin" : return "redirect:/admin/home/"+test.getuID();
-                    default : return "redirect:/home";
-                }
-            }
-        }
-        return "redirect:/login";
+    @PostMapping("/verify-user")
+    public String verifyUser(@RequestParam String username, @RequestParam String password, Model model){
+        return "redirect:/home";
     }
+
+//    @GetMapping("/verify-user")
+//    public String verifyLogin(String username, String password){
+//        User test = userService.getUserByUsername(username).orElse(null);
+//        if(test != null){
+//            String pass = test.getPassword();
+//            System.out.println(pass + "" + password);
+//            System.out.println(pass.equals(password));
+//            if (pass.equals(password)){
+//                String accountType = test.getAccountType();
+//                System.out.println(accountType);
+//                switch(accountType){
+//                    case "student" : return "redirect:/customer/home/"+test.getuID();
+//                    case "instructor" : return "redirect:/provider/home/"+test.getuID();
+//                    case "admin" : return "redirect:/admin/home/"+test.getuID();
+//                    default : return "redirect:/home";
+//                }
+//            }
+//        }
+//        return "redirect:/login";
+//    }
 
     @GetMapping("/create-account")
     public String createAccount(){
