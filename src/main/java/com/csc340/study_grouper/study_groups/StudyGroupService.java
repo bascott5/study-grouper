@@ -38,6 +38,6 @@ public class StudyGroupService {
     public List<StudyGroup> getStudyGroupsByUserID(int uid) { return studyGroupRepository.findByUID(uid); }
 
     public StudyGroup joinStudyGroupByID(StudyGroup group, int uid) {
-      return studyGroupRepository.joinGroup(group, uid);
+      return studyGroupRepository.save(group);
     }
 }

@@ -75,9 +75,9 @@ public class StudyGroupController {
   }
 
   @PostMapping("/join/{groupID}")
-  public String joinGroup(@PathVariable int uid, @PathVariable int groupID) {
+  public String joinGroup(@PathVariable int groupID) {
       studyGroupService.joinStudyGroupByID(studyGroupService.getStudyGroupByID(groupID), 2);
 
-      return "customer-view/customer-group-view";
+      return "redirect:/customer-view/customer-group-view";
   }
 }
