@@ -32,7 +32,7 @@ public class InstructorController {
     @GetMapping("/create-group/{pID}")
     public String createGroup(Model model, @PathVariable int pID){
       model.addAttribute("instructor", userService.getUserByID(pID));
-      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
       return "provider-view/create-group";
     }
 
@@ -43,7 +43,7 @@ public class InstructorController {
     @GetMapping("/group-settings/{pID}")
     public String groupSettings(Model model, @PathVariable int pID){
       model.addAttribute("instructor", userService.getUserByID(pID));
-      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
       return "provider-view/group-settings";
     }
 
@@ -54,7 +54,7 @@ public class InstructorController {
     @GetMapping("/account/{pID}")
     public String account(Model model, @PathVariable int pID){
       model.addAttribute("instructor", userService.getUserByID(pID));
-      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
       return "provider-view/account";
     }
 
@@ -106,7 +106,7 @@ public class InstructorController {
     @GetMapping("/home/{pID}")
     public String home(Model model, @PathVariable int pID){
         model.addAttribute("instructor", userService.getUserByID(pID));
-        model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
         return "provider-view/provider-home";
     }
 

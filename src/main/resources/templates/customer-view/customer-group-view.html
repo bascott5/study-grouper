@@ -19,7 +19,7 @@
         <h2>Options</h2>
         <ul>
             <li><img src="/assets/search.png" alt="Search"> <p><a href="/group/search">Find Groups</a></p></li>
-            <li><img src="/assets/person.png" alt="Account"> <p><a href="/student/account/0">Account</a></p></li>
+            <li><img src="/assets/person.png" alt="Account"> <p><a href="/student/account/2">Account</a></p></li>
             <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
         </ul>
     </div>
@@ -27,29 +27,23 @@
         <h1>StudyGrouper</h1>
     </div>
 </nav>
-<main>
+<main id="chat-page">
     <section class="group-title">
-        <h1 data-th-text="${group.groupName}"></h1>
-        <a href="/student/write-review/0"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
+        <h1 data-th-text="${selectedCourse.groupName}"></h1>
+        <a href="/student/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
     </section>
-    <main id="chat-page">
-        <section class="group-title">
-            <h1>Computer Architecture</h1>
-            <a href="/student/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
-        </section>
-        <section id="messageArea" class="message-container">
-            <div class="message">
-                <img src="/assets/male.png" alt="User 1">
-                <div>
-                    <h3>User 1</h3>
-                    <p>Ipsum lorum!</p>
-                </div>
+    <section id="messageArea" class="message-container">
+        <div class="message">
+            <img src="/assets/male.png" alt="User 1">
+            <div>
+                <h3>User 1</h3>
+                <p>Ipsum lorum!</p>
             </div>
-        </section>
-        <form id="messageForm" name="messageForm" action="">
-            <input id="message" type="text" placeholder="Type your message here...">
-        </form>
-    </main>
+        </div>
+    </section>
+    <form id="messageForm" name="messageForm" action="">
+        <input id="message" type="text" placeholder="Type your message here...">
+    </form>
 </main>
 </body>
 </html>

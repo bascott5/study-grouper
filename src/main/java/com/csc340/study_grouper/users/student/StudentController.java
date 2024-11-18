@@ -22,7 +22,7 @@ public class StudentController {
     @GetMapping("/account/{pID}")
     public String account(Model model, @PathVariable int pID){
       model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
 
       return "customer-view/account";
     }
@@ -55,7 +55,7 @@ public class StudentController {
     @GetMapping("/group-description/{pID}")
     public String groupDescription(Model model, @PathVariable int pID){
       model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
 
       return "customer-view/group-description";
     }
@@ -63,7 +63,7 @@ public class StudentController {
     @GetMapping("/home/{pID}")
     public String home(Model model, @PathVariable int pID) {
       model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
 
       return "customer-view/customer-home";
     }
@@ -71,7 +71,7 @@ public class StudentController {
     @GetMapping("/write-review/{pID}")
     public String review(Model model, @PathVariable int pID) {
       model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+      model.addAttribute("courses", groupService.getStudyGroupsByUserID(pID));
 
       return "customer-view/chat-settings";
     }
