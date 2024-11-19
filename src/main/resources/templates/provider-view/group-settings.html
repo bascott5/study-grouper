@@ -31,8 +31,11 @@
         <h1></h1>
         <section>
             <div>
-                <h2>Group Name</h2>
-                <input type="text" value="Computer Architecture">
+                <h2 data-th-text="${group.groupName}"></h2>
+                <input type="text" name="groupID" data-th-value="${group.groupID}" readonly hidden>
+                <input type="text" name="creatorID" data-th-value="${group.creatorID}" readonly hidden>
+                <input type="text" name="groupName" data-th-value="${group.groupName}" placeholder="Group Name">
+                <input type="text" name="description" data-th-value="${group.description}" placeholder="Description">
             </div>
             <div>
                 <h2>Topic</h2>

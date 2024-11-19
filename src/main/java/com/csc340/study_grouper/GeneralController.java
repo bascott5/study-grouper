@@ -1,5 +1,6 @@
 package com.csc340.study_grouper;
 
+import com.csc340.study_grouper.study_groups.StudyGroupService;
 import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class GeneralController {
 
     @Autowired
     UserService userService;
+
+
     /**
      * Mapping to the login page
      * @return login.html page
@@ -72,5 +75,13 @@ public class GeneralController {
     public String editAccount(@PathVariable int uID, Model model){
         model.addAttribute("user", userService.getUserByID(uID));
         return "edit-account";
+    }
+
+    @PostMapping("/edit-account")
+    public String editAccount(User user){
+        userService.addUser(user);
+        String accountType = user.getAccountType();
+        int uID = user.getuID();
+        return "redirect:/"+accountType+"/account/"+uID;
     }
 }

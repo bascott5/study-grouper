@@ -12,7 +12,7 @@
         <div model="courses" class="servers-container">
             <h2 data-th-text="${user.first_name}"/>
             <ul class="servers">
-                <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{/group/{gID} (gID=${course.groupID})}"></a></li>
+                <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{/group/instructor/{gID} (gID=${course.groupID})}"></a></li>
             </ul>
             <ul>
                 <h3>Swap Account</h3>
@@ -24,7 +24,7 @@
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="/assets/plus.png" alt="Add"> <p><a data-th-href="@{/instructor/create-group/{pID} (pID =${user.uID})}">Create Group</a></p></li>
+                <li><img src="/assets/plus.png" alt="Add"> <p><a data-th-href="@{/group/instructor/{pID} (pID =${user.uID})}">Create Group</a></p></li>
                 <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/instructor/account/{pID} (pID =${user.uID})}">Account</a></p></li>
                 <li><img src="/assets/home.png" alt="Home"> <p><a data-th-href="@{/instructor/home/{pID} (pID =${user.uID})}">Home</a></p></li>
             </ul>

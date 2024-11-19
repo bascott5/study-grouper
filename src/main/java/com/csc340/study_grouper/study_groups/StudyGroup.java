@@ -18,7 +18,7 @@ public class StudyGroup {
     public String groupName;
 
     @Column
-    String description;
+    public String description;
 
     /**
      * Constructor for all column values in the study groups table

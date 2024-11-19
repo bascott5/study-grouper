@@ -33,13 +33,21 @@
     <img src="/assets/person.png" alt="PFP">
     <h1>Username</h1>
     <div>
-      <input type="text" placeholder="Username">
-      <input  type="text" placeholder="Password">
-      <input  type="text" placeholder="email">
-      <br>
-      <button class="create"><a href="/admin/account">Save</a></button>
-      <br>
-      <button class="delete"><a href="/home">Delete Account</a></button>
+      <form action="/edit-account" method="post" model="user">
+        <input type="text" name="uID" data-th-value="${user.uID}" readonly hidden>
+        <input type="text" name="accountType" data-th-value="${user.accountType}" readonly hidden>
+        Title: <input type="text" name="title" data-th-value="${user.title}"><br>
+        First Name: <input type="text" name="first_name" data-th-value="${user.first_name}"><br>
+        Last Name: <input type="text" name="last_name" data-th-value="${user.last_name}"><br>
+        Username: <input type="text" name="username" data-th-value="${user.username}"><br>
+        Password: <input  type="text" name="password" data-th-value="${user.password}"><br>
+        Email: <input  type="text" name="email" data-th-value="${user.email}"><br>
+        <br>
+        <button type="submit" class="create">Save</button>
+        <br>
+        <button class="delete"><a href="/home">Delete Account</a></button>
+      </form>
+
     </div>
   </section>
 </main>

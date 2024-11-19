@@ -1,9 +1,13 @@
 package com.csc340.study_grouper.group_access;
 
+import com.csc340.study_grouper.users.User;
+import com.csc340.study_grouper.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -14,6 +18,8 @@ public class GroupAccessService {
     @Autowired
     GroupAccessRepository repo;
 
+    @Autowired
+    UserRepository userRepository;
     /**
      * Returns everything from the groupaccess table
      * @return
@@ -38,5 +44,9 @@ public class GroupAccessService {
      */
     public List<GroupAccess> findByGroupId(int groupID){
         return repo.findByGroupID(groupID);
+    }
+
+    public Optional<List<User>> getUsersInGroupAccessList(int gID){
+        return userRepository.findUsersInGroupAccess(gID);
     }
 }

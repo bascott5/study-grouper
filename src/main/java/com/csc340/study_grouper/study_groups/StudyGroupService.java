@@ -1,5 +1,7 @@
 package com.csc340.study_grouper.study_groups;
 
+import com.csc340.study_grouper.users.User;
+import com.csc340.study_grouper.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class StudyGroupService {
 
     @Autowired
     StudyGroupRepository studyGroupRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     StudyGroupAndInstructorRepository studyGroupAndInstructorRepository;
@@ -39,5 +44,9 @@ public class StudyGroupService {
 
     public StudyGroup joinStudyGroupByID(StudyGroup group, int uid) {
       return studyGroupRepository.save(group);
+    }
+
+    public Optional<User> findGoupCreator(int gID){
+        return userRepository.findGroupCreator(gID);
     }
 }

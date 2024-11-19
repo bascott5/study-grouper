@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.study_groups;
 
+import com.csc340.study_grouper.group_access.GroupAccessService;
 import com.csc340.study_grouper.messages.MessagesService;
 import com.csc340.study_grouper.users.UserService;
 import com.csc340.study_grouper.users.instructor.InstructorService;
@@ -24,6 +25,9 @@ public class StudyGroupController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    GroupAccessService groupAccessService;
 
     @GetMapping("/instructor/{gID}")
     public String instructorStudyGroupPage(Model model, @PathVariable int gID){
@@ -73,12 +77,20 @@ public class StudyGroupController {
       model.addAttribute("description", group.getDescription());
 
       return "customer-view/group-description";
-  }
+    }
 
-  @PostMapping("/join/{groupID}")
-  public String joinGroup(@PathVariable int groupID) {
-      studyGroupService.joinStudyGroupByID(studyGroupService.getStudyGroupByID(groupID), 2);
+    @PostMapping("/join/{groupID}")
+    public String joinGroup(@PathVariable int groupID) {
+        studyGroupService.joinStudyGroupByID(studyGroupService.getStudyGroupByID(groupID), 2);
 
       return "redirect:/customer-view/customer-group-view";
   }
+
+     @GetMapping("/group-settings/{gID}")
+     public String groupSettings(@PathVariable int gID, Model model){
+        model.addAttribute("instructor",studyGroupService.findGoupCreator(gID).orElse(null));
+        model.addAttribute("group", studyGroupService.getStudyGroupByID(gID));
+        model.addAttribute("students", groupAccessService.getUsersInGroupAccessList(gID).orElse(null));
+        return "provider-view/group-settings";
+     }
 }
