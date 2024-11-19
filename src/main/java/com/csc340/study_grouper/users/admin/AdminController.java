@@ -6,6 +6,8 @@ import com.csc340.study_grouper.users.UserService;
 import com.csc340.study_grouper.users.customer.StudentService;
 import com.csc340.study_grouper.users.provider.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +23,13 @@ public class AdminController {
 
     @Autowired
     UserService service;
+    @Autowired
     InstructorService instructorService;
+    @Autowired
     StudentService studentService;
+    @Autowired
     StudyGroupService studyGroup;
+    @Autowired
     ReportsService reportsService;
 
 
@@ -42,7 +48,7 @@ public class AdminController {
      */
     @GetMapping("/reviews")
     public String reviews(Model model){
-        //model.addAttribute("reports-list", reportsService.findAllReports());
+        model.addAttribute("reports-list", reportsService.findAllReports());
         return "admin-view/reviews";
     }
 
@@ -52,12 +58,12 @@ public class AdminController {
      */
     @GetMapping("/statistics")
     public String stats(@ModelAttribute Model model){
-        /*model.addAttribute("Students", studentService.getStudents().size());
+        model.addAttribute("Students", studentService.getStudents().size());
         model.addAttribute("Providers", instructorService.getProviders().size());
         //Number of rooms divided by number of students.
         int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
+        model.addAttribute("Avg room size", avg);
 
-        model.addAttribute("Avg room size", avg);*/
         return "admin-view/statistics";
     }
 
@@ -71,7 +77,8 @@ public class AdminController {
     }
 
     @GetMapping("/home")
-    public String home(){
+    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model){
+        model.addAttribute("username", userDetails.getUsername());
         return "admin-view/admin-home";
     }
 
@@ -85,6 +92,6 @@ public class AdminController {
     @GetMapping("/delete/{uID}")
     public String deleteUser(@PathVariable int uID){
         service.deleteUser(uID);
-        return "admin-view/view-users";
+        return "redirect:/admin-view/view-users";
     }
 }

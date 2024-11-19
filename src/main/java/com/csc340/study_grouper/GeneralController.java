@@ -1,6 +1,7 @@
 package com.csc340.study_grouper;
 
 import com.csc340.study_grouper.users.User;
+import com.csc340.study_grouper.users.UserRepository;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class GeneralController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    UserRepository userRepository;
     /**
      * Mapping to the login page
      * @return login.html page
@@ -30,8 +33,22 @@ public class GeneralController {
     }
 
     @PostMapping("/verify-user")
-    public String verifyUser(@RequestParam String username, @RequestParam String password, Model model){
-        return "redirect:/home";
+    public String verifyUser(@RequestParam String username, @RequestParam String password) {
+        User user = userRepository.findUserByUsername(username).orElse(null);
+
+        if (user != null && user.getPassword().equals(password)) {
+            switch (user.getAccountType().toString()) {
+                case "ADMIN":
+                    return "redirect:/admin/home/" + user.getuID();
+                case "INSTRUCTOR":
+                    return "redirect:/instructor/home/" + user.getuID();
+                case "STUDENT":
+                    return "redirect:/student/home/" + user.getuID();
+                default:
+                    return "redirect:/home";
+            }
+    }
+        return "redirect:/login";
     }
 
 //    @GetMapping("/verify-user")
