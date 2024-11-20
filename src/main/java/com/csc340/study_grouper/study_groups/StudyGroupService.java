@@ -49,4 +49,8 @@ public class StudyGroupService {
     public Optional<User> findGoupCreator(int gID){
         return userRepository.findGroupCreator(gID);
     }
+
+    public void save(StudyGroup group){
+        studyGroupRepository.save(group);
+    }
 }

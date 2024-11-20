@@ -11,9 +11,8 @@ public class GroupAccess {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int group_access_ID;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="groupID")
-    private StudyGroup groupID;
+    @Column(nullable = false)
+    private int groupID;
 
     @Column(nullable = false)
     private int userID;
@@ -24,20 +23,20 @@ public class GroupAccess {
      * @param groupID
      * @param userID
      */
-    public GroupAccess(int group_access_ID, StudyGroup groupID, int userID){
+    public GroupAccess(int group_access_ID, int groupID, int userID){
         this.group_access_ID = group_access_ID;
         this.groupID = groupID;
         this.userID = userID;
     }
 
-    public GroupAccess(StudyGroup groupID, int userID){
+    public GroupAccess(int groupID, int userID){
         this.groupID = groupID;
         this.userID = userID;
     }
 
     public GroupAccess(){}
 
-    public StudyGroup getGroupID() {
+    public int getGroupID() {
         return groupID;
     }
 
@@ -45,7 +44,7 @@ public class GroupAccess {
         return userID;
     }
 
-    public void setGroupID(StudyGroup groupID) {
+    public void setGroupID(int groupID) {
         this.groupID = groupID;
     }
 

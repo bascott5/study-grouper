@@ -2,6 +2,7 @@ package com.csc340.study_grouper.study_groups;
 
 import com.csc340.study_grouper.group_access.GroupAccessService;
 import com.csc340.study_grouper.messages.MessagesService;
+import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import com.csc340.study_grouper.users.instructor.InstructorService;
 import com.csc340.study_grouper.users.student.StudentService;
@@ -68,13 +69,14 @@ public class StudyGroupController {
 
     @GetMapping("/group-description/{groupID}")
     public String groupDescription(@PathVariable int groupID, Model model) {
-      StudyGroupAndInstructor group = studyGroupService.getStudyGroupAndInstructorById(groupID);
-
+      StudyGroup group = studyGroupService.getStudyGroupByID(groupID);
+      User instructor = userService.getUserByID(group.creatorID);
+      model.addAttribute("instructor", instructor);
       model.addAttribute("student", userService.getUserByID(2));
       model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
       model.addAttribute("groupID", groupID);
       model.addAttribute("groupName", group.getGroupName());
-      model.addAttribute("description", group.getDescription());
+      model.addAttribute("description", group.description);
 
       return "customer-view/group-description";
     }
@@ -93,4 +95,11 @@ public class StudyGroupController {
         model.addAttribute("students", groupAccessService.getUsersInGroupAccessList(gID).orElse(null));
         return "provider-view/group-settings";
      }
+
+    @PostMapping("/update-group")
+    public String updateGroup(StudyGroup group){
+        studyGroupService.save(group);
+        return "redirect:/group/instructor/"+group.getGroupID();
+    }
+
 }

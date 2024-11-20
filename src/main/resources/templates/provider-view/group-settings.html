@@ -18,9 +18,9 @@
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="../assets/plus.png" alt="Add"> <p><a href="/instructor/create-group/0">Create Group</a></p></li>
-                <li><img src="../assets/person.png" alt="Account"> <p><a href="/instructor/account/0">Account</a></p></li>
-                <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+                <li><img src="/assets/plus.png" alt="Add"> <p><a data-th-href="@{/instructor/create-group/{uID} (uID=${instructor.uID})}">Create Group</a></p></li>
+                <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/instructor/account/{uID} (uID=${instructor.uID})}">Account</a></p></li>
+                <li><img src="/assets/home.png" alt="Home"> <p><a data-th-href="@{/instructor/home/{uID} (uID=${instructor.uID})}">Home</a></p></li>
             </ul>
         </div>
         <div class="logo">
@@ -31,11 +31,17 @@
         <h1></h1>
         <section>
             <div>
-                <h2 data-th-text="${group.groupName}"></h2>
-                <input type="text" name="groupID" data-th-value="${group.groupID}" readonly hidden>
-                <input type="text" name="creatorID" data-th-value="${group.creatorID}" readonly hidden>
-                <input type="text" name="groupName" data-th-value="${group.groupName}" placeholder="Group Name">
-                <input type="text" name="description" data-th-value="${group.description}" placeholder="Description">
+                <form action="/group/update-group" method="post">
+                    <h2 data-th-text="${group.groupName}"></h2>
+                    <input type="text" name="groupID" data-th-value="${group.groupID}" readonly hidden>
+                    <input type="text" name="creatorID" data-th-value="${group.creatorID}" readonly hidden>
+                    <input type="text" name="groupName" data-th-value="${group.groupName}" placeholder="Group Name">
+                    <input type="text" name="description" id="description" data-th-value="${group.description}" placeholder="Description">
+                    <div>
+                        <button type="submit" class="create">Save</button>
+                    </div>
+                </form>
+
             </div>
             <div>
                 <h2>Topic</h2>
@@ -53,9 +59,12 @@
                     <option value="">Sunday</option>
                 </select>
             </div>
-            <div>
-                <button class="delete">Delete Group</button>
-            </div>
+            <form>
+                <div>
+                    <button class="delete">Delete Group</button>
+                </div>
+            </form>
+
             <div>
                 <button class="create-account"><a href="/instructor/statistics/0">Click here for statistics</a></button>
             </div>

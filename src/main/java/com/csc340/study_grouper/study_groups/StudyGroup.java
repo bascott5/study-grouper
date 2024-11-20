@@ -17,7 +17,7 @@ public class StudyGroup {
     @Column(name="groupName", nullable=false)
     public String groupName;
 
-    @Column
+    @Column(name="description")
     public String description;
 
     /**
@@ -71,4 +71,10 @@ public class StudyGroup {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+    public void setDescription(String description){this.description=description;}
 }

@@ -18,9 +18,9 @@
     <div class="options">
         <h2>Options</h2>
         <ul>
-            <li><img src="/assets/plus.png" alt="Add"> <p class="selected"><a href="/instructor/create-group/0">Create Group</a></p></li>
-            <li><img src="/assets/person.png" alt="Account"> <p><a href="/instructor/account/0">Account</a></p>
-            <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+            <li><img src="/assets/plus.png" alt="Add"> <p class="selected"><a data-th-href="@{/instructor/create-group/{uID}(uID=${instructor.uID})}">Create Group</a></p></li>
+            <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/instructor/account/{uID}(uID=${instructor.uID})}">Account</a></p>
+            <li><img src="/assets/home.png" alt="Home"> <p><a data-th-href="@{/instructor/home/{uID}(uID=${instructor.uID})}">Home</a></p></li>
         </ul>
     </div>
     <div class="logo">
@@ -30,26 +30,31 @@
 <main>
     <h1></h1>
     <section>
-        <div>
-            <h2>Group Name</h2>
-            <input type="text" placeholder="Enter group name...">
-        </div>
-        <div>
-            <h2>Meeting Time</h2>
-            <input type="time" value="10:00"> - <input type="time" value="12:00"> <p>every</p>
-            <select name="" id="">
-            <option value="">Monday</option>
-            <option value="">Tuesday</option>
-            <option value="">Wednesday</option>
-            <option value="">Thursday</option>
-            <option value="">Friday</option>
-            <option value="">Saturday</option>
-            <option value="">Sunday</option>
-        </select>
-        </div>
-        <div>
-            <button class="create">Create Group</button>
-        </div>
+        <form action="/instructor/create-group" method="post">
+            <div>
+                <h2>Group Name</h2>
+                <input type="text" name="creatorID" data-th-value="${instructor.uID}" hidden readonly>
+                <input type="text" name="groupName" placeholder="Enter group name...">
+                <input type="text" name="description" placeholder="Description">
+            </div>
+            <div>
+                <h2>Meeting Time</h2>
+                <input type="time" value="10:00"> - <input type="time" value="12:00"> <p>every</p>
+                <select name="" id="">
+                    <option value="">Monday</option>
+                    <option value="">Tuesday</option>
+                    <option value="">Wednesday</option>
+                    <option value="">Thursday</option>
+                    <option value="">Friday</option>
+                    <option value="">Saturday</option>
+                    <option value="">Sunday</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="create">Create Group</button>
+            </div>
+        </form>
+
     </section>
 </main>
 </body>

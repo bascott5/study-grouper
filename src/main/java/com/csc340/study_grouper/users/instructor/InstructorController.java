@@ -1,14 +1,12 @@
 package com.csc340.study_grouper.users.instructor;
 
+import com.csc340.study_grouper.study_groups.StudyGroup;
 import com.csc340.study_grouper.study_groups.StudyGroupService;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -29,19 +27,20 @@ public class InstructorController {
      * Get mapping for the page where a instructor can make a group
      * @return create-group html in instructor-view
      */
-    @GetMapping("/create-group")
-    public String createGroup(){
-        return "instructor-view/create-group";
+    @GetMapping("/create-group/{pID}")
+    public String createGroup(@PathVariable int pID, Model model){
+        model.addAttribute("instructor", userService.getUserByID(pID));
+        return "provider-view/create-group";
     }
 
-    /**
-     * Get mapping for the group settings where a instructor can view student student statistics
-     * @return group-settings html in instructor-view
-     */
-    @GetMapping("/group-settings")
-    public String groupSettings(){
-        return "instructor-view/group-settings";
+    @PostMapping("/create-group")
+    public String postGroup(StudyGroup group){
+        groupService.save(group);
+        return "redirect:/instructor/home/"+group.getCreatorID();
     }
+
+
+
 
     /**
      * Get mapping for the instructor specific account page
@@ -66,4 +65,7 @@ public class InstructorController {
     public String providerStats() {
         return "instructor-view/statistics";
     }
+//
+//    @PostMapping("/delete-group")
+//    public String delete
 }
