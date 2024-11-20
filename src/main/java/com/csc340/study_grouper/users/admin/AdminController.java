@@ -2,6 +2,7 @@ package com.csc340.study_grouper.users.admin;
 
 import com.csc340.study_grouper.reports.ReportsService;
 import com.csc340.study_grouper.study_groups.StudyGroupService;
+import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import com.csc340.study_grouper.users.student.StudentService;
 import com.csc340.study_grouper.users.instructor.InstructorService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -77,14 +80,16 @@ public class AdminController {
 
 
     @GetMapping("/view-users")
-    public String viewUsers(Model model, @RequestParam(name = "continue",required = false) String cont) {
-        model.addAttribute("users", service.getAllUsers());
+    public String viewUsers(Model model) {
+        List<User> userList = service.getAllUsers();
+        model.addAttribute("username", "Admin");
+        model.addAttribute("userList", userList);
         return "admin-view/view-users";
     }
 
     @GetMapping("/delete/{uID}")
     public String deleteUser(@PathVariable int uID){
         service.deleteUser(uID);
-        return "admin-view/view-users";
+        return "redirect:/admin-view/view-users";
     }
 }

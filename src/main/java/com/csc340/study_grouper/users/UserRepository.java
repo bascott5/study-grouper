@@ -36,4 +36,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             "LEFT JOIN study_groups s ON u.uID = s.creatorID " +
             "WHERE s.groupID = :gID", nativeQuery = true)
     Optional<User> findGroupCreator(int gID);
+
 }

@@ -15,16 +15,16 @@
     <div class="servers-container">
       <h2>Groups</h2>
       <ul class="servers">
-        <li class="selected"><a href="/admin/statistics">Statistics</a></li>
-        <li class="selected"><a href="/admin/reviews">Reviews</a></li>
-        <li class="selected"><a href="/admin/admin-view">Admin View</a></li>
+        <li><a th:href="@{/admin/statistics}">Statistics</a></li>
+        <li><a th:href="@{/admin/reviews}">Reviews</a></li>
+        <li><a th:href="@{/admin/admin-view}">Admin View</a></li>
       </ul>
     </div>
     <div class="options">
       <h2>Options</h2>
       <ul>
-        <li><img src="../assets/person.png" alt="Account"> <p><a href="/admin/account">Account</a></p></li>
-        <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+        <li><img src="../assets/person.png" alt="Account"> <a th:href="@{/admin/account}">Account</a></li>
+        <li><img src="../assets/home.png" alt="Home"> <a th:href="@{/home}">Home</a></li>
       </ul>
     </div>
     <div class="logo">
@@ -34,7 +34,7 @@
   <main>
     <div class="container">
 
-      <h1 data-th-text="${username}"></h1>
+      <h1 th:text="${username}"></h1>
 
       <div style="align-content: center;">
 
@@ -49,15 +49,19 @@
           </thead>
           <tbody>
           <tr th:each="user : ${userList}">
-            <td><a th:href="@{/users/{uID} (id=${user.uID})}" th:text=" ${user.uID}"> </a></td>
-            <td th:text=" ${user.username}"></td>
-            <td th:text=" ${user.email}"></td>
-            <td th:text=" ${user.accountType}"></td>
+            <td th:text="${user.uID}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.accountType}"></td>
+            <td>
+              <a th:href="@{/admin/delete/{uID}(uID=${user.uID})}">Delete</a>
+            </td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <h3 th:text="${#lists.size(userList)}"></h3>
   </main>
 
 </body>

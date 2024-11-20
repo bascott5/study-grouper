@@ -47,6 +47,7 @@ public class UserService {
         existing.setLast_name(user.getLast_name());
         existing.setTitle(user.getTitle());
         existing.setProfile_picture(user.getProfile_picture());
+        repository.save(existing);
         return existing;
     }
 
@@ -55,4 +56,5 @@ public class UserService {
         repository.delete(getUserByID(uID));
         return getAllUsers();
     }
+
 }

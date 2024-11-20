@@ -35,7 +35,7 @@ public class User {
     @Column(name="last_name", nullable=false)
     private String last_name;
 
-    @Column(nullable=false)
+    @Column(name = "accountType", nullable=false)
     private String accountType;
 
     @Column
@@ -181,5 +181,15 @@ public class User {
 
     public void setProfile_picture(Blob profile_picture) {
         this.profile_picture = profile_picture;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uID=" + uID +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", accountType='" + accountType + '\'' +
+                '}';
     }
 }
