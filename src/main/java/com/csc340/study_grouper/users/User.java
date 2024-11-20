@@ -12,9 +12,7 @@ import java.sql.Blob;
 @Table(name="users")
 public class User {
 
-    public enum AccountType{
-        ADMIN, INSTRUCTOR, STUDENT
-    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int uID;
@@ -34,9 +32,8 @@ public class User {
     @Column(nullable=false)
     private String last_name;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable=false)
-    private AccountType accountType;
+    private String accountType;
 
     @Column
     private String title;
@@ -57,7 +54,7 @@ public class User {
      * @param title
      * @param profile_picture
      */
-    public User(int uID, String email, String username, String password, String first_name, String last_name, AccountType accountType, String title, Blob profile_picture){
+    public User(int uID, String email, String username, String password, String first_name, String last_name, String accountType, String title, Blob profile_picture){
         this.uID = uID;
         this.email = email;
         this.username=username;
@@ -80,7 +77,7 @@ public class User {
      * @param title
      * @param profile_picture
      */
-    public User(String email, String username, String password, String first_name, String last_name, AccountType accountType, String title, Blob profile_picture){
+    public User(String email, String username, String password, String first_name, String last_name, String accountType, String title, Blob profile_picture){
         this.email=email;
         this.username=username;
         this.password=password;
@@ -100,7 +97,7 @@ public class User {
      * @param last_name
      * @param accountType
      */
-    public User(String email, String username, String password, String first_name, String last_name, AccountType accountType){
+    public User(String email, String username, String password, String first_name, String last_name, String accountType){
         this(email,username,password,first_name,last_name,accountType,null,null);
     }
 
@@ -133,7 +130,7 @@ public class User {
         return last_name;
     }
 
-    public AccountType getAccountType() {
+    public String getAccountType() {
         return accountType;
     }
 
@@ -169,7 +166,7 @@ public class User {
         this.last_name = last_name;
     }
 
-    public void setAccountType(AccountType accountType) {
+    public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
 
