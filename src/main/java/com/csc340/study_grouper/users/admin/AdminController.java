@@ -24,8 +24,12 @@ public class AdminController {
 
     @Autowired
     UserService service;
+    @Autowired
     InstructorService instructorService;
+    @Autowired
     StudentService studentService;
+    @Autowired
+    AdminService adminService;
     StudyGroupService studyGroup;
     ReportsService reportsService;
 
@@ -54,13 +58,34 @@ public class AdminController {
      * @return statistics html in admin-view
      */
     @GetMapping("/statistics")
-    public String stats(@ModelAttribute Model model){
-        /*model.addAttribute("Students", studentService.getStudents().size());
-        model.addAttribute("Providers", instructorService.getProviders().size());
-        //Number of rooms divided by number of students.
-        int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
+    public String stats(Model model){
+        List<User> allUsers = service.getAllUsers();
+        List<User> students = studentService.getStudents();
+        List<User> instructors = instructorService.getProviders();
+        List<User> admins = adminService.getAdmins();
 
-        model.addAttribute("Avg room size", avg);*/
+        int totalStudents = students.size();
+        int totalInstructors = instructors.size();
+        int totalUsers = allUsers.size();
+        int totalAdmins = admins.size();
+
+        double percentage = ((double) totalInstructors / totalStudents) * 100;
+        double sProportion = ((double) totalStudents / totalUsers) * 100;
+        double iProportion = ((double) totalInstructors / totalUsers) * 100;
+        double aProportion = ((double) totalAdmins / totalUsers) * 100;
+
+        model.addAttribute("Students", totalStudents);
+        model.addAttribute("Providers", totalInstructors);
+        model.addAttribute("instructorPercentage", percentage);
+        model.addAttribute("admins", totalAdmins);
+        model.addAttribute("totalUsers", totalUsers);
+        model.addAttribute("sProportion", sProportion);
+        model.addAttribute("iProportion", iProportion);
+        model.addAttribute("aProportion", aProportion);
+//        System.out.println("Total Users: " + totalUsers);
+//        System.out.println("Total Students: " + totalStudents);
+//        System.out.println("Total Instructors: " + totalInstructors);
+//        System.out.println("Instructor Percentage: " + percentage);
         return "admin-view/statistics";
     }
 
