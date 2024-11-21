@@ -109,12 +109,12 @@ public class AdminController {
         List<User> userList = service.getAllUsers();
         model.addAttribute("username", "Admin");
         model.addAttribute("userList", userList);
-        return "admin-view/view-users";
+        return "admin/view-users";
     }
 
     @GetMapping("/delete/{uID}")
     public String deleteUser(@PathVariable int uID){
         service.deleteUser(uID);
-        return "redirect:/admin-view/view-users";
+        return "redirect:/admin/view-users";
     }
 }

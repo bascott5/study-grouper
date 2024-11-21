@@ -40,10 +40,10 @@
             <p>Total Students: <span th:text="${Students}"></span></p>
             <p>Total Instructors: <span th:text="${Providers}"></span></p>
             <p>Total Admins: <span th:text="${admins}"></span></p>
-            <p>Instructor to Student Ratio: <span th:text="${instructorPercentage} + '%'"></span></p>
-            <p>Percentage of users who are students: <span th:text="${sProportion} + '%'"></span></p>
-            <p>Percentage of users who are instructors: <span th:text="${iProportion} + '%'"></span></p>
-            <p>Percentage of users who are admins: <span th:text="${aProportion} + '%'"></span></p>
+            <p>Instructor to Student Ratio: <span th:text="'%' + ${instructorPercentage}"></span></p>
+            <p>Percentage of users who are students: <span th:text="'%' + ${sProportion}"></span></p>
+            <p>Percentage of users who are instructors: <span th:text="'%' + ${iProportion}"></span></p>
+            <p>Percentage of users who are admins: <span th:text="'%' + ${aProportion}"></span></p>
 <!--            <img src="/assets/bar-graph.png" alt="Search" width="180" height="180"><p></p>-->
 <!--            <img src="/assets/pie-chart.png" alt="Search" width="280" height="180"> <p class="selected"></p>-->
         </div>
