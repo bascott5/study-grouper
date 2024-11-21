@@ -3,16 +3,6 @@ These SQL scripts are meant to populate the data base with dummy data to test th
 **/
 use studygrouper;
 
--- Updating datatypes
-alter table messages 
-modify column time_stamp timestamp default current_timestamp on update current_timestamp not null;
-
-alter table reviews 
-modify column time_stamp timestamp default current_timestamp on update current_timestamp not null;
-
-
-
-
 -- Inserting test users
 insert into users
 values(1, 'lindaschminda@gmail.com', 'LSchminda', 'password', 'Linda', 'Schminda', null, null, 'student'),
