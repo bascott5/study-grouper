@@ -14,13 +14,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         String redirectUrl = request.getContextPath();
 
-        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))){
+        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("admin"))){
             redirectUrl = "/admin/home";
-        } else if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("INSTRUCTOR"))){
+        } else if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("instructor"))){
             redirectUrl = "/instructor/home";
         }
-        else if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("STUDENT"))){
-            redirectUrl = "student/home";
+        else if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("student"))){
+            redirectUrl = "/student/home";
         }
         response.sendRedirect(redirectUrl);
     }
