@@ -21,8 +21,6 @@ public class StudyGroupService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    StudyGroupAndInstructorRepository studyGroupAndInstructorRepository;
 
     public List<StudyGroup> getAllStudyGroups(){
         return studyGroupRepository.findAll();
@@ -36,9 +34,8 @@ public class StudyGroupService {
         return studyGroupRepository.findByCreatorID(uID);
     }
 
-    public List<StudyGroupAndInstructor> searchStudyGroups(String query) { return studyGroupAndInstructorRepository.search(query); }
-
-    public StudyGroupAndInstructor getStudyGroupAndInstructorById(int groupId) { return studyGroupAndInstructorRepository.getById(groupId); }
+    public List<StudyGroup> searchStudyGroups() { return studyGroupRepository.search(""); }
+    public List<StudyGroup> searchStudyGroups(String query) { return studyGroupRepository.search(query); }
 
     public List<StudyGroup> getStudyGroupsByUserID(int uid) { return studyGroupRepository.findByUID(uid); }
 
@@ -46,7 +43,7 @@ public class StudyGroupService {
       return studyGroupRepository.save(group);
     }
 
-    public Optional<User> findGoupCreator(int gID){
+    public Optional<User> findGroupCreator(int gID){
         return userRepository.findGroupCreator(gID);
     }
 

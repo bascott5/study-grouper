@@ -16,9 +16,16 @@ public interface StudyGroupRepository extends JpaRepository<StudyGroup, Integer>
     @Query(value = "SELECT * FROM study_groups WHERE creatorID = :creatorID", nativeQuery = true)
     Optional<List<StudyGroup>> findByCreatorID(int creatorID);
 
-    @Query(value = "SELECT * FROM study_groups WHERE uid = :uid;", nativeQuery = true)
+    @Query(value = "SELECT * FROM study_groups WHERE creatorid = :uid;", nativeQuery = true)
     List<StudyGroup> findByUID(int uid);
 
     @Query(value = "INSERT INTO study_groups (groupid, creatorid, group_name, description, uid) VALUES (:group.groupid, :group.creatorid, :group.group_name, :group.description, :uid);", nativeQuery = true)
     StudyGroup joinGroup(StudyGroup group, int uid);
+
+    @Query(value= "SELECT s.* FROM study_groups s " +
+            "LEFT JOIN users u ON s.creatorID = u.uID " +
+            "WHERE s.group_name LIKE %:query% OR s.groupID LIKE %:query% OR s.description LIKE %:query% " +
+            "OR u.first_name LIKE %:query% OR u.last_name LIKE %:query% " +
+            "ORDER BY s.groupID", nativeQuery = true)
+    List<StudyGroup> search(String query);
 }

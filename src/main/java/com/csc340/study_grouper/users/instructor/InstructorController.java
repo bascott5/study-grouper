@@ -36,11 +36,8 @@ public class InstructorController {
     @PostMapping("/create-group")
     public String postGroup(StudyGroup group){
         groupService.save(group);
-        return "redirect:/instructor/home/"+group.getCreatorID();
+        return "redirect:/instructor/home/"+group.getCreatorID().getuID();
     }
-
-
-
 
     /**
      * Get mapping for the instructor specific account page

@@ -11,9 +11,6 @@ public class MessagesService {
 
     @Autowired
     MessagesRepository messagesRepository;
-    
-    @Autowired
-    UserMessageJoinRepository umjRepository;
 
 
     /**
@@ -53,13 +50,8 @@ public class MessagesService {
         return messagesRepository.findAll();
     }
 
-    /**
-     * Returns a UserMessageJoin entity that is the result of a join between the Message table and the User table
-     * @param groupID
-     * @return
-     */
-    public List<UserMessageJoin> userMessageJoin(int groupID){
-        return umjRepository.userMessageJoin(groupID);
+    public List<Message> findOrderedGroupMessages(int gID){
+        return messagesRepository.getGroupMessagesInOrder(gID);
     }
 
 }

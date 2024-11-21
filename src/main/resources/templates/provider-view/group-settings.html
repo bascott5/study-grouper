@@ -34,7 +34,7 @@
                 <form action="/group/update-group" method="post">
                     <h2 data-th-text="${group.groupName}"></h2>
                     <input type="text" name="groupID" data-th-value="${group.groupID}" readonly hidden>
-                    <input type="text" name="creatorID" data-th-value="${group.creatorID}" readonly hidden>
+                    <input type="text" name="creatorID" data-th-value="${group.creatorID.uID}" readonly hidden>
                     <input type="text" name="groupName" data-th-value="${group.groupName}" placeholder="Group Name">
                     <input type="text" name="description" id="description" data-th-value="${group.description}" placeholder="Description">
                     <div>

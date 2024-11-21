@@ -29,19 +29,22 @@
         </div>
     </nav>
     <main>
-        <form action="/group/search" method="post">
+        <form data-th-action="@{/group/post-search/{uID} (uID=${student.uID})}" method="post">
           <input type="text" name="query" id="query" placeholder="Enter group name here...">
         </form>
         <section>
-            <hr>
-            <a data-th-each="group : ${studyGroups}" data-th-href="(@{~/group/group-description/} + ${group.groupID})">
-                <div>
-                    <h2 data-th-text="${group.groupName}" ></h2>
-                    <h4 data-th-text="(${group.first_name} + ' ' + ${group.last_name})"></h4>
-                    <p data-th-text="${group.description}"></p>
-                </div>
-            </a>
-            <hr>
+            <div data-th-each="group : ${studyGroups}">
+                <hr>
+                <a data-th-href="(@{~/group/group-description/} + ${group.groupID})">
+                    <div>
+                        <h2 data-th-text="${group.groupName}" ></h2>
+                        <h3 data-th-text="${group.creatorID.getFullName()}"></h3>
+                        <p data-th-text="${group.description}"></p>
+                    </div>
+                </a>
+                <hr>
+            </div>
+
         </section>
     </main>
 </body>

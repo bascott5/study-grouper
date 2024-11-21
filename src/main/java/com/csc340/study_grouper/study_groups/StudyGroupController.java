@@ -32,11 +32,11 @@ public class StudyGroupController {
 
     @GetMapping("/instructor/{gID}")
     public String instructorStudyGroupPage(Model model, @PathVariable int gID){
-        int pID = studyGroupService.getStudyGroupByID(gID).getCreatorID();
+        int pID = studyGroupService.getStudyGroupByID(gID).getCreatorID().getuID();
         model.addAttribute("instructor", userService.getUserByID(pID));
         model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(pID));
         model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
-        model.addAttribute("messages", messageService.userMessageJoin(gID));
+        model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
         return "provider-view/provider-group-view";
     }
 
@@ -45,39 +45,34 @@ public class StudyGroupController {
       model.addAttribute("student", userService.getUserByID(2));;
       model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
       model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
-      model.addAttribute("messages", messageService.userMessageJoin(gID));
+      model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
       return "customer-view/customer-group-view";
     }
 
-    @GetMapping("/search")
-    public String searchPage(Model model) {
-        model.addAttribute("student", userService.getUserByID(2));
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
-        model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(""));
+    @GetMapping("/search/{uID}")
+    public String searchPage(@PathVariable int uID, Model model) {
+        model.addAttribute("student", userService.getUserByID(uID));
+        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(uID));
+        model.addAttribute("studyGroups", studyGroupService.searchStudyGroups());
 
         return "customer-view/find-group";
     }
 
-    @PostMapping("/search")
-    public String searchStudyGroups(String query, Model model) {
-      model.addAttribute("student", userService.getUserByID(2));
-      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
+    @PostMapping("/post-search/{uID}")
+    public String searchStudyGroups(@PathVariable int uID, String query, Model model) {
+      model.addAttribute("student", userService.getUserByID(uID));
+      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(uID));
       model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(query));
-
       return "customer-view/find-group";
     }
 
     @GetMapping("/group-description/{groupID}")
     public String groupDescription(@PathVariable int groupID, Model model) {
-      StudyGroup group = studyGroupService.getStudyGroupByID(groupID);
-      User instructor = userService.getUserByID(group.creatorID);
-      model.addAttribute("instructor", instructor);
       model.addAttribute("student", userService.getUserByID(2));
       model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
       model.addAttribute("groupID", groupID);
-      model.addAttribute("groupName", group.getGroupName());
-      model.addAttribute("description", group.description);
-
+      model.addAttribute("groupName", studyGroupService.getStudyGroupByID(groupID).getGroupName());
+      model.addAttribute("description", studyGroupService.getStudyGroupByID(groupID).description);
       return "customer-view/group-description";
     }
 
@@ -90,7 +85,7 @@ public class StudyGroupController {
 
      @GetMapping("/group-settings/{gID}")
      public String groupSettings(@PathVariable int gID, Model model){
-        model.addAttribute("instructor",studyGroupService.findGoupCreator(gID).orElse(null));
+        model.addAttribute("instructor",studyGroupService.findGroupCreator(gID).orElse(null));
         model.addAttribute("group", studyGroupService.getStudyGroupByID(gID));
         model.addAttribute("students", groupAccessService.getUsersInGroupAccessList(gID).orElse(null));
         return "provider-view/group-settings";

@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.messages;
 
+import com.csc340.study_grouper.study_groups.StudyGroup;
 import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import jakarta.persistence.*;
@@ -22,13 +23,15 @@ public class Message {
     @Column(nullable = false)
     private String message;
 
-    @Column(nullable = false)
-    private int senderID;
+    @ManyToOne
+    @JoinColumn(name="senderID")
+    private User senderID;
 
-    @Column(nullable = false)
-    private int groupID;
+    @ManyToOne
+    @JoinColumn(name="groupID")
+    private StudyGroup groupID;
 
-    @Column(nullable = false)
+    @Column(name="time_stamp", nullable = false)
     @CurrentTimestamp
     LocalDateTime time_stamp;
 
@@ -41,7 +44,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(int messageID, int senderID, int groupID, String message, LocalDateTime time_stamp) {
+    public Message(int messageID, User senderID, StudyGroup groupID, String message, LocalDateTime time_stamp) {
         this.messageID = messageID;
         this.message = message;
         this.senderID = senderID;
@@ -56,7 +59,7 @@ public class Message {
      * @param message
      * @param time_stamp
      */
-    public Message(int senderID, int groupID, String message, LocalDateTime time_stamp){
+    public Message(User senderID, StudyGroup groupID, String message, LocalDateTime time_stamp){
         this.message = message;
         this.senderID = senderID;
         this.groupID = groupID;
@@ -78,11 +81,11 @@ public class Message {
         return message;
     }
 
-    public int getSenderID() {
+    public User getSenderID() {
         return senderID;
     }
 
-    public int getGroupID() {
+    public StudyGroup getGroupID() {
         return groupID;
     }
 
@@ -98,11 +101,11 @@ public class Message {
         this.message = message;
     }
 
-    public void setSenderID(int senderID) {
+    public void setSenderID(User senderID) {
         this.senderID = senderID;
     }
 
-    public void setGroupID(int groupID) {
+    public void setGroupID(StudyGroup groupID) {
         this.groupID = groupID;
     }
 

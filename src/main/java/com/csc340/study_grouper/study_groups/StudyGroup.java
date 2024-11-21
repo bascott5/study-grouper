@@ -11,8 +11,9 @@ public class StudyGroup {
     @Column(name="groupID")
     public int groupID;
 
-    @Column(nullable = false)
-    public int creatorID;
+    @ManyToOne
+    @JoinColumn(name="creatorID")
+    public User creatorID;
 
     @Column(name="groupName", nullable=false)
     public String groupName;
@@ -26,7 +27,7 @@ public class StudyGroup {
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int groupID, int creatorID, String groupName, String description){
+    public StudyGroup(int groupID, User creatorID, String groupName, String description){
         this(creatorID, groupName, description);
         this.groupID = groupID;
         this.description = description;
@@ -37,7 +38,7 @@ public class StudyGroup {
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int creatorID, String groupName, String description){
+    public StudyGroup(User creatorID, String groupName, String description){
         this.creatorID = creatorID;
         this.groupName = groupName;
         this.description = description;
@@ -52,7 +53,7 @@ public class StudyGroup {
         return groupID;
     }
 
-    public int getCreatorID() {
+    public User getCreatorID() {
         return creatorID;
     }
 
@@ -64,7 +65,7 @@ public class StudyGroup {
         this.groupID = groupID;
     }
 
-    public void setCreatorID(int creatorID) {
+    public void setCreatorID(User creatorID) {
         this.creatorID = creatorID;
     }
 
