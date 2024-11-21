@@ -109,7 +109,7 @@ public class AdminController {
         List<User> userList = service.getAllUsers();
         model.addAttribute("username", "Admin");
         model.addAttribute("userList", userList);
-        return "admin/view-users";
+        return "admin-view/view-users";
     }
 
     @GetMapping("/delete/{uID}")
