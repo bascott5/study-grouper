@@ -12,11 +12,10 @@ values(1, 'lindaschminda@gmail.com', 'LSchminda', 'password', 'Linda', 'Schminda
 select * from users;
 
 -- Inserting test study groups
-insert into study_groups
-values(1, 3, 'Software Engineering'),
-(2, 3, 'Computer Architecture'),
-(3, 3, 'Senior Capstone');
-
+insert into study_groups (groupid, group_name, creatorid)
+values(1, 'Software Engineering', 3),
+(2, 'Computer Architecture', 3),
+(3, 'Senior Capstone', 3);
 
 -- Inserting test groupaccess
 insert into groupaccess (groupID, userID, group_access_id)
@@ -25,20 +24,17 @@ values (1, 1, 1),
 (1,3, 3);
 
 
+
 -- Inserting test messages
-insert into messages (messageID, message, senderID, groupID)
-values(1, 'I need help with an assignment!', 1, 1),
-(2, 'I will help you out as soon as I can.', 3, 1),
-(3, 'Will this be one the exam?', 2, 2),
-(4, 'Yes.', 3, 2),
-(5, 'I just finished my project!!', 1, 3);
+insert into messages
+values(1, 'I need help with an assignment!', CURRENT_TIMESTAMP(), 1, 1),
+(2, 'I will help you out as soon as I can.', CURRENT_TIMESTAMP(), 3, 1),
+(3, 'Will this be one the exam?', CURRENT_TIMESTAMP(), 2, 2),
+(4, 'Yes.', CURRENT_TIMESTAMP(), 3, 2),
+(5, 'I just finished my project!!', CURRENT_TIMESTAMP(), 1, 3);
 
 
 -- Inserting test reviews
 insert into reviews (reviewID, groupID, review, senderID)
 values (1,1, 'This class was great!', 1),
 (2, 3, 'This was pretty fun making an application', 2); 
-
-
-
-
