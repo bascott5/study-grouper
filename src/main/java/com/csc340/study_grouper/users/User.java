@@ -12,9 +12,7 @@ import java.sql.Blob;
 @Table(name="users")
 public class User {
 
-    public static final String INSTRUCTOR = "instructor";
-    public static final String STUDENT = "student";
-    public static final String ADMIN = "admin";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="uID")
@@ -182,4 +180,6 @@ public class User {
     public void setProfile_picture(Blob profile_picture) {
         this.profile_picture = profile_picture;
     }
+
+
 }

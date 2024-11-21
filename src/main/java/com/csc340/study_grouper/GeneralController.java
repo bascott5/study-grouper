@@ -1,15 +1,14 @@
 package com.csc340.study_grouper;
 
-import com.csc340.study_grouper.study_groups.StudyGroupService;
 import com.csc340.study_grouper.users.User;
+import com.csc340.study_grouper.users.UserRepository;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -22,8 +21,8 @@ public class GeneralController {
 
     @Autowired
     UserService userService;
-
-
+    @Autowired
+    UserRepository userRepository;
     /**
      * Mapping to the login page
      * @return login.html page
@@ -33,26 +32,45 @@ public class GeneralController {
         return "login";
     }
 
-    @GetMapping("/verify-user")
-    public String verifyLogin(String username, String password){
-        User test = userService.getUserByUsername(username).orElse(null);
-        if(test != null){
-            String pass = test.getPassword();
-            System.out.println(pass + "" + password);
-            System.out.println(pass.equals(password));
-            if (pass.equals(password)){
-                String accountType = test.getAccountType();
-                System.out.println(accountType);
-                switch(accountType){
-                    case "student" : return "redirect:/student/home/"+test.getuID();
-                    case "instructor" : return "redirect:/instructor/home/"+test.getuID();
-                    case "admin" : return "redirect:/admin/home/"+test.getuID();
-                    default : return "redirect:/home";
-                }
+    @PostMapping("/verify-user")
+    public String verifyUser(@RequestParam String username, @RequestParam String password) {
+        User user = userRepository.findUserByUsername(username).orElse(null);
+
+        if (user != null && user.getPassword().equals(password)) {
+            switch (user.getAccountType().toString()) {
+                case "ADMIN":
+                    return "redirect:/admin/home/" + user.getuID();
+                case "INSTRUCTOR":
+                    return "redirect:/instructor/home/" + user.getuID();
+                case "STUDENT":
+                    return "redirect:/student/home/" + user.getuID();
+                default:
+                    return "redirect:/home";
             }
-        }
+    }
         return "redirect:/login";
     }
+
+//    @GetMapping("/verify-user")
+//    public String verifyLogin(String username, String password){
+//        User test = userService.getUserByUsername(username).orElse(null);
+//        if(test != null){
+//            String pass = test.getPassword();
+//            System.out.println(pass + "" + password);
+//            System.out.println(pass.equals(password));
+//            if (pass.equals(password)){
+//                String accountType = test.getAccountType();
+//                System.out.println(accountType);
+//                switch(accountType){
+//                    case "student" : return "redirect:/customer/home/"+test.getuID();
+//                    case "instructor" : return "redirect:/provider/home/"+test.getuID();
+//                    case "admin" : return "redirect:/admin/home/"+test.getuID();
+//                    default : return "redirect:/home";
+//                }
+//            }
+//        }
+//        return "redirect:/login";
+//    }
 
     @GetMapping("/create-account")
     public String createAccount(){
@@ -71,17 +89,8 @@ public class GeneralController {
         return "home";
     }
 
-    @GetMapping("/edit-account/{uID}")
-    public String editAccount(@PathVariable int uID, Model model){
-        model.addAttribute("user", userService.getUserByID(uID));
+    @GetMapping("edit-account")
+    public String editAccount(){
         return "edit-account";
-    }
-
-    @PostMapping("/edit-account")
-    public String editAccount(User user){
-        userService.addUser(user);
-        String accountType = user.getAccountType();
-        int uID = user.getuID();
-        return "redirect:/"+accountType+"/account/"+uID;
     }
 }

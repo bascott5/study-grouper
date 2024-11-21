@@ -14,6 +14,6 @@ public class StudentService {
     UserRepository repository;
 
     public List<User> getStudents(){
-        return repository.findByAccountType(User.STUDENT);
+        return repository.findByAccountType("student");
     }
 }
