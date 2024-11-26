@@ -53,12 +53,12 @@ select {
 }
 .create-account {
     background-color: white;
-    color: blue;
-    border: solid 2px blue;
-    margin: 10px 0;
-    font-weight: bold;
-    border-radius: 25px;
-    padding: 10px 20px;
+        color: blue;
+        border: solid 2px blue;
+        margin-top: 15px;
+        font-weight: bold;
+        border-radius: 25px;
+        padding: 10px 20px;
 }
 
 .delete:hover {
