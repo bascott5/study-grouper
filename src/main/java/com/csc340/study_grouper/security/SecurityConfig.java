@@ -27,9 +27,9 @@ public class SecurityConfig{
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/admin-view/**", "admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/student/**", "/customer-view/**").hasAuthority("STUDENT")
-                        .requestMatchers("/provider-view/**", "/instructor/**").hasAuthority("INSTRUCTOR")
+                        .requestMatchers("/admin-view/**", "/admin/**").hasAuthority("admin")
+                        .requestMatchers("/student/**", "/customer-view/**").hasAuthority("student")
+                        .requestMatchers("/provider-view/**", "/instructor/**").hasAuthority("instructor")
                         .requestMatchers("/", "/login", "/create-account").permitAll()
                         .requestMatchers("/assets/**", "/styles/**").permitAll()
                         .anyRequest().authenticated()
@@ -58,3 +58,4 @@ public class SecurityConfig{
         return new BCryptPasswordEncoder();
     }
 }
+
