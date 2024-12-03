@@ -39,7 +39,7 @@ public class StudyGroupService {
 
     public List<StudyGroupAndInstructor> searchStudyGroups(String query) { return studyGroupAndInstructorRepository.search(query); }
 
-    public StudyGroupAndInstructor getStudyGroupAndInstructorById(int groupId) { return studyGroupAndInstructorRepository.getById(groupId); }
+    public StudyGroupAndInstructor getStudyGroupAndInstructorById(int groupId) { return studyGroupAndInstructorRepository.findById(groupId).orElse(null); }
 
     public List<StudyGroup> getStudyGroupByGroupAccess(int pID) {
         List<GroupAccess> accessGroups = groupAccessRepository.findByUserID(pID);
