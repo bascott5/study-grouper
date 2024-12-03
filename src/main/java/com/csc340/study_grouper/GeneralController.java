@@ -32,11 +32,8 @@ public class GeneralController {
         User test = userService.getUserByUsername(username).orElse(null);
         if(test != null){
             String pass = test.getPassword();
-            System.out.println(pass + "" + password);
-            System.out.println(pass.equals(password));
             if (pass.equals(password)){
                 String accountType = test.getAccountType();
-                System.out.println(accountType);
                 switch(accountType){
                     case "student" : return "redirect:/student/home/"+test.getuID();
                     case "instructor" : return "redirect:/instructor/home/"+test.getuID();
