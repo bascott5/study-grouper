@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.users.customer;
 
+import com.csc340.study_grouper.group_access.GroupAccessService;
 import com.csc340.study_grouper.study_groups.StudyGroupService;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class StudentController {
 
     @Autowired
     StudyGroupService groupService;
+
+    @Autowired
+    GroupAccessService groupAccessService;
 
     @GetMapping("/account/{pID}")
     public String account(Model model, @PathVariable int pID){

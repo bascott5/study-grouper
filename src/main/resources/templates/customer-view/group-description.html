@@ -18,8 +18,8 @@
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="/assets/search.png" alt="Search"> <p class="selected"><a href="/group/search">Find Groups</a></p></li>
-                <li><img src="/assets/person.png" alt="Account"> <p><a href="/student/account/2">Account</a></p></li>
+                <li><img src="/assets/search.png" alt="Search"> <p class="selected"><a data-th-href="@{/group/search/{uID} (uID=${student.uID})}">Find Groups</a></p></li>
+                <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/student/account/{uID} (uID=${student.uID})}">Account</a></p></li>
                 <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
             </ul>
         </div>
@@ -32,9 +32,9 @@
             <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F33694.jpg&f=1&nofb=1&ipt=ae6558cb0f62dae7fa88de396645c37f12a1af977c1b2b3e1d0fe29b29870f21&ipo=images" alt="banner">
             <div>
                 <h1 data-th-text="${groupName}"></h1>
-                <h2 data-th-text="${instructor.getFullName()}"/>
+                <h2 data-th-text="${instructor.getFullName()}"></h2>
             </div>
-            <form data-th-action="(@{~/group/join/} + ${groupID})" method="post">
+            <form data-th-action="(@{~/group/join/} + ${student.getuID()} + '/' + ${groupID})" method="post">
                 <button type="submit">Join Group</button>
             </form>
         </section>

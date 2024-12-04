@@ -35,7 +35,7 @@
         <section>
             <div data-th-each="group : ${studyGroups}">
                 <hr>
-                <a data-th-href="(@{~/group/group-description/} + ${group.groupID})">
+                <a data-th-href="(@{~/group/group-description/} + ${student.getuID()} + '/' + ${group.groupID})">
                     <div>
                         <h2 data-th-text="${group.groupName}" ></h2>
                         <h3 data-th-text="${group.creatorID.getFullName()}"></h3>

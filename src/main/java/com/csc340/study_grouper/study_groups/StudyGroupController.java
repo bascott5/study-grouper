@@ -66,26 +66,27 @@ public class StudyGroupController {
       return "customer-view/find-group";
     }
 
-    @GetMapping("/group-description/{groupID}")
-    public String groupDescription(@PathVariable int groupID, Model model) {
-      model.addAttribute("student", userService.getUserByID(2));
-      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
+    @GetMapping("/group-description/{uID}/{groupID}")
+    public String groupDescription(@PathVariable int uID, @PathVariable int groupID, Model model) {
+      model.addAttribute("student", userService.getUserByID(uID));
+      model.addAttribute("instructor", studyGroupService.getStudyGroupByID(groupID).getCreatorID());
+      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(uID));
       model.addAttribute("groupID", groupID);
       model.addAttribute("groupName", studyGroupService.getStudyGroupByID(groupID).getGroupName());
       model.addAttribute("description", studyGroupService.getStudyGroupByID(groupID).description);
       return "customer-view/group-description";
     }
 
-    @PostMapping("/join/{groupID}")
-    public String joinGroup(@PathVariable int groupID) {
-        studyGroupService.joinStudyGroupByID(studyGroupService.getStudyGroupByID(groupID), 2);
+    @PostMapping("/join/{uID}/{groupID}")
+    public String joinGroup(@PathVariable int uID, @PathVariable int groupID) {
+        studyGroupService.joinStudyGroupByID(studyGroupService.getStudyGroupByID(groupID), uID);
 
-      return "redirect:/customer-view/customer-group-view";
+        return "redirect:/group/student/" + groupID;
   }
 
      @GetMapping("/group-settings/{gID}")
      public String groupSettings(@PathVariable int gID, Model model){
-        model.addAttribute("instructor",studyGroupService.findGroupCreator(gID).orElse(null));
+        model.addAttribute("instructor", studyGroupService.findGroupCreator(gID).orElse(null));
         model.addAttribute("group", studyGroupService.getStudyGroupByID(gID));
         model.addAttribute("students", groupAccessService.getUsersInGroupAccessList(gID).orElse(null));
         return "provider-view/group-settings";

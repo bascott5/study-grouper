@@ -18,8 +18,8 @@
     <div class="options">
         <h2>Options</h2>
         <ul>
-            <li><img src="/assets/search.png" alt="Search"> <p><a href="/group/search">Find Groups</a></p></li>
-            <li><img src="/assets/person.png" alt="Account"> <p><a href="/student/account/2">Account</a></p></li>
+            <li><img src="/assets/search.png" alt="Search"> <p><a data-th-href="@{/group/search/{uID} (uID=${student.uID})}">Find Groups</a></p></li>
+            <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/student/account/{uID} (uID=${student.uID})}">Account</a></p></li>
             <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
         </ul>
     </div>
@@ -30,14 +30,14 @@
 <main id="chat-page">
     <section class="group-title">
         <h1 data-th-text="${selectedCourse.groupName}"></h1>
-        <a href="/student/write-review"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
+        <a data-th-href="@{/student/write-review/{pID} (pID=${student.getuID()})}"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
     </section>
     <section id="messageArea" class="message-container">
-        <div class="message">
+        <div class="message" data-th-each="message : ${messages}">
             <img src="/assets/male.png" alt="User 1">
             <div>
-                <h3>User 1</h3>
-                <p>Ipsum lorum!</p>
+                <h3 data-th-text="${message.getSenderID().getFullName()}"></h3>
+                <p data-th-text="${message.getMessage()}"></p>
             </div>
         </div>
     </section>

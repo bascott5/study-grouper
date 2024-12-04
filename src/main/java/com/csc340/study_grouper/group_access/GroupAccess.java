@@ -41,7 +41,7 @@ public class GroupAccess {
     }
 
     public int getUserID() {
-        return userID;
+        return this.userID;
     }
 
     public void setGroupID(int groupID) {
