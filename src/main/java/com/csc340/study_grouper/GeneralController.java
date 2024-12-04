@@ -51,26 +51,6 @@ public class GeneralController {
         return "redirect:/login";
     }
 
-//    @GetMapping("/verify-user")
-//    public String verifyLogin(String username, String password){
-//        User test = userService.getUserByUsername(username).orElse(null);
-//        if(test != null){
-//            String pass = test.getPassword();
-//            System.out.println(pass + "" + password);
-//            System.out.println(pass.equals(password));
-//            if (pass.equals(password)){
-//                String accountType = test.getAccountType();
-//                System.out.println(accountType);
-//                switch(accountType){
-//                    case "student" : return "redirect:/customer/home/"+test.getuID();
-//                    case "instructor" : return "redirect:/provider/home/"+test.getuID();
-//                    case "admin" : return "redirect:/admin/home/"+test.getuID();
-//                    default : return "redirect:/home";
-//                }
-//            }
-//        }
-//        return "redirect:/login";
-//    }
 
     @GetMapping("/create-account")
     public String createAccount(){
