@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/menu.css">
-    <title>Software Engineering - StudyGrouper</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script data-th-src="@{/app.js}"></script>
+    <title>Provider View - StudyGrouper</title>
 </head>
-<body>
+<body data-th-attr="onload='connect(' + ${instructor.uID} + ')'">
     <nav>
         <div model="courses" class="servers-container">
             <h2 data-th-text="${instructor.first_name}"></h2>
@@ -32,17 +35,17 @@
             <h1 data-th-text="${selectedCourse.groupName}"></h1>
             <a data-th-href="@{/group/group-settings/{gID} (gID=${selectedCourse.groupID})}" value="Group Settings"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
         </section>
-        <section class="message-container">
-            <div class="message" data-th-each="message:${messages}">
+        <section id="messageArea" class="message-container">
+            <div class="message" data-th-each="message : ${messages}">
                 <img src="/assets/male.png" alt="User 1">
                 <div>
-                    <h3 data-th-text="${message.senderID.getFullName()}"/>
-                    <p data-th-text="${message.message}"> </p>
+                    <h3 data-th-text="${message.getSenderID().getFullName()}"></h3>
+                    <p data-th-text="${message.getMessage()}"></p>
                 </div>
             </div>
         </section>
-        <form action="">
-            <input type="text" placeholder="Type your message here...">
+        <form id="messageForm" name="messageForm">
+            <input id="message" type="text" placeholder="Type your message here...">
         </form>
     </main>
 </body>

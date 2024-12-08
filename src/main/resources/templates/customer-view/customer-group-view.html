@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/layout.css">
     <link rel="stylesheet" href="/styles/menu.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script data-th-src="@{/js/main.js}"></script>
     <title>Group View - StudyGrouper</title>
 </head>
 <body>
@@ -41,7 +44,7 @@
             </div>
         </div>
     </section>
-    <form id="messageForm" name="messageForm" action="">
+    <form id="messageForm" name="messageForm">
         <input id="message" type="text" placeholder="Type your message here...">
     </form>
 </main>
