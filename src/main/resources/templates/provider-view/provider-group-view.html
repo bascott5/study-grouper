@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles/menu.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script data-th-src="@{/app.js}"></script>
+    <script defer data-th-src="@{/app.js}"></script>
     <title>Provider View - StudyGrouper</title>
 </head>
 <body data-th-attr="onload='connect(' + ${instructor.uID} + ')'">

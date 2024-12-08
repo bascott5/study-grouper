@@ -34,7 +34,6 @@ previousMessages.forEach((message) =>appendMessage(message, true));
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
-    console.log(messageContent)
     if(messageContent && stompClient) {
         var chatMessage = {
             sender: currentUser,
@@ -87,4 +86,4 @@ message = JSON.parse(payload.body);
     messageArea.scrollTop = messageArea.scrollHeight;
 }
 
-//messageForm.addEventListener('submit', sendMessage, true)
+messageForm.addEventListener('submit', sendMessage, true)
