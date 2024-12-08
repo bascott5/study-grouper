@@ -39,10 +39,6 @@ public class StudyGroupService {
 
     public List<StudyGroup> getStudyGroupsByUserID(int uid) { return studyGroupRepository.findByUID(uid); }
 
-    public void joinStudyGroupByID(StudyGroup group, int uid) {
-      //studyGroupRepository.joinGroup(group.getGroupID(), group.getCreatorID().getuID(), group.getGroupName(), group.getDescription(), uid);
-    }
-
     public Optional<User> findGroupCreator(int gID){
         return userRepository.findGroupCreator(gID);
     }

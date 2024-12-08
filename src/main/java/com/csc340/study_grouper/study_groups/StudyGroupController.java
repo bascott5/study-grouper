@@ -79,7 +79,7 @@ public class StudyGroupController {
 
     @PostMapping("/join/{uID}/{groupID}")
     public String joinGroup(@PathVariable int uID, @PathVariable int groupID) {
-        studyGroupService.joinStudyGroupByID(studyGroupService.getStudyGroupByID(groupID), uID);
+        groupAccessService.save(groupID, uID);
 
         return "redirect:/group/student/" + groupID;
   }

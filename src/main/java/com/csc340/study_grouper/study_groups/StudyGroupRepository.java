@@ -19,9 +19,6 @@ public interface StudyGroupRepository extends JpaRepository<StudyGroup, Integer>
     @Query(value = "SELECT * FROM study_groups WHERE creatorid = :uid;", nativeQuery = true)
     List<StudyGroup> findByUID(int uid);
 
-    @Query(value = "INSERT INTO study_groups (groupid, creatorid, group_name, description, uid) VALUES (:groupID, :creatorID, :groupName, :description, :uid);", nativeQuery = true)
-    StudyGroup joinGroup(int groupID, int creatorID, String groupName, String description, int uid);
-
     @Query(value= "SELECT s.* FROM study_groups s " +
             "LEFT JOIN users u ON s.creatorID = u.uID " +
             "WHERE s.group_name LIKE %:query% OR s.groupID LIKE %:query% OR s.description LIKE %:query% " +

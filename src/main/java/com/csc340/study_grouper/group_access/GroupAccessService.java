@@ -49,4 +49,9 @@ public class GroupAccessService {
     public Optional<List<User>> getUsersInGroupAccessList(int gID){
         return userRepository.findUsersInGroupAccess(gID);
     }
+
+    public void save (int gID, int uID) {
+        GroupAccess groupAccess = new GroupAccess(gID, uID);
+        repo.save(groupAccess);
+    }
 }

@@ -22,10 +22,9 @@ public class MessagesController {
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    public void sendMessage(@Payload String chatMessage) {
-        System.out.println(chatMessage);
-        //messagesRepository.save(chatMessage);
-        //return chatMessage;
+    public Message sendMessage(@Payload Message chatMessage) {
+        messagesRepository.save(chatMessage);
+        return chatMessage;
     }
 
     @MessageMapping("/chat.addUser")
