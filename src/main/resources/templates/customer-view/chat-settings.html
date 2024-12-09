@@ -12,15 +12,15 @@
   <div model="courses" class="servers-container">
     <h2 data-th-text="${student.first_name}"></h2>
     <ul class="servers">
-        <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{/group/student/{gID} (gID=${course.groupID})}"></a></li>
+      <li data-th-each="course : ${courses}"><a data-th-text="${course.getGroupID().getGroupName()}" data-th-href="@{/group/student/{gID} (gID=${course.getGroupID().getGroupID()})}"></a></li>
     </ul>
 </div>
   <div class="options">
     <h2>Options</h2>
     <ul>
-      <li><img src="/assets/search.png" alt="Add"> <p><a data-th-href="@{/group/search/{uID} (uID=${student.uID})}">Find Group</a></p></li>
-      <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/student/account/{uID} (uID=${student.uID})}">Account</a></p>
-      <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+      <li><img src="/assets/search.png" alt="Search"> <p><a data-th-href="@{/group/search}">Find Groups</a></p></li>
+      <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/student/account}">Account</a></p></li>
+      <li><img src="/assets/home.png" alt="Home"> <p><a data-th-href="@{/student/home}">Home</a></p></li>
     </ul>
   </div>
   <div class="logo">

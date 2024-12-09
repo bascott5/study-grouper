@@ -1,5 +1,7 @@
 package com.csc340.study_grouper.users.instructor;
 
+import com.csc340.study_grouper.group_access.GroupAccess;
+import com.csc340.study_grouper.group_access.GroupAccessService;
 import com.csc340.study_grouper.study_groups.StudyGroup;
 import com.csc340.study_grouper.study_groups.StudyGroupService;
 import com.csc340.study_grouper.users.User;
@@ -27,6 +29,9 @@ public class InstructorController {
     @Autowired
     StudyGroupService groupService;
 
+    @Autowired
+    GroupAccessService groupAccessService;
+
     /**
      * Get mapping for the page where a instructor can make a group
      * @return create-group html in instructor-view
@@ -36,13 +41,16 @@ public class InstructorController {
         User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         int pID = instructor.getuID();
         model.addAttribute("instructor", userService.getUserByID(pID));
+        model.addAttribute("courses", groupAccessService.findByUserId(instructor.getuID()));
         return "provider-view/create-group";
     }
 
     @PostMapping("/create-group")
     public String postGroup(StudyGroup group){
+        User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         groupService.save(group);
-        return "redirect:/instructor/home/"+group.getCreatorID().getuID();
+        groupAccessService.save(group, instructor);
+        return "redirect:/instructor/home";
     }
 
     /**
@@ -53,7 +61,8 @@ public class InstructorController {
     public String account(Model model){
         User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         int uID = instructor.getuID();
-        model.addAttribute("courses", groupService.findByCreatorId(uID).orElse(null));
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("courses", groupAccessService.findByUserId(instructor.getuID()));
         return "provider-view/account";
     }
 
@@ -61,7 +70,7 @@ public class InstructorController {
     public String home(Model model){
         User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         model.addAttribute("instructor", instructor);
-        model.addAttribute("courses", groupService.findByCreatorId(instructor.getuID()).orElse(null));
+        model.addAttribute("courses", groupAccessService.findByUserId(instructor.getuID()));
         return "provider-view/provider-home";
     }
 

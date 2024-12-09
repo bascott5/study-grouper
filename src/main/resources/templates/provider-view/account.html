@@ -10,23 +10,17 @@
 <body>
     <nav>
         <div model="courses" class="servers-container">
-            <h2 data-th-text="${user.first_name}"/>
+            <h2 data-th-text="${instructor.getFirst_name()}"/>
             <ul class="servers">
-                <li data-th-each="course : ${courses}"><a data-th-text="${course.groupName}" data-th-href="@{/group/instructor/{gID} (gID=${course.groupID})}"></a></li>
-            </ul>
-            <ul>
-                <h3>Swap Account</h3>
-                <li><a href="/student/home">Student</a></li>
-                <li class="selected"><a href="/instructor/home/3">Instructor / Tutor</a></li>
-                <li><a href="/admin/home">Admin</a></li>
+                <li data-th-each="course : ${courses}"><a data-th-text="${course.getGroupID().getGroupName()}" data-th-href="@{/group/instructor/{gID} (gID=${course.getGroupID().getGroupID()})}"></a></li>
             </ul>
         </div>
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="/assets/plus.png" alt="Add"> <p><a data-th-href="@{/group/instructor/{pID} (pID =${user.uID})}">Create Group</a></p></li>
-                <li><img src="/assets/person.png" alt="Account"> <p><a data-th-href="@{/instructor/account/{pID} (pID =${user.uID})}">Account</a></p></li>
-                <li><img src="/assets/home.png" alt="Home"> <p><a data-th-href="@{/instructor/home/{pID} (pID =${user.uID})}">Home</a></p></li>
+                <li><img src="/assets/plus.png" alt="Add"> <p><a data-th-href="@{/instructor/create-group}">Create Group</a></p></li>
+                <li><img src="/assets/person.png" alt="Account"> <p class="selected"><a data-th-href="@{/instructor/account}">Account</a></p></li>
+                <li><img src="/assets/home.png" alt="Home"> <p><a data-th-href="@{/instructor/home}">Home</a></p></li>
             </ul>
         </div>
         <div class="logo">
@@ -36,9 +30,9 @@
     <main>
         <section>
         <img src="/assets/person.png" alt="PFP">
-        <h1 data-th-text="${user.username}"/>
+        <h1 data-th-text="${instructor.getUsername()}"/>
         <div>
-            <a data-th-href="@{/edit-account/{uID} (uID = ${user.uID})}"><button>Edit Account</button></a>
+            <a data-th-href="@{/edit-account/{uID} (uID = ${instructor.getuID()})}"><button>Edit Account</button></a>
             <a href="/home"><button>Logout</button></a>
         </div>
         </section>

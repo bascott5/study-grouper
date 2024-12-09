@@ -35,7 +35,7 @@ public class StudyGroupController {
     public String instructorStudyGroupPage(Model model, @PathVariable int gID){
         User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         model.addAttribute("instructor", instructor);
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(instructor.getuID()));
+        model.addAttribute("courses", groupAccessService.findByUserId(instructor.getuID()));
         model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
         model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
         return "provider-view/provider-group-view";
@@ -45,7 +45,7 @@ public class StudyGroupController {
     public String studentStudyGroupPage(Model model, @PathVariable int gID){
         User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         model.addAttribute("student", student);;
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(student.getuID()));
+        model.addAttribute("courses", groupAccessService.findByUserId(student.getuID()));
         model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
         model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
         return "customer-view/customer-group-view";
@@ -55,7 +55,7 @@ public class StudyGroupController {
     public String searchPage(Model model) {
         User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         model.addAttribute("student", user);
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(user.getuID()));
+        model.addAttribute("courses", groupAccessService.findByUserId(user.getuID()));
         model.addAttribute("studyGroups", studyGroupService.searchStudyGroups());
 
         return "customer-view/find-group";
@@ -75,7 +75,7 @@ public class StudyGroupController {
         User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         model.addAttribute("student", user);
         model.addAttribute("instructor", studyGroupService.getStudyGroupByID(groupID).getCreatorID());
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(user.getuID()));
+        model.addAttribute("courses", groupAccessService.findByUserId(user.getuID()));
         model.addAttribute("groupID", groupID);
         model.addAttribute("groupName", studyGroupService.getStudyGroupByID(groupID).getGroupName());
         model.addAttribute("description", studyGroupService.getStudyGroupByID(groupID).description);
@@ -90,9 +90,11 @@ public class StudyGroupController {
 
      @GetMapping("/group-settings/{gID}")
      public String groupSettings(@PathVariable int gID, Model model){
-        model.addAttribute("instructor", studyGroupService.findGroupCreator(gID).orElse(null));
-        model.addAttribute("group", studyGroupService.getStudyGroupByID(gID));
-        model.addAttribute("students", groupAccessService.getUsersInGroupAccessList(gID).orElse(null));
+         User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+         model.addAttribute("instructor", instructor);
+         model.addAttribute("courses", groupAccessService.findByUserId(instructor.getuID()));
+         model.addAttribute("group", studyGroupService.getStudyGroupByID(gID));
+        // model.addAttribute("students", groupAccessService.findByGroupId(gID));
         return "provider-view/group-settings";
      }
 

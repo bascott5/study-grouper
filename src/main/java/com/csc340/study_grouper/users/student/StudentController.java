@@ -2,8 +2,10 @@ package com.csc340.study_grouper.users.customer;
 
 import com.csc340.study_grouper.group_access.GroupAccessService;
 import com.csc340.study_grouper.study_groups.StudyGroupService;
+import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +25,11 @@ public class StudentController {
     @Autowired
     GroupAccessService groupAccessService;
 
-    @GetMapping("/account/{pID}")
-    public String account(Model model, @PathVariable int pID){
-      model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupAccessService.findByUserId(pID));
+    @GetMapping("/account")
+    public String account(Model model){
+        User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("student", student);
+        model.addAttribute("courses", groupAccessService.findByUserId(student.getuID()));
 
       return "customer-view/account";
     }
@@ -56,26 +59,29 @@ public class StudentController {
         return "customer-view/software-engineering";
     }
 
-    @GetMapping("/group-description/{pID}")
-    public String groupDescription(Model model, @PathVariable int pID){
-      model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupAccessService.findByUserId(pID));
+    @GetMapping("/group-description")
+    public String groupDescription(Model model){
+        User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("student", student);
+        model.addAttribute("courses", groupAccessService.findByUserId(student.getuID()));
 
       return "customer-view/group-description";
     }
 
-    @GetMapping("/home/{pID}")
-    public String home(Model model, @PathVariable int pID) {
-      model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupAccessService.findByUserId(pID));
+    @GetMapping("/home")
+    public String home(Model model) {
+        User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+      model.addAttribute("student", student);
+      model.addAttribute("courses", groupAccessService.findByUserId(student.getuID()));
 
       return "customer-view/customer-home";
     }
 
-    @GetMapping("/write-review/{pID}")
-    public String review(Model model, @PathVariable int pID) {
-      model.addAttribute("student", userService.getUserByID(pID));
-      model.addAttribute("courses", groupAccessService.findByUserId(pID));
+    @GetMapping("/write-review")
+    public String review(Model model) {
+        User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("student", student);
+        model.addAttribute("courses", groupAccessService.findByUserId(student.getuID()));
 
       return "customer-view/chat-settings";
     }
