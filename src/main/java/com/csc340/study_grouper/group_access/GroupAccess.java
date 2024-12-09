@@ -1,6 +1,7 @@
 package com.csc340.study_grouper.group_access;
 
 import com.csc340.study_grouper.study_groups.StudyGroup;
+import com.csc340.study_grouper.users.User;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,11 +12,13 @@ public class GroupAccess {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int group_access_ID;
 
-    @Column(nullable = false)
-    private int groupID;
+    @ManyToOne
+    @JoinColumn(name = "groupID")
+    StudyGroup groupID;
 
-    @Column(nullable = false)
-    private int userID;
+    @ManyToOne
+    @JoinColumn(name="uID")
+    User userID;
 
     /**
      * Constructor with all values
@@ -23,32 +26,32 @@ public class GroupAccess {
      * @param groupID
      * @param userID
      */
-    public GroupAccess(int group_access_ID, int groupID, int userID){
+    public GroupAccess(int group_access_ID, StudyGroup groupID, User userID){
         this.group_access_ID = group_access_ID;
         this.groupID = groupID;
         this.userID = userID;
     }
 
-    public GroupAccess(int groupID, int userID){
+    public GroupAccess(StudyGroup groupID, User userID){
         this.groupID = groupID;
         this.userID = userID;
     }
 
     public GroupAccess(){}
 
-    public int getGroupID() {
+    public StudyGroup getGroupID() {
         return groupID;
     }
 
-    public int getUserID() {
+    public User getUserID() {
         return this.userID;
     }
 
-    public void setGroupID(int groupID) {
+    public void setGroupID(StudyGroup groupID) {
         this.groupID = groupID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(User userID) {
         this.userID = userID;
     }
 }

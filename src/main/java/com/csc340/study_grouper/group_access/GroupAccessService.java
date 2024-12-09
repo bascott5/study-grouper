@@ -1,5 +1,6 @@
 package com.csc340.study_grouper.group_access;
 
+import com.csc340.study_grouper.study_groups.StudyGroup;
 import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class GroupAccessService {
         return userRepository.findUsersInGroupAccess(gID);
     }
 
-    public void save (int gID, int uID) {
+    public void save (StudyGroup gID, User uID) {
         GroupAccess groupAccess = new GroupAccess(gID, uID);
         repo.save(groupAccess);
     }
