@@ -2,11 +2,15 @@ package com.csc340.study_grouper.users.instructor;
 
 import com.csc340.study_grouper.study_groups.StudyGroup;
 import com.csc340.study_grouper.study_groups.StudyGroupService;
+import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -51,10 +55,11 @@ public class InstructorController {
     }
 
 
-    @GetMapping("/home/{pID}")
-    public String home(Model model, @PathVariable int pID){
-        model.addAttribute("instructor", userService.getUserByID(pID));
-        model.addAttribute("courses", groupService.findByCreatorId(pID).orElse(null));
+    @GetMapping("/home")
+    public String home(Model model){
+        User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("courses", groupService.findByCreatorId(instructor.getuID()).orElse(null));
         return "provider-view/provider-home";
     }
 
