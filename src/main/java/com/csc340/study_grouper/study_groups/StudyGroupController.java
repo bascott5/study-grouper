@@ -51,32 +51,35 @@ public class StudyGroupController {
         return "customer-view/customer-group-view";
     }
 
-    @GetMapping("/search/{uID}")
-    public String searchPage(@PathVariable int uID, Model model) {
-        model.addAttribute("student", userService.getUserByID(uID));
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(uID));
+    @GetMapping("/search")
+    public String searchPage(Model model) {
+        User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("student", user);
+        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(user.getuID()));
         model.addAttribute("studyGroups", studyGroupService.searchStudyGroups());
 
         return "customer-view/find-group";
     }
 
-    @PostMapping("/post-search/{uID}")
-    public String searchStudyGroups(@PathVariable int uID, String query, Model model) {
-      model.addAttribute("student", userService.getUserByID(uID));
-      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(uID));
-      model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(query));
-      return "customer-view/find-group";
+    @PostMapping("/post-search")
+    public String searchStudyGroups(String query, Model model) {
+        User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("student", user);
+        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(user.getuID()));
+        model.addAttribute("studyGroups", studyGroupService.searchStudyGroups(query));
+        return "customer-view/find-group";
     }
 
-    @GetMapping("/group-description/{uID}/{groupID}")
-    public String groupDescription(@PathVariable int uID, @PathVariable int groupID, Model model) {
-      model.addAttribute("student", userService.getUserByID(uID));
-      model.addAttribute("instructor", studyGroupService.getStudyGroupByID(groupID).getCreatorID());
-      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(uID));
-      model.addAttribute("groupID", groupID);
-      model.addAttribute("groupName", studyGroupService.getStudyGroupByID(groupID).getGroupName());
-      model.addAttribute("description", studyGroupService.getStudyGroupByID(groupID).description);
-      return "customer-view/group-description";
+    @GetMapping("/group-description/{groupID}")
+    public String groupDescription(@PathVariable int groupID, Model model) {
+        User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("student", user);
+        model.addAttribute("instructor", studyGroupService.getStudyGroupByID(groupID).getCreatorID());
+        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(user.getuID()));
+        model.addAttribute("groupID", groupID);
+        model.addAttribute("groupName", studyGroupService.getStudyGroupByID(groupID).getGroupName());
+        model.addAttribute("description", studyGroupService.getStudyGroupByID(groupID).description);
+        return "customer-view/group-description";
     }
 
     @PostMapping("/join/{uID}/{groupID}")
