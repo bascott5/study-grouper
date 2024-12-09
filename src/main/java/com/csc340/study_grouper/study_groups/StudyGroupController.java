@@ -7,6 +7,7 @@ import com.csc340.study_grouper.users.UserService;
 import com.csc340.study_grouper.users.instructor.InstructorService;
 import com.csc340.study_grouper.users.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,9 @@ public class StudyGroupController {
 
     @GetMapping("/instructor/{gID}")
     public String instructorStudyGroupPage(Model model, @PathVariable int gID){
-        int pID = studyGroupService.getStudyGroupByID(gID).getCreatorID().getuID();
-        model.addAttribute("instructor", userService.getUserByID(pID));
-        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(pID));
+        User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(instructor.getuID()));
         model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
         model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
         return "provider-view/provider-group-view";
@@ -42,11 +43,12 @@ public class StudyGroupController {
 
     @GetMapping("/student/{gID}")
     public String studentStudyGroupPage(Model model, @PathVariable int gID){
-      model.addAttribute("student", userService.getUserByID(2));;
-      model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(2));
-      model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
-      model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
-      return "customer-view/customer-group-view";
+        User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("student", student);;
+        model.addAttribute("courses", studyGroupService.getStudyGroupsByUserID(student.getuID()));
+        model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
+        model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
+        return "customer-view/customer-group-view";
     }
 
     @GetMapping("/search/{uID}")
