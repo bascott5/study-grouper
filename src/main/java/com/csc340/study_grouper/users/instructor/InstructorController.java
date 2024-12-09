@@ -31,8 +31,10 @@ public class InstructorController {
      * Get mapping for the page where a instructor can make a group
      * @return create-group html in instructor-view
      */
-    @GetMapping("/create-group/{pID}")
-    public String createGroup(@PathVariable int pID, Model model){
+    @GetMapping("/create-group")
+    public String createGroup(Model model){
+        User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        int pID = instructor.getuID();
         model.addAttribute("instructor", userService.getUserByID(pID));
         return "provider-view/create-group";
     }
@@ -47,13 +49,13 @@ public class InstructorController {
      * Get mapping for the instructor specific account page
      * @return account html in instructor-view
      */
-    @GetMapping("/account/{uID}")
-    public String account(@PathVariable int uID, Model model){
-        model.addAttribute("user", userService.getUserByID(uID));
+    @GetMapping("/account")
+    public String account(Model model){
+        User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        int uID = instructor.getuID();
         model.addAttribute("courses", groupService.findByCreatorId(uID).orElse(null));
         return "provider-view/account";
     }
-
 
     @GetMapping("/home")
     public String home(Model model){
@@ -67,7 +69,5 @@ public class InstructorController {
     public String providerStats() {
         return "instructor-view/statistics";
     }
-//
-//    @PostMapping("/delete-group")
-//    public String delete
+
 }
