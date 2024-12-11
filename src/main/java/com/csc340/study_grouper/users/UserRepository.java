@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT * FROM users WHERE name LIKE %:name%", nativeQuery = true)
     Optional<User> findUserByName(String name);
 
-    @Query(value = "SELECT * FROM users WHERE accountType = :accountType", nativeQuery = true)
+    @Query(value = "SELECT * FROM users WHERE account_type = :accountType", nativeQuery = true)
     List<User> findByAccountType(String accountType);
 
     @Query(value = "SELECT * FROM users WHERE username = :username", nativeQuery = true)

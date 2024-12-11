@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/layout.css">
-    <link rel="stylesheet" href="/styles/menu.css">
+    <link rel="stylesheet" href="/styles/statistics.css">
     <title>Statistics</title>
 </head>
 <body>
@@ -29,16 +29,19 @@
     </div>
 </nav>
 <main>
-    <section class="banner">
-        <div>
-            <h1>Statistics</h1>
-            <h4>Here we have a pie chart and bar graph.</h4>
-        </div>
-    </section>
     <section class="content">
-        <div><p>
-            <img src="/assets/bar-graph.png" alt="Search" width="180" height="180"><p></p>
-            <img src="/assets/pie-chart.png" alt="Search" width="280" height="180"> <p class="selected"></p>
+        <h1>Statistics</h1>
+        <div>
+            <p class="selected">Number of Students:</p>
+            <p data-th-text="${students}"></p>
+        </div>
+        <div>
+            <p class="selected">Number of Instructors:</p>
+            <p data-th-text="${instructors}"></p>
+        </div>
+        <div>
+            <p class="selected">Average Room Size:</p>
+            <p data-th-text="${avg}"></p>
         </div>
     </section>
 </main>

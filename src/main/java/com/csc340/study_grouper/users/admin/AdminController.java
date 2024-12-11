@@ -57,12 +57,12 @@ public class AdminController {
      * @return statistics html in admin-view
      */
     @GetMapping("/statistics")
-    public String stats(@ModelAttribute Model model){
-        model.addAttribute("Students", studentService.getStudents().size());
-        model.addAttribute("Providers", instructorService.getProviders().size());
+    public String stats(Model model){
+        model.addAttribute("students", studentService.getStudents().size());
+        model.addAttribute("instructors", instructorService.getProviders().size());
         //Number of rooms divided by number of students.
         int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
-        model.addAttribute("Avg room size", avg);
+        model.addAttribute("avg", avg);
 
         return "admin-view/statistics";
     }
