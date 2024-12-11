@@ -5,6 +5,7 @@ import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CurrentTimestamp;
+import org.hibernate.dialect.pagination.FetchLimitHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
