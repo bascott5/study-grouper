@@ -24,6 +24,8 @@ public class AdminController {
     @Autowired
     UserService service;
     @Autowired
+    AdminService adminService;
+    @Autowired
     InstructorService instructorService;
     @Autowired
     StudentService studentService;
@@ -38,7 +40,8 @@ public class AdminController {
      * @return account html in admin-view
      */
     @GetMapping("/account")
-    public String account(){
+    public String account(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        model.addAttribute("uID", adminService.getAdminByUsername(userDetails.getUsername()).getuID());
         return "admin-view/account";
     }
 

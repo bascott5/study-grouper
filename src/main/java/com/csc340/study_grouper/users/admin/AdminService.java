@@ -16,4 +16,8 @@ public class AdminService {
     public List<User> getAdmins(){
         return repository.findByAccountType("admin");
     }
+
+    public User getAdminByUsername(String username) {
+        return repository.findUserByUsername(username).orElse(null);
+    }
 }

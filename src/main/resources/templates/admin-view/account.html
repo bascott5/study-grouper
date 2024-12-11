@@ -20,8 +20,8 @@
         <div class="options">
             <h2>Options</h2>
             <ul>
-                <li><img src="../assets/person.png" alt="Account"> <p><a href="/admin/account">Account</a></p></li>
-                <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
+                <li><img src="/assets/person.png" alt="Account"> <p class="selected"><a href="/admin/account">Account</a></p></li>
+                <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
             </ul>
         </div>
         <div class="logo">
@@ -33,7 +33,7 @@
         <img src="/assets/person.png" alt="PFP">
         <h1>Username</h1>
         <div>
-            <a href="/edit-account"><button>Edit Account</button></a>
+            <a data-th-href="@{/edit-account/{uID} (uID=${uID})}" href="/edit-account"><button>Edit Account</button></a>
             <a href="/home"><button>Logout</button></a>
         </div>
         </section>
