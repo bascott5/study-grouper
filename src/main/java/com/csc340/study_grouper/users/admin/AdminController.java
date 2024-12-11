@@ -2,15 +2,16 @@ package com.csc340.study_grouper.users.admin;
 
 import com.csc340.study_grouper.reports.ReportsService;
 import com.csc340.study_grouper.study_groups.StudyGroupService;
+import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import com.csc340.study_grouper.users.student.StudentService;
 import com.csc340.study_grouper.users.instructor.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -24,14 +25,12 @@ public class AdminController {
     @Autowired
     UserService service;
     @Autowired
-    AdminService adminService;
-    @Autowired
     InstructorService instructorService;
     @Autowired
     StudentService studentService;
     @Autowired
+    AdminService adminService;
     StudyGroupService studyGroup;
-    @Autowired
     ReportsService reportsService;
 
 
@@ -40,8 +39,7 @@ public class AdminController {
      * @return account html in admin-view
      */
     @GetMapping("/account")
-    public String account(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        model.addAttribute("uID", adminService.getAdminByUsername(userDetails.getUsername()).getuID());
+    public String account(){
         return "admin-view/account";
     }
 
@@ -51,7 +49,7 @@ public class AdminController {
      */
     @GetMapping("/reviews")
     public String reviews(Model model){
-        model.addAttribute("reports-list", reportsService.findAllReports());
+        //model.addAttribute("reports-list", reportsService.findAllReports());
         return "admin-view/reviews";
     }
 
@@ -61,12 +59,33 @@ public class AdminController {
      */
     @GetMapping("/statistics")
     public String stats(Model model){
-        model.addAttribute("students", studentService.getStudents().size());
-        model.addAttribute("instructors", instructorService.getProviders().size());
-        //Number of rooms divided by number of students.
-        int avg = (studyGroup.getAllStudyGroups().size() / studentService.getStudents().size());
-        model.addAttribute("avg", avg);
+        List<User> allUsers = service.getAllUsers();
+        List<User> students = studentService.getStudents();
+        List<User> instructors = instructorService.getProviders();
+        List<User> admins = adminService.getAdmins();
 
+        int totalStudents = students.size();
+        int totalInstructors = instructors.size();
+        int totalUsers = allUsers.size();
+        int totalAdmins = admins.size();
+
+        double percentage = ((double) totalInstructors / totalStudents) * 100;
+        double sProportion = ((double) totalStudents / totalUsers) * 100;
+        double iProportion = ((double) totalInstructors / totalUsers) * 100;
+        double aProportion = ((double) totalAdmins / totalUsers) * 100;
+
+        model.addAttribute("Students", totalStudents);
+        model.addAttribute("Providers", totalInstructors);
+        model.addAttribute("instructorPercentage", percentage);
+        model.addAttribute("admins", totalAdmins);
+        model.addAttribute("totalUsers", totalUsers);
+        model.addAttribute("sProportion", sProportion);
+        model.addAttribute("iProportion", iProportion);
+        model.addAttribute("aProportion", aProportion);
+//        System.out.println("Total Users: " + totalUsers);
+//        System.out.println("Total Students: " + totalStudents);
+//        System.out.println("Total Instructors: " + totalInstructors);
+//        System.out.println("Instructor Percentage: " + percentage);
         return "admin-view/statistics";
     }
 
@@ -80,21 +99,22 @@ public class AdminController {
     }
 
     @GetMapping("/home")
-    public String home(@AuthenticationPrincipal UserDetails userDetails, Model model){
-        model.addAttribute("username", userDetails.getUsername());
+    public String home(){
         return "admin-view/admin-home";
     }
 
 
     @GetMapping("/view-users")
-    public String viewUsers(Model model, @RequestParam(name = "continue",required = false) String cont) {
-        model.addAttribute("users", service.getAllUsers());
+    public String viewUsers(Model model) {
+        List<User> userList = service.getAllUsers();
+        model.addAttribute("username", "Admin");
+        model.addAttribute("userList", userList);
         return "admin-view/view-users";
     }
 
     @GetMapping("/delete/{uID}")
     public String deleteUser(@PathVariable int uID){
         service.deleteUser(uID);
-        return "redirect:/admin-view/view-users";
+        return "redirect:/admin/view-users";
     }
 }
