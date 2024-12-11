@@ -5,10 +5,12 @@ var messageArea = document.querySelector('#messageArea');
 
 var stompClient = null;
 var currentUser = null;
+var currentGroup = null
 
-function connect(id) {
-currentUser = id;
-    if(currentUser != null) {
+function connect(uID, gID) {
+currentUser = uID;
+currentGroup = gID;
+    if(currentUser != null && currentGroup != null) {
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
 
@@ -36,11 +38,11 @@ function sendMessage(event) {
     var messageContent = messageInput.value.trim();
     if(messageContent && stompClient) {
         var chatMessage = {
-            sender: currentUser,
+            senderID: currentUser,
+            groupID: currentGroup,
             content: messageInput.value,
-            type: 'CHAT'
         };
-        stompClient.send("/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
@@ -62,13 +64,6 @@ message = JSON.parse(payload.body);
     var messageElement = document.createElement('li');
 
         messageElement.classList.add('chat-message');
-
-        var avatarElement = document.createElement('i');
-        var avatarText = document.createTextNode(message.sender[0]);
-        avatarElement.appendChild(avatarText);
-        avatarElement.style['background-color'] = getAvatarColor(message.sender);
-
-        messageElement.appendChild(avatarElement);
 
         var usernameElement = document.createElement('span');
         var usernameText = document.createTextNode(message.sender);

@@ -10,7 +10,7 @@
     <script defer data-th-src="@{/app.js}"></script>
     <title>Group View - StudyGrouper</title>
 </head>
-<body data-th-attr="onload='connect(' + ${student.getuID()} + ')'">
+<body data-th-attr="onload='connect(' + ${student.getuID()} + ', ' + ${selectedCourse.getGroupID()} + ')'">
 <nav>
     <div model="courses" class="servers-container">
         <h2 data-th-text="${student.first_name}"></h2>
