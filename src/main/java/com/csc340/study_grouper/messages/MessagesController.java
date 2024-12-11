@@ -34,7 +34,7 @@ public class MessagesController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public Message sendMessage(NewMessage newMessage) {
-        Message chatMessage = new Message(userService.getUserByID(newMessage.senderID), studyGroupService.getStudyGroupByID(newMessage.groupID), newMessage.content);
+        Message chatMessage = new Message(userService.getUserByID(newMessage.senderID), studyGroupService.getStudyGroupByID(newMessage.groupID), newMessage.message);
 
         messageService.postMessage(chatMessage);
         return chatMessage;

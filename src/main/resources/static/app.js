@@ -40,7 +40,7 @@ function sendMessage(event) {
         var chatMessage = {
             senderID: currentUser,
             groupID: currentGroup,
-            content: messageInput.value,
+            message: messageInput.value,
         };
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';

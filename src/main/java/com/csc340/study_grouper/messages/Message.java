@@ -23,11 +23,11 @@ public class Message {
     @Column(nullable = false)
     private String message;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name="senderID")
     private User senderID;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name="groupID")
     private StudyGroup groupID;
 
