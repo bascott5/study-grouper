@@ -52,6 +52,10 @@ public class GroupAccessService {
     }
 
     public void save (StudyGroup gID, User uID) {
+        if (!findByUserId(uID.getuID()).isEmpty() && !findByGroupId(gID.getGroupID()).isEmpty()) {
+            return;
+        }
+
         GroupAccess groupAccess = new GroupAccess(gID, uID);
         repo.save(groupAccess);
     }

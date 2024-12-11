@@ -77,10 +77,18 @@ public class GeneralController implements ErrorController {
         return "home";
     }
 
-    @GetMapping("edit-account/{uID}")
-    public String editAccount(Model model, @PathVariable int uID){
-        model.addAttribute("user", userService.getUserByID(uID));
+    @GetMapping("edit-account")
+    public String editAccount(Model model){
+        User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("user", user);
         return "edit-account";
+    }
+
+    @PostMapping("edit-account")
+    public String postEditAccount(User user){
+        User u = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        userService.addUser(user);
+        return "redirect:/"+u.getAccountType()+"/account";
     }
 
     @RequestMapping("/error")
