@@ -70,18 +70,22 @@ public class AdminController {
         int totalAdmins = admins.size();
 
         double percentage = ((double) totalInstructors / totalStudents) * 100;
+        String formattedPercentage = String.format("%.2f", percentage);
         double sProportion = ((double) totalStudents / totalUsers) * 100;
+        String formattedSProportion = String.format("%.2f", sProportion);
         double iProportion = ((double) totalInstructors / totalUsers) * 100;
+        String formattedIProportion = String.format("%.2f", iProportion);
         double aProportion = ((double) totalAdmins / totalUsers) * 100;
+        String formattedAProportion = String.format("%.2f", aProportion);
 
         model.addAttribute("Students", totalStudents);
         model.addAttribute("Providers", totalInstructors);
-        model.addAttribute("instructorPercentage", percentage);
+        model.addAttribute("instructorPercentage", formattedPercentage);
         model.addAttribute("admins", totalAdmins);
         model.addAttribute("totalUsers", totalUsers);
-        model.addAttribute("sProportion", sProportion);
-        model.addAttribute("iProportion", iProportion);
-        model.addAttribute("aProportion", aProportion);
+        model.addAttribute("sProportion", formattedSProportion);
+        model.addAttribute("iProportion", formattedIProportion);
+        model.addAttribute("aProportion", formattedAProportion);
 //        System.out.println("Total Users: " + totalUsers);
 //        System.out.println("Total Students: " + totalStudents);
 //        System.out.println("Total Instructors: " + totalInstructors);
