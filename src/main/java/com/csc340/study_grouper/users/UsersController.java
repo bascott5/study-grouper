@@ -1,9 +1,11 @@
 package com.csc340.study_grouper.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller to map user information from the database
@@ -48,5 +50,4 @@ public class UsersController {
         service.deleteUser(uID);
         return "User with ID " + uID + " has been deleted.";
     }
-
 }

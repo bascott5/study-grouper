@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +12,11 @@
         <div class="servers-container">
             <h2>Groups</h2>
             <ul class="servers">
-                <li><a href="/admin/statistics">Statistics</a></li>
-                <li><a href="/admin/reviews">Reviews</a></li>
             </ul>
         </div>
         <div class="options">
             <h2>Options</h2>
-            <ul>
-                <li><img src="/assets/person.png" alt="Account"> <p class="selected"><a href="/admin/account">Account</a></p></li>
-                <li><img src="/assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
-            </ul>
+            <li><a th:href="@{/admin/home}">Admin Home</a></li>
         </div>
         <div class="logo">
             <h1>StudyGrouper</h1>
@@ -30,9 +25,9 @@
     <main>
         <section>
         <img src="/assets/person.png" alt="PFP">
-        <h1>Username</h1>
+        <h1>Admin</h1>
         <div>
-            <a data-th-href="@{/edit-account/{uID} (uID=${uID})}" href="/edit-account"><button>Edit Account</button></a>
+            <a data-th-href="@{/edit-account/{uID} (uID=${uID})}" href="../edit-account"><button>Edit Account</button></a>
             <a href="/home"><button>Logout</button></a>
         </div>
         </section>

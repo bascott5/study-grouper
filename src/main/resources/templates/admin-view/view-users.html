@@ -17,15 +17,13 @@
     <h2>Groups</h2>
     <ul class="servers">
       <li><a th:href="@{/admin/statistics}">Statistics</a></li>
-      <li class="selected"><a th:href="@{/admin/view-users}">Users</a></li>
-      <li><a th:href="@{/admin/view}">Admin View</a></li>
+      <li><a th:href="@{/admin/home}">Admin Home</a></li>
     </ul>
   </div>
   <div class="options">
     <h2>Options</h2>
     <ul>
       <li><img src="/assets/person.png" alt="Account"> <p><a href="/admin/account">Account</a></p></li>
-      <li><img src="/assets/home.png" alt="Home"> <p><a href="/admin/home">Home</a></p></li>
     </ul>
   </div>
   <div class="logo">
@@ -55,7 +53,7 @@
           <td th:text="${user.email}"></td>
           <td th:text="${user.accountType}"></td>
           <td>
-            <a th:href="@{/admin/delete/{uID}(uID=${user.uID})}">Delete</a>
+            <a th:href="@{/admin/delete/{uID}(uID=${user.uID})}" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
           </td>
         </tr>
         </tbody>
