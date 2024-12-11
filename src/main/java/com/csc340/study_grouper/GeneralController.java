@@ -3,14 +3,20 @@ package com.csc340.study_grouper;
 import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserRepository;
 import com.csc340.study_grouper.users.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Adam Cichoski, Bennet Scott, Logan Keiper
@@ -19,7 +25,7 @@ import org.springframework.ui.Model;
  * pages are accessible to everyone
  */
 @Controller
-public class GeneralController {
+public class GeneralController implements ErrorController {
 
     @Autowired
     UserService userService;
@@ -75,5 +81,18 @@ public class GeneralController {
     public String editAccount(Model model, @PathVariable int uID){
         model.addAttribute("user", userService.getUserByID(uID));
         return "edit-account";
+    }
+
+    @RequestMapping("/error")
+    public String error(Model model) {
+        String quote = "";
+
+        String url = "https://api.chucknorris.io/jokes/random?category=dev";
+        RestTemplate restTemplate = new RestTemplate();
+        String jsonListResponse = restTemplate.getForObject(url, String.class);
+        quote = jsonListResponse;
+
+        model.addAttribute("quote", quote);
+        return "error";
     }
 }
