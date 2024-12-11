@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../styles/layout.css">
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="../styles/layout.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -11,54 +11,57 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
-  <nav>
-    <div class="servers-container">
-      <h2>Groups</h2>
-      <ul class="servers">
-        <li class="selected"><a href="/admin/statistics">Statistics</a></li>
-        <li class="selected"><a href="/admin/reviews">Reviews</a></li>
-        <li class="selected"><a href="/admin/admin-view">Admin View</a></li>
-      </ul>
-    </div>
-    <div class="options">
-      <h2>Options</h2>
-      <ul>
-        <li><img src="../assets/person.png" alt="Account"> <p><a href="/admin/account">Account</a></p></li>
-        <li><img src="../assets/home.png" alt="Home"> <p><a href="/home">Home</a></p></li>
-      </ul>
-    </div>
-    <div class="logo">
-      <h1>StudyGrouper</h1>
-    </div>
-  </nav>
-  <main>
-    <div class="container">
+<nav>
+  <div class="servers-container">
+    <h2>Groups</h2>
+    <ul class="servers">
+      <li><a th:href="@{/admin/statistics}">Statistics</a></li>
+      <li><a th:href="@{/admin/reviews}">Reviews</a></li>
+      <li><a th:href="@{/admin/admin-view}">Admin View</a></li>
+    </ul>
+  </div>
+  <div class="options">
+    <h2>Options</h2>
+    <ul>
+      <li><img src="../assets/person.png" alt="Account"> <a th:href="@{/admin/account}">Account</a></li>
+      <li><img src="../assets/home.png" alt="Home"> <a th:href="@{/home}">Home</a></li>
+    </ul>
+  </div>
+  <div class="logo">
+    <h1>StudyGrouper</h1>
+  </div>
+</nav>
+<main>
+  <div class="container">
 
-      <h1 data-th-text="${username}"></h1>
+    <h1 th:text="${username}"></h1>
 
-      <div style="align-content: center;">
+    <div style="align-content: center;">
 
-        <table class="table table-striped rounded-3 overflow-hidden">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Account Type</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="user : ${userList}">
-            <td><a th:href="@{/users/{uID} (id=${user.uID})}" th:text=" ${user.uID}"> </a></td>
-            <td th:text=" ${user.username}"></td>
-            <td th:text=" ${user.email}"></td>
-            <td th:text=" ${user.accountType}"></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-striped rounded-3 overflow-hidden">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Account Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
+          <td th:text="${user.uID}"></td>
+          <td th:text="${user.username}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.accountType}"></td>
+          <td>
+            <a th:href="@{/admin/delete/{uID}(uID=${user.uID})}">Delete</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-  </main>
+  </div>
+</main>
 
 </body>
 </html>
