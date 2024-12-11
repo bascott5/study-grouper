@@ -31,6 +31,8 @@ main > form > input {
 }
 
 .message-container {
+    display: flex;
+    flex-direction: column-reverse;
     position: absolute;
     margin: 0 25px;
     top: 65px;
