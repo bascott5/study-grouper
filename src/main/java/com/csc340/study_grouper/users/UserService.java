@@ -50,6 +50,17 @@ public class UserService {
         return existing;
     }
 
+    public User updateUser(User current, User newVersion){
+        current.setEmail(newVersion.getEmail());
+        current.setUsername(newVersion.getUsername());
+        current.setPassword(newVersion.getPassword());
+        current.setFirst_name(newVersion.getFirst_name());
+        current.setLast_name(newVersion.getLast_name());
+        current.setTitle(newVersion.getTitle());
+        current.setProfile_picture(newVersion.getProfile_picture());
+        return current;
+    }
+
 
     public List<User> deleteUser(int uID){
         repository.delete(getUserByID(uID));
