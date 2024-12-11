@@ -35,7 +35,6 @@ public class Message {
     @CurrentTimestamp
     LocalDateTime time_stamp;
 
-
     /**
      * Constructor with all column values
      * @param messageID
@@ -57,13 +56,11 @@ public class Message {
      * @param senderID
      * @param groupID
      * @param message
-     * @param time_stamp
      */
-    public Message(User senderID, StudyGroup groupID, String message, LocalDateTime time_stamp){
+    public Message(User senderID, StudyGroup groupID, String message){
         this.message = message;
         this.senderID = senderID;
         this.groupID = groupID;
-        this.time_stamp = time_stamp;
     }
 
     /**

@@ -1,5 +1,9 @@
 package com.csc340.study_grouper.messages;
 
+import com.csc340.study_grouper.study_groups.StudyGroup;
+import com.csc340.study_grouper.study_groups.StudyGroupService;
+import com.csc340.study_grouper.users.User;
+import com.csc340.study_grouper.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -12,47 +16,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Controller
 public class MessagesController {
 
+    @Autowired
     MessagesService messageService;
-    MessagesRepository messagesRepository;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    StudyGroupService studyGroupService;
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    public Message sendMessage(@Payload Message chatMessage) {
-        messagesRepository.save(chatMessage);
+    public Message sendMessage(NewMessage newMessage) {
+        Message chatMessage = new Message(userService.getUserByID(newMessage.senderID), studyGroupService.getStudyGroupByID(newMessage.groupID), newMessage.content);
+
+        messageService.postMessage(chatMessage);
         return chatMessage;
     }
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
     public Message addUser(@Payload Message chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        messagesRepository.save(chatMessage);
+        messageService.postMessage(chatMessage);
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSenderID());
         return chatMessage;
     }
-
-    /*@Autowired
-    MessagesService service;
-
-    @GetMapping("/{gID}")
-    public String getGroupMessagesInOrder(@PathVariable int groupID, Model model){
-        model.addAttribute("messages", service.getGroupMessagesInOrder(groupID));
-        return "redirect:student-group-view";
-    }
-
-    @PostMapping("/post-message")
-    public String postMessage(Message message){
-        service.postMessage(message);
-        return "redirect:student-group-view";
-    }
-
-    @GetMapping("/delete-message/{mID}")
-    public String deleteMessage(@PathVariable int mID){
-        service.deleteMessage(service.findByID(mID));
-        return "redirect:";
-    }*/
 }
