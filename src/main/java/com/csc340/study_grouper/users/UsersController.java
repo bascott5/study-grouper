@@ -43,4 +43,10 @@ public class UsersController {
         return service.getUserByID(uID);
     }
 
+    @DeleteMapping("/{uID}")
+    public String deleteUser(@PathVariable int uID) {
+        service.deleteUser(uID);
+        return "User with ID " + uID + " has been deleted.";
+    }
+
 }
