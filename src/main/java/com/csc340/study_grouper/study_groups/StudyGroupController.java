@@ -44,7 +44,7 @@ public class StudyGroupController {
     @GetMapping("/student/{gID}")
     public String studentStudyGroupPage(Model model, @PathVariable int gID){
         User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
-        model.addAttribute("student", student);;
+        model.addAttribute("student", student);
         model.addAttribute("courses", groupAccessService.findByUserId(student.getuID()));
         model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gID));
         model.addAttribute("messages", messageService.findOrderedGroupMessages(gID));
