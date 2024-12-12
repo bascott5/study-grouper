@@ -39,6 +39,10 @@ public class GroupAccess {
 
     public GroupAccess(){}
 
+    public int getGroup_access_ID() {
+        return group_access_ID;
+    }
+
     public StudyGroup getGroupID() {
         return groupID;
     }

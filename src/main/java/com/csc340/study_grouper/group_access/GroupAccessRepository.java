@@ -21,4 +21,7 @@ public interface GroupAccessRepository extends JpaRepository<GroupAccess, Intege
             "WHERE g.groupID = :groupID AND s.deleted = 'n'", nativeQuery = true)
     List<GroupAccess> findByGroupID (int groupID);
 
+    @Query(value = "SELECT * FROM groupaccess WHERE uid = :uID AND groupid = :gID", nativeQuery = true)
+    GroupAccess findByUserIDAndGroupID(int uID, int gID);
+
 }

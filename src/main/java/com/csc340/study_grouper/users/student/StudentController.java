@@ -77,12 +77,21 @@ public class StudentController {
       return "customer-view/customer-home";
     }
 
-    @GetMapping("/write-review")
-    public String review(Model model) {
+    @GetMapping("/write-review/{gID}")
+    public String review(Model model, @PathVariable int gID) {
         User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
         model.addAttribute("student", student);
         model.addAttribute("courses", groupAccessService.findByUserId(student.getuID()));
+        model.addAttribute("gID", gID);
 
       return "customer-view/chat-settings";
+    }
+
+    @GetMapping("/leave-group/{gID}")
+    public String leaveGroup(@PathVariable int gID) {
+        User student = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        groupAccessService.leaveGroup(student.getuID(), gID);
+
+        return "redirect:/student/home";
     }
 }

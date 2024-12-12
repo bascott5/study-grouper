@@ -47,6 +47,10 @@ public class GroupAccessService {
         return repo.findByGroupID(groupID);
     }
 
+    public GroupAccess findByUserIdAndGroupId(int uID, int gID) {
+        return repo.findByUserIDAndGroupID(uID, gID);
+    }
+
     public Optional<List<User>> getUsersInGroupAccessList(int gID){
         return userRepository.findUsersInGroupAccess(gID);
     }
@@ -58,6 +62,11 @@ public class GroupAccessService {
 
         GroupAccess groupAccess = new GroupAccess(gID, uID);
         repo.save(groupAccess);
+    }
+
+    public void leaveGroup(int uID, int gID) {
+        GroupAccess group = findByUserIdAndGroupId(uID, gID);
+        repo.delete(group);
     }
 
 }

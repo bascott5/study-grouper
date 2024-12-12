@@ -33,7 +33,7 @@
 <main id="chat-page">
     <section class="group-title">
         <h1 data-th-text="${selectedCourse.groupName}"></h1>
-        <a data-th-href="@{/student/write-review/{pID} (pID=${student.getuID()})}"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
+        <a data-th-href="@{/student/write-review/{gID} (gID=${selectedCourse.getGroupID()})}"><img src="/assets/gear.png" alt="Settings" class="gear"></a>
     </section>
     <section id="messageArea" class="message-container">
         <div class="message" data-th-each="message : ${messages}">
