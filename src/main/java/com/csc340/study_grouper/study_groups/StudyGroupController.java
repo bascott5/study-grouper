@@ -104,4 +104,10 @@ public class StudyGroupController {
         return "redirect:/group/instructor/"+group.getGroupID();
     }
 
+    @GetMapping("/delete/{groupID}")
+    public String deleteGroup(@PathVariable int groupID){
+        studyGroupService.delete(groupID);
+        return "redirect:/instructor/home";
+    }
+
 }

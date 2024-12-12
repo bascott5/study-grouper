@@ -2,13 +2,13 @@ package com.csc340.study_grouper.study_groups;
 
 import com.csc340.study_grouper.users.User;
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name="studyGroups")
 public class StudyGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="groupID")
     public int groupID;
 
     @ManyToOne
@@ -21,18 +21,33 @@ public class StudyGroup {
     @Column(name="description")
     public String description;
 
+    @Column(name="deleted")
+    @ColumnDefault("'n'")
+    public Character deleted;
+
+
+    public static final Character DELETED_YES = 'y';
+    public static final Character DELETED_NO = 'n';
+
     /**
      * Constructor for all column values in the study groups table
      * @param groupID
      * @param creatorID
      * @param groupName
      */
-    public StudyGroup(int groupID, User creatorID, String groupName, String description){
+    public StudyGroup(int groupID, User creatorID, String groupName, String description, Character deleted){
         this(creatorID, groupName, description);
         this.groupID = groupID;
         this.description = description;
+        this.deleted = deleted;
     }
 
+    public StudyGroup(User creatorID, String groupName, String description, Character deleted){
+        this.creatorID = creatorID;
+        this.groupName = groupName;
+        this.description = description;
+        this.deleted=deleted;
+    }
     /**
      * Constructor for only required values that are not auto generated
      * @param creatorID
@@ -78,4 +93,12 @@ public class StudyGroup {
     }
 
     public void setDescription(String description){this.description=description;}
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
 }

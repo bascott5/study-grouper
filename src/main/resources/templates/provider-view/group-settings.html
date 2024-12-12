@@ -33,10 +33,12 @@
             <div>
                 <form action="/group/update-group" method="post">
                     <h2 data-th-text="${group.groupName}"></h2>
-                    <input type="text" name="groupID" data-th-value="${group.getGroupID()}" readonly hidden>
+                    Group ID: <input type="text" name="groupID" data-th-value="${group.getGroupID()}" readonly>
                     <input type="text" name="creatorID" data-th-value="${group.getCreatorID().getuID()}" readonly hidden>
-                    <input type="text" name="groupName" data-th-value="${group.getGroupName()}" placeholder="Group Name">
-                    <input type="text" name="description" id="description" data-th-value="${group.getDescription()}" placeholder="Description">
+                    <br>
+                    Group Name: <input type="text" name="groupName" data-th-value="${group.getGroupName()}" placeholder="Group Name">
+                    <br>
+                    Description: <input type="text" name="description" id="description" data-th-value="${group.getDescription()}" placeholder="Description">
                     <div>
                         <button type="submit" class="create">Save</button>
                     </div>
@@ -59,12 +61,9 @@
                     <option value="">Sunday</option>
                 </select>
             </div>
-            <form>
-                <div>
-                    <button class="delete">Delete Group</button>
-                </div>
-            </form>
-
+            <div>
+                <a data-th-href="@{/group/delete/{groupID}(groupID=${group.getGroupID()})}" onclick="return confirm('Are you sure you want to delete this study group?')"><button class="delete">Delete Group</button></a>
+            </div>
             <div>
                 <button class="create-account"><a href="/instructor/statistics/0">Click here for statistics</a></button>
             </div>

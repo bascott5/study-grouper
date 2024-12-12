@@ -54,4 +54,8 @@ public class MessagesService {
         return messagesRepository.getGroupMessagesInOrder(gID);
     }
 
+    public void deleteByGroupID(int groupID){
+        messagesRepository.deleteByGroupID(groupID);
+    }
+
 }

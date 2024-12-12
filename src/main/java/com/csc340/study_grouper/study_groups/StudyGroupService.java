@@ -23,7 +23,7 @@ public class StudyGroupService {
 
 
     public List<StudyGroup> getAllStudyGroups(){
-        return studyGroupRepository.findAll();
+        return studyGroupRepository.getAll();
     }
 
     public StudyGroup getStudyGroupByID(int groupID){
@@ -44,6 +44,11 @@ public class StudyGroupService {
     }
 
     public void save(StudyGroup group){
+        studyGroupRepository.save(group);
+    }
+    public void delete(int groupID){
+        StudyGroup group = getStudyGroupByID(groupID);
+        group.setDeleted(StudyGroup.DELETED_YES);
         studyGroupRepository.save(group);
     }
 }
