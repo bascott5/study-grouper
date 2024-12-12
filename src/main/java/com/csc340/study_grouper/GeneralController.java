@@ -66,7 +66,9 @@ public class GeneralController implements ErrorController {
     }
 
     @PostMapping("/create")
-    public String createUser(User user){
+    public String createUser(@RequestParam String first_name, @RequestParam String last_name, @RequestParam String username, @RequestParam String email, @RequestParam String password, @RequestParam String accountType){
+        User user = new User(email, username, password, first_name, last_name, accountType);
+
         userService.addUser(user);
         return "redirect:/login";
     }
