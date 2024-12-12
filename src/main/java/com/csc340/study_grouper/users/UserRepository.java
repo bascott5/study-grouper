@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findUserById(int uid);
 
     @Query(value = "SELECT * FROM users u " +
-            "LEFT JOIN groupaccess g ON u.uID = g.userID " +
+            "LEFT JOIN groupaccess g ON u.uID = g.uid " +
             "WHERE g.groupID = :gID AND u.account_type = 'student' " +
             "ORDER BY u.first_name", nativeQuery = true)
     Optional<List<User>> findUsersInGroupAccess(int gID);

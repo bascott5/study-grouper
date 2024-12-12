@@ -34,7 +34,7 @@
                 <h1 data-th-text="${groupName}"></h1>
                 <h2 data-th-text="${instructor.getFullName()}"></h2>
             </div>
-            <form data-th-action="(@{~/group/join/} + ${student.getuID()} + '/' + ${groupID})" method="post">
+            <form data-th-action="@{/group/join/{gid}(gid=${groupID})}" method="post">
                 <button type="submit">Join Group</button>
             </form>
         </section>
