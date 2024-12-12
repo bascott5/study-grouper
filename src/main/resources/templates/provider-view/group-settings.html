@@ -65,7 +65,7 @@
                 <a data-th-href="@{/group/delete/{groupID}(groupID=${group.getGroupID()})}" onclick="return confirm('Are you sure you want to delete this study group?')"><button class="delete">Delete Group</button></a>
             </div>
             <div>
-                <button class="create-account"><a href="/instructor/statistics/0">Click here for statistics</a></button>
+                <a data-th-href="@{/group/statistics/{gid}(gid=${group.getGroupID()})}"><button class="create-account">Click here for statistics</button></a>
             </div>
         </section>
     </main>

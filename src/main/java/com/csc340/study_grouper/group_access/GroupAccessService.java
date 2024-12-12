@@ -51,13 +51,19 @@ public class GroupAccessService {
         return userRepository.findUsersInGroupAccess(gID);
     }
 
-    public void save (StudyGroup gID, User uID) {
-        if (!findByUserId(uID.getuID()).isEmpty() && !findByGroupId(gID.getGroupID()).isEmpty()) {
-            return;
-        }
+    public Optional<GroupAccess> findByMatchPair(int groupID, int userID){
+        return repo.findByMatchPair(groupID, userID);
+    }
 
-        GroupAccess groupAccess = new GroupAccess(gID, uID);
-        repo.save(groupAccess);
+    public void save (StudyGroup gID, User uID) {
+        if(findByMatchPair(gID.getGroupID(), uID.getuID()).isEmpty()){
+            GroupAccess groupAccess = new GroupAccess(gID, uID);
+            repo.save(groupAccess);
+        }
+    }
+
+    public void deleteByPair(int gid, int uid){
+        repo.delete(findByMatchPair(gid, uid).get());
     }
 
 }

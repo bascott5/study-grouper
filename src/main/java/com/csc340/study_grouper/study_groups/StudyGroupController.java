@@ -6,6 +6,7 @@ import com.csc340.study_grouper.users.User;
 import com.csc340.study_grouper.users.UserService;
 import com.csc340.study_grouper.users.instructor.InstructorService;
 import com.csc340.study_grouper.users.student.StudentService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -82,9 +83,10 @@ public class StudyGroupController {
         return "customer-view/group-description";
     }
 
-    @PostMapping("/join/{uID}/{groupID}")
-    public String joinGroup(@PathVariable int uID, @PathVariable int groupID) {
-        groupAccessService.save(studyGroupService.getStudyGroupByID(groupID), userService.getUserByID(uID));
+    @PostMapping("/join/{groupID}")
+    public String joinGroup(@PathVariable int groupID) {
+        User user = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        groupAccessService.save(studyGroupService.getStudyGroupByID(groupID), user);
         return "redirect:/group/student/" + groupID;
   }
 
@@ -104,10 +106,26 @@ public class StudyGroupController {
         return "redirect:/group/instructor/"+group.getGroupID();
     }
 
+    @GetMapping("/statistics/{gid}")
+    public String groupStatistics(@PathVariable int gid, Model model){
+        User instructor = userService.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        model.addAttribute("instructor", instructor);
+        model.addAttribute("selectedCourse", studyGroupService.getStudyGroupByID(gid));
+        model.addAttribute("courses", groupAccessService.findByUserId(instructor.getuID()));
+        model.addAttribute("userList", groupAccessService.getUsersInGroupAccessList(gid).orElse(null));
+        return "/provider-view/statistics";
+    }
+
     @GetMapping("/delete/{groupID}")
     public String deleteGroup(@PathVariable int groupID){
         studyGroupService.delete(groupID);
         return "redirect:/instructor/home";
+    }
+
+    @GetMapping("/remove-user/{gid}/{uid}")
+    public String removeAccess(@PathVariable int gid, @PathVariable int uid, HttpServletRequest request){
+        groupAccessService.deleteByPair(gid, uid);
+        return "redirect:/group/statistics/"+gid;
     }
 
 }

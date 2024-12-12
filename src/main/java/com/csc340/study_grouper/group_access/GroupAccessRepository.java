@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface GroupAccessRepository extends JpaRepository<GroupAccess, Integer> {
@@ -20,5 +21,9 @@ public interface GroupAccessRepository extends JpaRepository<GroupAccess, Intege
             "LEFT JOIN study_groups s ON g.groupid = s.groupid " +
             "WHERE g.groupID = :groupID AND s.deleted = 'n'", nativeQuery = true)
     List<GroupAccess> findByGroupID (int groupID);
+
+    @Query(value = "SELECT * FROM groupaccess " +
+            "WHERE groupid = :groupID AND uID = :uID;", nativeQuery = true)
+    Optional<GroupAccess> findByMatchPair(int groupID, int uID);
 
 }
